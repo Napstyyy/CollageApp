@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "Ciudadela Cuba",
+    "url": "http://s1.plataformaacademica.com:7777/inecicu/",
+    "img": "https://lh3.googleusercontent.com/u/0/d/1mlqch5XIrCQLYWqQio4X-O2Uk_FeXGfW",
+    "namespace": "inecicu",
+    "confire": {
+      "apiKey": "AIzaSyBm9QHEV4dTI8c1TRX9mE3d3eka3SABoek",
+      "authDomain": "collage-824d0.firebaseapp.com",
+      "databaseURL": "https://collage-824d0.firebaseio.com",
+      "projectId": "collage-824d0",
+      "storageBucket": "",
+      "messagingSenderId": "1091559789270"
+    }
+  },
+  {
+    "id": 2,
+    "name": "San Nicolas",
+    "url": "http://s16.plataformaacademica.com:7777/inesan/",
+    "img": "https://lh3.googleusercontent.com/u/0/d/1yViLbt_vHZx3dvbJnFDoU3Wqz3rYgxyF",
+    "namespace": "inesan",
+    "confire": {
+      "apiKey": "AIzaSyAPPeCJSC1F2yDTYUXJh-Q2dc3na8yugic",
+      "authDomain": "collage-487db.firebaseapp.com",
+      "databaseURL": "https://collage-487db.firebaseio.com",
+      "projectId": "collage-487db",
+      "storageBucket": "",
+      "messagingSenderId": "1061344619867"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Dolorosa Secundaria",
+    "url": "http://s2.plataformaacademica.com:7777/dolorosasecundaria/",
+    "img": "https://lh3.googleusercontent.com/u/0/d/1uUvF-pnPs8ODfOtOKjYhg1e286dPIITA",
+    "namespace": "dolorosasecundaria",
+    "confire": {
+      "apiKey": "AIzaSyCwnDa9kTFEfEPFS-Kz4fLOhkqOXUoDM2U",
+      "authDomain": "collage-1223d.firebaseapp.com",
+      "databaseURL": "https://collage-1223d.firebaseio.com",
+      "projectId": "collage-1223d",
+      "storageBucket": "",
+      "messagingSenderId": "984464784028"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Dolorosa Secundaria",
+    "url": "http://s2.plataformaacademica.com:7777/dolorosasecundaria/",
+    "img": "https://lh3.googleusercontent.com/u/0/d/1uUvF-pnPs8ODfOtOKjYhg1e286dPIITA",
+    "namespace": "dolorosasecundaria",
+    "confire": {
+      "apiKey": "AIzaSyCwnDa9kTFEfEPFS-Kz4fLOhkqOXUoDM2U",
+      "authDomain": "collage-1223d.firebaseapp.com",
+      "databaseURL": "https://collage-1223d.firebaseio.com",
+      "projectId": "collage-1223d",
+      "storageBucket": "",
+      "messagingSenderId": "984464784028"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Dolorosa Secundaria",
+    "url": "http://s2.plataformaacademica.com:7777/dolorosasecundaria/",
+    "img": "https://lh3.googleusercontent.com/u/0/d/1uUvF-pnPs8ODfOtOKjYhg1e286dPIITA",
+    "namespace": "dolorosasecundaria",
+    "confire": {
+      "apiKey": "AIzaSyCwnDa9kTFEfEPFS-Kz4fLOhkqOXUoDM2U",
+      "authDomain": "collage-1223d.firebaseapp.com",
+      "databaseURL": "https://collage-1223d.firebaseio.com",
+      "projectId": "collage-1223d",
+      "storageBucket": "",
+      "messagingSenderId": "984464784028"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Dolorosa Secundaria",
+    "url": "http://s2.plataformaacademica.com:7777/dolorosasecundaria/",
+    "img": "https://lh3.googleusercontent.com/u/0/d/1uUvF-pnPs8ODfOtOKjYhg1e286dPIITA",
+    "namespace": "dolorosasecundaria",
+    "confire": {
+      "apiKey": "AIzaSyCwnDa9kTFEfEPFS-Kz4fLOhkqOXUoDM2U",
+      "authDomain": "collage-1223d.firebaseapp.com",
+      "databaseURL": "https://collage-1223d.firebaseio.com",
+      "projectId": "collage-1223d",
+      "storageBucket": "",
+      "messagingSenderId": "984464784028"
+    }
+  }
+]

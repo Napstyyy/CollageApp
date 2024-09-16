@@ -32,6 +32,26 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen
+        name="clients-login"
+        options={{
+          title: 'Explore',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          ),
+          tabBarStyle: { display: 'none' },
+        }}
+      />
+      <Tabs.Screen
+        name="login"
+        options={{
+          title: 'Home',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          ),
+          //tabBarStyle: { display: 'none' },
+        }}
+      />
     </Tabs>
   );
 }

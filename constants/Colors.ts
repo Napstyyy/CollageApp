@@ -5,6 +5,7 @@
 
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
+export const MainButtonColor = '#3E84E0';
 
 export const Colors = {
   light: {
