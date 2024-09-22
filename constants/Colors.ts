@@ -6,6 +6,15 @@
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
 export const MainButtonColor = '#3E84E0';
+export const SecondaryButtonColor = '#37B6E9';
+export const MainInputColor = '#D3CFCF';
+export const PlaceHolderInputColor = '#D3CFCF';
+export const OptionsText = '#37B6E9';
+export const BackgroundColor1 = '#37B6E9';
+export const BackgroundColor2 = '#4B4CED';
+export const iconColor = '#4B4CED';
+export const lightGray = '#EEEEEE';
+export const mainBackgroundColor = '#FFFFFF';
 
 export const Colors = {
   light: {

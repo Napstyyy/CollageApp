@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 50,
     padding: 20,
     width: '100%',
-    flexGrow: 0.9,
+    flexGrow: 1,
   },
   clientTitle: {
     fontSize: 24,

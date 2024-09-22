@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { MainButtonColor } from '@/constants/Colors';
+import { SecondaryButtonColor } from '@/constants/Colors';
 
 
 interface MainButtonProps {
@@ -18,15 +18,16 @@ const MainButton: React.FC<MainButtonProps> = ({ text, controller }) => {
 
 const styles = StyleSheet.create({
     Button: {
-    backgroundColor: MainButtonColor ,
+    backgroundColor: SecondaryButtonColor ,
     borderRadius: 16,
     paddingVertical: '4%',
-    paddingHorizontal: '16%',
-    width: '90%',
+    paddingHorizontal: '4%',
+    width: '70%',
+    height: 'auto',
     alignItems: 'center',
   },
   Text: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#FFFFFF', // Texto blanco
     fontWeight: 'bold',
   },

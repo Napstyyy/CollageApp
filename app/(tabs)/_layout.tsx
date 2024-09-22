@@ -45,11 +45,21 @@ export default function TabLayout() {
       <Tabs.Screen
         name="login"
         options={{
+          title: 'Login',
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          ),
+          tabBarStyle: { display: 'none' },
+        }}
+      />
+      <Tabs.Screen
+        name="home"
+        options={{
           title: 'Home',
           tabBarIcon: ({ color, focused }) => (
             <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
           ),
-          //tabBarStyle: { display: 'none' },
+          tabBarStyle: { display: 'none' },
         }}
       />
     </Tabs>
