@@ -9,12 +9,14 @@ import Header from "@/components/Home/header";
 import Body from "@/components/Home/body";
 import Feather from "@expo/vector-icons/Feather";
 import { mainBackgroundColor } from "@/constants/Colors";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
     <View style={styles.mainContainer}>
       <Header/>
       <Body/>
+      <Footer/>
     </View>
   );
 }

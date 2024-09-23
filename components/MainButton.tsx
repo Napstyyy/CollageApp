@@ -1,18 +1,20 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { INavigationController } from '@/navigation//interfaces/INavigationController';
 import { MainButtonColor } from '@/constants/Colors';
-
+import { RootStackParamList } from '@/navigation/routes';
 
 interface MainButtonProps {
   text: string;
-  controller: any;
+  controller: INavigationController;
+  route: keyof RootStackParamList;
 }
 
-const MainButton: React.FC<MainButtonProps> = ({ text, controller }) => {
+const MainButton: React.FC<MainButtonProps> = ({ text, controller, route }) => {
   return (
-    <TouchableOpacity style={styles.Button}>
-        <Text style={styles.Text}>{ text }</Text>
-      </TouchableOpacity>
+    <TouchableOpacity style={styles.Button} onPress={() => controller.navigate(route)}>
+      <Text style={styles.Text}>{text}</Text>
+    </TouchableOpacity>
   );
 };
 

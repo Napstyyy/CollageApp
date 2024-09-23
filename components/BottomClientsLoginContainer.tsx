@@ -1,16 +1,22 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import ClientList from '@/components/ClientList';
-import MainButton from '@/components/MainButton';
+import ClientList from './ClientList';
+import MainButton from './MainButton';
+import { NavigationController } from '@/navigation/controllers/NavigationController';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
+import { RootStackParamList, Routes } from '../navigation/routes';
 
 const BottomClientsLoginContainer: React.FC = () => {
+  const navigationController = new NavigationController();
+
   return (
     <View style={styles.bottomContainer}>
-        <ClientList />
+      <ClientList />
       <View style={styles.buttonContainer}>
-        <MainButton text={'Ingresar'} controller={undefined} />
-        </View>
+        <MainButton text={'Ingresar'} controller={navigationController} route={Routes.login} />
       </View>
+    </View>
   );
 };
 

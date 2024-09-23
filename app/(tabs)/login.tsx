@@ -3,8 +3,11 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import FormContainer from '@/components/Login/FormContainer';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BackgroundColor1, BackgroundColor2 } from '@/constants/Colors';
+import { NavigationController } from '@/navigation/controllers/NavigationController';
 
 export default function Login() {
+  const navigationController = new NavigationController();
+
   return (
     <View style={styles.container}>
     <LinearGradient
@@ -14,7 +17,7 @@ export default function Login() {
       />
       {/* Contenedor para el botón de "Go Back", el título y la imagen */}
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => {}} style={styles.goBackButton}>
+        <TouchableOpacity onPress={() => navigationController.goBack()} style={styles.goBackButton}>
           <Image source={require('@/assets/icons/goback_icon.png')} style={styles.goBackIcon} />
         </TouchableOpacity>
         <Text style={styles.title}>Collage</Text>
