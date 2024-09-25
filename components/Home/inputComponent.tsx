@@ -26,6 +26,9 @@ const InputComponent: React.FC = () => {
             <TouchableOpacity style={styles.iconButton}>
               <Ionicons name="videocam-outline" size={26} color={iconColor} />
             </TouchableOpacity>
+            <TouchableOpacity style={styles.iconButton}>
+              <AntDesign name="link" size={26} color={iconColor} />
+            </TouchableOpacity>
           </View>
         </View>
         <TouchableOpacity style={styles.submitButton}>
