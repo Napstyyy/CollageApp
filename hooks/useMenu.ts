@@ -1,23 +1,46 @@
 import { useState, useRef } from 'react';
-import { Animated, Dimensions } from 'react-native';
+import { Animated } from 'react-native';
+import phoneWindow from '@/constants/Dimensions';
 
-const { width } = Dimensions.get('window');
+interface UseMenuReturn {
+  menuVisible: boolean;
+  slideAnim: Animated.Value;
+  toggleMenu: () => void;
+}
 
-const useMenu = () => {
-  const [menuVisible, setMenuVisible] = useState(false);
-  const slideAnim = useRef(new Animated.Value(width)).current;  // Inicializado fuera de pantalla
+const useMenu = (): UseMenuReturn => {
+  const [menuVisible, setMenuVisible] = useState<boolean>(false);
+  const slideAnim = useRef<Animated.Value>(new Animated.Value(phoneWindow.width)).current;  // Inicializado fuera de pantalla
 
-  const toggleMenu = () => {
-    const newVisibility = !menuVisible;
-    setMenuVisible(newVisibility);
-
+  // Métodos "privados" no accesibles fuera del hook
+  const openMenu = (): void => {
+    setMenuVisible(true);
     Animated.timing(slideAnim, {
-      toValue: newVisibility ? width * 0.2 : width,  // Desliza el menú visible o lo oculta
+      toValue: 0,
       duration: 300,
       useNativeDriver: true,
     }).start();
   };
 
+  const closeMenu = (): void => {
+    setMenuVisible(false);
+    Animated.timing(slideAnim, {
+      toValue: phoneWindow.width,  // Oculta el menú
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  // Método público para alternar el menú
+  const toggleMenu = (): void => {
+    if (!menuVisible) {
+      openMenu();
+    } else {
+      closeMenu();
+    }
+  };
+
+  // Solo retornamos lo que debe ser accesible desde fuera
   return { menuVisible, slideAnim, toggleMenu };
 };
 

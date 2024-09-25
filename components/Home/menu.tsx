@@ -1,13 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Animated, TouchableOpacity, Dimensions } from 'react-native';
+import { View, StyleSheet, Animated, TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import Feather from "@expo/vector-icons/Feather";
 import { iconColor } from '@/constants/Colors';
 import useMenu from '@/hooks/useMenu';
-
-const { width, height } = Dimensions.get('window');
+import phoneWindow from '@/constants/Dimensions';
 
 const Menu: React.FC = () => {
-  const { menuVisible, slideAnim, toggleMenu } = useMenu();
+  const { menuVisible, toggleMenu } = useMenu(); // Supongo que `animatedStyle` es lo que obtienes del hook
 
   return (
     <>
@@ -15,9 +14,13 @@ const Menu: React.FC = () => {
         <Feather name="menu" size={32} color={iconColor} style={styles.icon} />
       </TouchableOpacity>
 
-      <Animated.View style={[styles.menu, { transform: [{ translateX: slideAnim }] }]}>
-        {/* Contenido del menú */}
-      </Animated.View>
+      {menuVisible && (
+        <TouchableWithoutFeedback onPress={toggleMenu}>
+          <View style={styles.menuOverlay}>
+            
+          </View>
+        </TouchableWithoutFeedback>
+      )}
     </>
   );
 };
@@ -26,14 +29,14 @@ const styles = StyleSheet.create({
   icon: {
     paddingTop: '1%',
   },
-  menu: {
+  menuOverlay: {
     position: 'absolute',
     top: 0,
-    right: 0,
-    height: height,
-    width: width * 0.8, // Ancho del menú (80% de la pantalla)
-    backgroundColor: 'black', 
-    zIndex: 1000,
+    left: 0,
+    width: phoneWindow.width,
+    height: phoneWindow.height,
+    zIndex: 999,  // Capa por encima de otros componentes
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fondo semi-transparente
   },
 });
 
