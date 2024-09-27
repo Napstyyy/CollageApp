@@ -11,7 +11,7 @@ const HomeContent: React.FC = () => {
     <View style={styles.mainContainer}>
       <Header />
       <Body />
-      <Footer />
+      {/*<Footer />*/}
     </View>
   );
 };

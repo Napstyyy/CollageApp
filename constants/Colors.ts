@@ -15,6 +15,9 @@ export const BackgroundColor2 = '#4B4CED';
 export const iconColor = '#4B4CED';
 export const lightGray = '#EEEEEE';
 export const mainBackgroundColor = '#FFFFFF';
+export const mainTextColor = '#4B4CED';
+export const secondayTextColor = '#37B6E9';
+export const gray = '#B4B2B2';
 
 export const Colors = {
   light: {

@@ -1,14 +1,11 @@
-import React, { useState, useRef } from 'react';
-import { View, Text, Image, StyleSheet, Animated, Dimensions, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { View, Text, Image, StyleSheet} from 'react-native';
 import AntDesign from "@expo/vector-icons/AntDesign";
-import Feather from "@expo/vector-icons/Feather";
-import { iconColor } from '@/constants/Colors';
-import useMenu from '@/hooks/useMenu';
+import { iconColor, mainTextColor } from '@/constants/Colors';
 import Menu from '@/components/Home/menu';
 
 
 const Header: React.FC = () => {
-  const { menuVisible, slideAnim, toggleMenu } = useMenu();
 
   return (
     <View style={styles.header}>
@@ -41,7 +38,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: iconColor,
+    color: mainTextColor,
   },
   iconsContainer: {
     flexDirection: 'row',
