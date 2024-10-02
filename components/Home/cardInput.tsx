@@ -1,9 +1,10 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import { AntDesign, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { iconColor, mainBackgroundColor } from '@/constants/Colors';
+import phoneWindow from '@/constants/Dimensions';
 
-const Card: React.FC = () => {
+const CardInput: React.FC = () => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardImage}>
@@ -13,21 +14,26 @@ const Card: React.FC = () => {
         />
       </View>
       <View style={styles.cardText}>
-        <Text style={styles.text}>Evento semana cultural</Text>
-        <Text style={styles.text}>Para los grados decimo y once</Text>
+        <Text style={styles.text}>¿En qué estás pensando?</Text>
       </View>
 
-      <View style={styles.cardFooter1}>
+      <View style={styles.cardFooter2}>
         <View style={styles.leftIcons}>
-          <TouchableOpacity>
-            <AntDesign name="hearto" size={22} color={iconColor} />
+          <TouchableOpacity style={styles.iconButton}>
+            <MaterialIcons name="folder-open" size={26} color={iconColor} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.commentIcon}>
-            <FontAwesome5 name="comment-alt" size={20} color={iconColor} />
+          <TouchableOpacity style={styles.iconButton}>
+            <Ionicons name="image-outline" size={26} color={iconColor} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconButton}>
+            <Ionicons name="videocam-outline" size={26} color={iconColor} />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconButton}>
+            <AntDesign name="link" size={26} color={iconColor} />
           </TouchableOpacity>
         </View>
-        <TouchableOpacity>
-          <SimpleLineIcons name="options-vertical" size={22} color={iconColor} />
+        <TouchableOpacity style={styles.submitButton}>
+          <AntDesign name="up" size={32} color="white" />
         </TouchableOpacity>
       </View>
     </View>
@@ -36,8 +42,8 @@ const Card: React.FC = () => {
 
 const styles = StyleSheet.create({
   cardContainer: {
-    flex: 0.4,
-    width: '100%',
+    height: phoneWindow.height * 0.34,
+    width: phoneWindow.width * 0.9,
     backgroundColor: mainBackgroundColor,
     borderRadius: 10,
     shadowColor: '#000',
@@ -67,7 +73,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#B4B2B2',
   },
-  cardFooter1: {
+  cardFooter2: {
     flex: 0.2,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -78,9 +84,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  commentIcon: {
-    marginLeft: 16,
+  iconButton: {
+    marginHorizontal: 8,
+  },
+  submitButton: {
+    width: 50,
+    height: 42,
+    borderRadius: 8,
+    backgroundColor: iconColor,
+    paddingTop: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 
-export default Card;
+export default CardInput;

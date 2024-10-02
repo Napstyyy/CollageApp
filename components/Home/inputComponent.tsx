@@ -1,48 +1,53 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { Ionicons, MaterialIcons, AntDesign } from '@expo/vector-icons';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { lightGray, iconColor, PlaceHolderInputColor } from '@/constants/Colors';
 import BlankComponent from '@/components/BlankComponent';
+import CardInput from '@/components/Home/cardInput';
 
 const InputComponent: React.FC = () => {
+  const [modalVisible, setModalVisible] = useState(false); // Estado para controlar el modal
 
   return (
-      <View style={styles.inputComponent}>
+    <>
+      {/* Contenedor principal con el TouchableOpacity */}
+      <TouchableOpacity style={styles.inputComponent} onPress={() => setModalVisible(true)}>
         <View style={styles.leftColumn}>
           <TouchableOpacity style={styles.profileIcon}>
-            <Ionicons name="person-outline" size={26} color={iconColor} />
+            <Ionicons name="person-outline" size={24} color={iconColor} />
           </TouchableOpacity>
         </View>
         <View style={styles.rightColumn}>
           <Text style={styles.placeholderText}>¿En qué estás pensando?</Text>
           <BlankComponent BCwidth="100%" BCheight="40%" />
-          <View style={styles.iconRow}>
-            <TouchableOpacity style={styles.iconButton}>
-              <MaterialIcons name="folder-open" size={26} color={iconColor} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
-              <Ionicons name="image-outline" size={26} color={iconColor} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
-              <Ionicons name="videocam-outline" size={26} color={iconColor} />
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.iconButton}>
-              <AntDesign name="link" size={26} color={iconColor} />
-            </TouchableOpacity>
-          </View>
         </View>
-        <TouchableOpacity style={styles.submitButton}>
-        <AntDesign name="up" size={26} color="white" />
       </TouchableOpacity>
-      </View>
-      
+
+      {/* Modal que se muestra al hacer clic en el InputComponent */}
+      <Modal
+  animationType="slide"
+  transparent={true}
+  visible={modalVisible}
+  onRequestClose={() => setModalVisible(false)} // Permite cerrar el modal cuando el usuario presiona atrás
+>
+  {/* Al hacer clic en el fondo (modalBackground), el modal se cerrará */}
+  <TouchableOpacity
+    style={styles.modalBackground}
+    activeOpacity={1} // Asegura que no se vea como presionado
+    onPress={() => setModalVisible(false)} // Cierra el modal
+  >
+      <CardInput/>
+  </TouchableOpacity>
+</Modal>
+
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   inputComponent: {
     width: '100%',
-    flex: 0.16,
+    flex: 0.08,
     display: 'flex',
     flexDirection: 'row',
   },
@@ -54,11 +59,12 @@ const styles = StyleSheet.create({
   rightColumn: {
     flex: 1,
     flexDirection: 'column',
+    justifyContent: 'center',
   },
   profileIcon: {
-    width: '100%',
-    height: '64%',
-    borderRadius: 100,
+    width: 50,
+    height: 50,
+    borderRadius: 25,
     backgroundColor: lightGray,
     justifyContent: 'center',
     alignItems: 'center',
@@ -66,22 +72,35 @@ const styles = StyleSheet.create({
   placeholderText: {
     color: PlaceHolderInputColor,
     fontSize: 16,
-    marginBottom: 8,
   },
-  iconRow: {
-    flexDirection: 'row',
-  },
-  iconButton: {
-    marginHorizontal: 8,
-  },
-  submitButton: {
-    width: '12%',
-    height: '30%',
-    borderRadius: 8,
-    backgroundColor: iconColor,
+  modalBackground: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    alignSelf: 'flex-end',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Fondo oscuro transparente
+  },
+  modalContainer: {
+    width: '80%',
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 10,
+    alignItems: 'center',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  closeButton: {
+    marginTop: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#007BFF',
+    borderRadius: 5,
+  },
+  closeButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
   },
 });
 

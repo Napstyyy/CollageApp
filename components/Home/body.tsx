@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatListComponent } from 'react-native';
 import { Ionicons, MaterialIcons, Feather, AntDesign } from '@expo/vector-icons';
 import { lightGray, iconColor, PlaceHolderInputColor } from '@/constants/Colors';
 import BlankComponent from '@/components/BlankComponent';
