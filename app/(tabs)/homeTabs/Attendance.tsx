@@ -2,6 +2,8 @@ import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import Header from '@/components/Home/header';
 import GroupsCard from '@/components/Attendance/groupsCard';
+import DateCard from '@/components/Attendance/dateCard';
+import ActionCard from '@/components/Attendance/actionCard';
 import { mainBackgroundColor } from '@/constants/Colors';
 
 export default function Attendance() {
@@ -11,6 +13,8 @@ export default function Attendance() {
     <Header title="Asistencia" />
     <View style={styles.body}>
     <GroupsCard/>
+    <DateCard/>
+    <ActionCard/>
     </View>
     </View>
   );

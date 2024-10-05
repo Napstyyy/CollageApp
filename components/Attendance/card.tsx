@@ -1,17 +1,22 @@
 import React, { ReactNode } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet, ViewStyle } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface CardProps {
   children: ReactNode;
+  gradientColors: string[]; // Los colores del gradiente
 }
 
-const Card: React.FC<CardProps> = ({ children }) => {
-  return <View style={styles.cardContainer}>{children}</View>;
+const Card: React.FC<CardProps> = ({ children, gradientColors }) => {
+  return (
+    <LinearGradient colors={gradientColors} style={styles.cardContainer}>
+      {children}
+    </LinearGradient>
+  );
 };
 
 const styles = StyleSheet.create({
   cardContainer: {
-    backgroundColor: '#1F4DAB',
     borderRadius: 15,
     padding: 20,
     marginVertical: 10,
@@ -20,7 +25,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
-  },
+  } as ViewStyle,
 });
 
 export default Card;
