@@ -6,8 +6,8 @@ export default function IDCards() {
 
   return (
     <>
-    <Header/>
-    <Text>IDCards</Text>
+    <Header title="Carnés"/>
+    <Text>Carnés</Text>
     </>
   );
 }

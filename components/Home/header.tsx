@@ -5,20 +5,23 @@ import { iconColor, mainTextColor } from '@/constants/Colors';
 import Menu from '@/components/Home/menu';
 
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  title: string;
+}
 
+const Header: React.FC<HeaderProps> = ({ title }) => {
   return (
     <View style={styles.header}>
-        <Image
-          source={require("@/assets/images/collage-logo.png")}
-          style={styles.logo}
-        />
-        <Text style={styles.title}>Collage</Text>
-        <View style={styles.iconsContainer}>
-        <AntDesign name="search1" size={32} color={ iconColor } style={styles.icon} />
+      <Image
+        source={require("@/assets/images/collage-logo.png")}
+        style={styles.logo}
+      />
+      <Text style={styles.title}>{title}</Text>
+      <View style={styles.iconsContainer}>
+        <AntDesign name="search1" size={32} color={iconColor} style={styles.icon} />
         <Menu />
-        </View>
       </View>
+    </View>
   );
 };
 

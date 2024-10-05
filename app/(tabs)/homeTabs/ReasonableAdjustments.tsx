@@ -6,8 +6,8 @@ export default function ReasonableAdjustments() {
 
   return (
     <>
-    <Header/>
-    <Text>ReasonableAdjustments</Text>
+    <Header title="Ajustes R."/>
+    <Text>Ajustes Razonables</Text>
     </>
   );
 }

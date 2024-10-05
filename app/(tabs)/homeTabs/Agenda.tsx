@@ -6,7 +6,7 @@ export default function Agenda() {
 
   return (
     <>
-    <Header />
+    <Header title="Agenda" />
     <Text>Agenda</Text>
     </>
   );

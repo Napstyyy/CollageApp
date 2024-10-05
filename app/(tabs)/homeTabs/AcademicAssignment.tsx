@@ -6,8 +6,8 @@ export default function AcademicAssignment() {
 
   return (
     <>
-    <Header/>
-    <Text>AcademicAssignment</Text>
+    <Header title="Asig. académica" />
+    <Text>Asig. académica</Text>
     </>
   );
 }

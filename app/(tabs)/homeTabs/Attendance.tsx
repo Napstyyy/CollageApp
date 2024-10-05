@@ -1,17 +1,30 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { Text, StyleSheet, View } from 'react-native';
 import Header from '@/components/Home/header';
+import GroupsCard from '@/components/Attendance/groupsCard';
+import { mainBackgroundColor } from '@/constants/Colors';
 
 export default function Attendance() {
 
   return (
-    <>
-    <Header/>
-    <Text>Attendance</Text>
-    </>
+    <View style={styles.mainContainer}>
+    <Header title="Asistencia" />
+    <View style={styles.body}>
+    <GroupsCard/>
+    </View>
+    </View>
   );
 }
 
 // Estilos para el componente
 const styles = StyleSheet.create({
+  mainContainer: {
+    backgroundColor: mainBackgroundColor,
+    flex: 1,
+  },
+  body: {
+    flex: 1,
+    alignItems: 'center',
+    padding: 16,
+  },
 });

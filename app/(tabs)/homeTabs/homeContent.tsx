@@ -9,7 +9,7 @@ import { mainBackgroundColor } from '@/constants/Colors';
 const HomeContent: React.FC = () => {
   return (
     <View style={styles.mainContainer}>
-      <Header />
+      <Header title="Collage" />
       <Body />
       {/*<Footer />*/}
     </View>

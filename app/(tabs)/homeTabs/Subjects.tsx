@@ -6,8 +6,8 @@ export default function Subjects() {
 
   return (
     <>
-    <Header/>
-    <Text>Subjects</Text>
+    <Header title="Asignaturas"/>
+    <Text>Asignaturas</Text>
     </>
   );
 }

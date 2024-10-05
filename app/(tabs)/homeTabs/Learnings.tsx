@@ -6,8 +6,8 @@ export default function Learnings() {
 
   return (
     <>
-    <Header/>
-    <Text>Learnings</Text>
+    <Header title="Aprendizajes"/>
+    <Text>Aprendizajes</Text>
     </>
   );
 }

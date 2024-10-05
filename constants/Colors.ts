@@ -3,22 +3,36 @@
  * There are many other ways to style your app. For example, [Nativewind](https://www.nativewind.dev/), [Tamagui](https://tamagui.dev/), [unistyles](https://reactnativeunistyles.vercel.app), etc.
  */
 
+// Tint Colors
 const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
+
+// Button Colors
 export const MainButtonColor = '#3E84E0';
 export const SecondaryButtonColor = '#37B6E9';
+
+// Input Colors
 export const MainInputColor = '#D3CFCF';
 export const PlaceHolderInputColor = '#D3CFCF';
+
+// Text Colors
 export const OptionsText = '#37B6E9';
+export const mainTextColor = '#3E84E0';
+export const secondayTextColor = '#37B6E9';
+
+// Background Colors
 export const BackgroundColor1 = '#37B6E9';
 export const BackgroundColor2 = '#4B4CED';
-export const iconColor = '#4B4CED';
-export const lightGray = '#EEEEEE';
 export const mainBackgroundColor = '#FFFFFF';
-export const mainTextColor = '#4B4CED';
-export const secondayTextColor = '#37B6E9';
+
+// Icon Colors
+export const iconColor = '#3E84E0';
+
+// Gray Colors
+export const lightGray = '#EEEEEE';
 export const gray = '#B4B2B2';
 
+// Colors Object
 export const Colors = {
   light: {
     text: '#11181C',
@@ -30,10 +44,10 @@ export const Colors = {
   },
   dark: {
     text: '#ECEDEE',
-    background: '#151718',
+    background: '#000',
     tint: tintColorDark,
-    icon: '#9BA1A6',
-    tabIconDefault: '#9BA1A6',
+    icon: '#fff',
+    tabIconDefault: '#fff',
     tabIconSelected: tintColorDark,
   },
 };

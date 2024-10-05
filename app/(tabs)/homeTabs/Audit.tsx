@@ -6,8 +6,8 @@ export default function Audit() {
 
   return (
     <>
-    <Header/>
-    <Text>Audit</Text>
+    <Header title="Auditoría" />
+    <Text>Auditoría</Text>
     </>
   );
 }
