@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import BottomClientsLoginContainer from '@/components/BottomClientsLoginContainer';
 import { LinearGradient } from 'expo-linear-gradient';
+import { gradientBackgroundColor1, gradientBackgroundColor2 } from '@/constants/Colors';
 
 export default function ClientsLogin() {
   return (
@@ -9,7 +10,7 @@ export default function ClientsLogin() {
       
         <LinearGradient
         // Background Linear Gradient
-        colors={['#37B6E9', '#4B4CED']}
+        colors={[gradientBackgroundColor1, gradientBackgroundColor2]}
         style={styles.background}
       />
       {/* Título de bienvenida */}

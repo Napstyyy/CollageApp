@@ -4,6 +4,7 @@ import FormContainer from '@/components/Login/FormContainer';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BackgroundColor1, BackgroundColor2 } from '@/constants/Colors';
 import { NavigationController } from '@/navigation/controllers/NavigationController';
+import { gradientBackgroundColor1, gradientBackgroundColor2 } from '@/constants/Colors';
 
 export default function Login() {
   const navigationController = new NavigationController();
@@ -12,7 +13,7 @@ export default function Login() {
     <View style={styles.container}>
     <LinearGradient
         // Background Linear Gradient
-        colors={[BackgroundColor1, BackgroundColor2]}
+        colors={[gradientBackgroundColor1, gradientBackgroundColor2]}
         style={styles.background}
       />
       {/* Contenedor para el botón de "Go Back", el título y la imagen */}

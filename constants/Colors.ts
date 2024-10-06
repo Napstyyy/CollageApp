@@ -8,7 +8,7 @@ const tintColorLight = '#0a7ea4';
 const tintColorDark = '#fff';
 
 // Button Colors
-export const MainButtonColor = '#3E84E0';
+export const MainButtonColor = '#315EB0';
 export const SecondaryButtonColor = '#37B6E9';
 
 // Input Colors
@@ -17,16 +17,17 @@ export const PlaceHolderInputColor = '#D3CFCF';
 
 // Text Colors
 export const OptionsText = '#37B6E9';
-export const mainTextColor = '#3E84E0';
-export const secondayTextColor = '#37B6E9';
+export const mainTextColor = '#22487A';
+export const secondayTextColor = '#3E84E0';
 
 // Background Colors
 export const BackgroundColor1 = '#37B6E9';
 export const BackgroundColor2 = '#4B4CED';
 export const mainBackgroundColor = '#FFFFFF';
-
+export const gradientBackgroundColor1 = '#22487A';
+export const gradientBackgroundColor2 = '#3E84E0';
 // Icon Colors
-export const iconColor = '#3E84E0';
+export const iconColor = '#22487A';
 
 // Gray Colors
 export const lightGray = '#EEEEEE';
