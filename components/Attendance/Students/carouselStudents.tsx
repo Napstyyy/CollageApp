@@ -1,22 +1,27 @@
-import React, { useRef } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
+import React from 'react';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { mainBackgroundColor, iconColor } from '@/constants/Colors';
 import { usePagerView } from '@/hooks/usePagerView';
 
-interface ButtonGroupProps {
-  buttons: string[];
+interface Icon {
+  title: string;
+  component: JSX.Element;
 }
 
-const BUTTONS_PER_PAGE = 3; // Número de botones por página
+interface CarouselStudentsProps {
+  students: Record<string, Icon>;
+}
 
-const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons }) => {
-  // Divide los botones en páginas
-  const pages = [];
-  for (let i = 0; i < buttons.length; i += BUTTONS_PER_PAGE) {
-    pages.push(buttons.slice(i, i + BUTTONS_PER_PAGE));
+const STUDENTS_PER_PAGE = 3;
+
+const CarouselStudents: React.FC<CarouselStudentsProps> = ({ students }) => {
+  const actionEntries = Object.entries(students);
+  const pages: Array<Array<[string, Icon]>> = [];
+
+  for (let i = 0; i < actionEntries.length; i += STUDENTS_PER_PAGE) {
+    pages.push(actionEntries.slice(i, i + STUDENTS_PER_PAGE));
   }
-
 
   const { pagerViewRef, pageIndex, setPageIndex, handlePageScroll, extendedPages } = usePagerView(pages);
 
@@ -25,17 +30,22 @@ const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons }) => {
       <PagerView
         ref={pagerViewRef}
         style={styles.pager}
-        initialPage={1} // Comienza en la primera página real
-        onPageScrollStateChanged={(e) => {setPageIndex(e.nativeEvent.position)}}
+        initialPage={1}
+        onPageSelected={(e) => setPageIndex(e.nativeEvent.position)}
         onPageScroll={handlePageScroll}
       >
         {extendedPages.map((pageButtons, pageIndex) => (
           <View style={styles.page} key={pageIndex}>
             <View style={styles.buttonGroup}>
-              {pageButtons.map((button: string, index: number) => (
+              {pageButtons.map(([key, { title, component }]: [string, Icon], index: number) => (
+                <View style={styles.studentContainer}>
                 <TouchableOpacity key={index} style={styles.button}>
-                  <Text style={styles.buttonText}>{button}</Text>
+                  <View style={styles.iconContainer}>
+                    {component}
+                  </View>
                 </TouchableOpacity>
+                <Text style={styles.buttonText}>{title}</Text>
+                </View>
               ))}
             </View>
           </View>
@@ -57,15 +67,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonGroup: {
-    flex: 0.8,
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '90%',
   },
+  studentContainer: {
+    width: '28%',
+    alignItems: 'center',
+  },
   button: {
+    flex: 1,
     backgroundColor: mainBackgroundColor,
     borderRadius: 12,
-    width: '28%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -75,11 +90,18 @@ const styles = StyleSheet.create({
     elevation: 5,
     paddingVertical: 10,
   },
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 5,
+  },
   buttonText: {
-    fontSize: 32,
+    fontSize: 12,
     fontWeight: 'bold',
-    color: iconColor,
+    color: mainBackgroundColor,
+    marginTop: 5,
+    textAlign: 'center',
   },
 });
 
-export default CarouselGroups;
+export default CarouselStudents;

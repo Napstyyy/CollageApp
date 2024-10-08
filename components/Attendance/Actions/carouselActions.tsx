@@ -1,61 +1,48 @@
-import React, { useRef } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
+import React from 'react';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { mainBackgroundColor, iconColor } from '@/constants/Colors';
+import { usePagerView } from '@/hooks/usePagerView';
 
-interface CarouselActionsProps {
-  actions: string[];
+interface Icon {
+  title: string;
+  component: JSX.Element;
 }
 
-const ACTIONS_PER_PAGE = 3; // Número de botones por página
+interface CarouselActionsProps {
+  actions: Record<string, Icon>;
+}
+
+const ACTIONS_PER_PAGE = 3;
 
 const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
-  // Divide los botones en páginas
-  const pages = [];
-  for (let i = 0; i < actions.length; i += ACTIONS_PER_PAGE) {
-    pages.push(actions.slice(i, i + ACTIONS_PER_PAGE));
+  const actionEntries = Object.entries(actions);
+  const pages: Array<Array<[string, Icon]>> = [];
+
+  for (let i = 0; i < actionEntries.length; i += ACTIONS_PER_PAGE) {
+    pages.push(actionEntries.slice(i, i + ACTIONS_PER_PAGE));
   }
 
-  // Añadir la primera y la última página para el bucle
-  const extendedPages = [
-    pages[pages.length - 1], // Última página (para deslizar a la izquierda)
-    ...pages,
-    pages[0], // Primera página (para deslizar a la derecha)
-  ];
-
-  const pagerViewRef = useRef<PagerView>(null);
+  const { pagerViewRef, pageIndex, setPageIndex, handlePageScroll, extendedPages } = usePagerView(pages);
 
   return (
     <View style={styles.container}>
       <PagerView
+        ref={pagerViewRef}
         style={styles.pager}
-        initialPage={1} // Comienza en la primera página real
-        onPageScroll={(e) => {
-          const { offset, position } = e.nativeEvent;
-          const pageCount = extendedPages.length;
-
-          // Si se desliza hacia la izquierda y llega a la última página
-          if (position === 0 && offset < 0) {
-            // Mover a la penúltima página
-            setTimeout(() => {
-              pagerViewRef.current?.setPage(pageCount - 2);
-            }, 0);
-          }
-          // Si se desliza hacia la derecha y llega a la primera página
-          else if (position === pageCount - 1 && offset > 0) {
-            // Mover a la segunda página
-            setTimeout(() => {
-              pagerViewRef.current?.setPage(1);
-            }, 0);
-          }
-        }}
+        initialPage={1}
+        onPageSelected={(e) => setPageIndex(e.nativeEvent.position)}
+        onPageScroll={handlePageScroll}
       >
         {extendedPages.map((pageButtons, pageIndex) => (
           <View style={styles.page} key={pageIndex}>
             <View style={styles.buttonGroup}>
-              {pageButtons.map((button, index) => (
+              {pageButtons.map(([key, { title, component }]: [string, Icon], index: number) => (
                 <TouchableOpacity key={index} style={styles.button}>
-                  <Text style={styles.buttonText}>{button}</Text>
+                  <View style={styles.iconContainer}>
+                    {component}
+                  </View>
+                  <Text style={styles.buttonText}>{title}</Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -96,10 +83,17 @@ const styles = StyleSheet.create({
     elevation: 5,
     paddingVertical: 10,
   },
+  iconContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 5,
+  },
   buttonText: {
-    fontSize: 32,
+    fontSize: 12,
     fontWeight: 'bold',
     color: iconColor,
+    marginTop: 5,
+    textAlign: 'center',
   },
 });
 

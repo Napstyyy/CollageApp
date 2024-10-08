@@ -4,11 +4,9 @@ import CardHeader from '@/components/Attendance/cardHeader';
 import CarouselGroups from '@/components/Attendance/Groups/carouselGroups';
 import { MaterialIcons } from '@expo/vector-icons';
 import { iconColor } from '@/constants/Colors';
-import { groups } from '@/data/data';
+import { groups } from '@/data/groups';
 
 const NotificationCard: React.FC = () => {
-  const [isEnabled, setIsEnabled] = useState<boolean>(false);
-  const toggleSwitch = () => setIsEnabled(!isEnabled);
 
   return (
     <Card 
