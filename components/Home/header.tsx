@@ -18,7 +18,6 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
       />
       <Text style={styles.title}>{title}</Text>
       <View style={styles.iconsContainer}>
-        <AntDesign name="search1" size={32} color={iconColor} style={styles.icon} />
         <Menu />
       </View>
     </View>

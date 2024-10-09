@@ -14,6 +14,7 @@ export const SecondaryButtonColor = '#37B6E9';
 // Input Colors
 export const MainInputColor = '#D3CFCF';
 export const PlaceHolderInputColor = '#D3CFCF';
+export const InputFieldColor = '#CCCCCC';
 
 // Text Colors
 export const OptionsText = '#37B6E9';

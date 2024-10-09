@@ -3,12 +3,12 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { SecondaryButtonColor } from '@/constants/Colors';
 
 
-interface MainButtonProps {
+interface SecondaryButtonProps {
   text: string;
   controller: any;
 }
 
-const MainButton: React.FC<MainButtonProps> = ({ text, controller }) => {
+const SecondaryButton: React.FC<SecondaryButtonProps> = ({ text, controller }) => {
   return (
     <TouchableOpacity style={styles.Button}>
         <Text style={styles.Text}>{ text }</Text>
@@ -33,4 +33,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MainButton;
+export default SecondaryButton;

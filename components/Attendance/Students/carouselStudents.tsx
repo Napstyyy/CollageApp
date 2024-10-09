@@ -1,8 +1,8 @@
-import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import PagerView from 'react-native-pager-view';
-import { mainBackgroundColor, iconColor } from '@/constants/Colors';
-import { usePagerView } from '@/hooks/usePagerView';
+import React from "react";
+import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
+import PagerView from "react-native-pager-view";
+import { mainBackgroundColor, iconColor } from "@/constants/Colors";
+import { usePagerView } from "@/hooks/usePagerView";
 
 interface Icon {
   title: string;
@@ -23,7 +23,13 @@ const CarouselStudents: React.FC<CarouselStudentsProps> = ({ students }) => {
     pages.push(actionEntries.slice(i, i + STUDENTS_PER_PAGE));
   }
 
-  const { pagerViewRef, pageIndex, setPageIndex, handlePageScroll, extendedPages } = usePagerView(pages);
+  const {
+    pagerViewRef,
+    pageIndex,
+    setPageIndex,
+    handlePageScroll,
+    extendedPages,
+  } = usePagerView(pages);
 
   return (
     <View style={styles.container}>
@@ -37,16 +43,19 @@ const CarouselStudents: React.FC<CarouselStudentsProps> = ({ students }) => {
         {extendedPages.map((pageButtons, pageIndex) => (
           <View style={styles.page} key={pageIndex}>
             <View style={styles.buttonGroup}>
-              {pageButtons.map(([key, { title, component }]: [string, Icon], index: number) => (
-                <View style={styles.studentContainer}>
-                <TouchableOpacity key={index} style={styles.button}>
-                  <View style={styles.iconContainer}>
-                    {component}
+              {pageButtons.map(
+                (
+                  [key, { title, component }]: [string, Icon],
+                  index: number
+                ) => (
+                  <View style={styles.studentContainer} key={key}>
+                    <TouchableOpacity style={styles.button}>
+                      <View style={styles.iconContainer}>{component}</View>
+                    </TouchableOpacity>
+                    <Text style={styles.buttonText}>{title}</Text>
                   </View>
-                </TouchableOpacity>
-                <Text style={styles.buttonText}>{title}</Text>
-                </View>
-              ))}
+                )
+              )}
             </View>
           </View>
         ))}
@@ -63,27 +72,27 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   page: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonGroup: {
     flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '90%',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "90%",
   },
   studentContainer: {
-    width: '28%',
-    alignItems: 'center',
+    width: "28%",
+    alignItems: "center",
   },
   button: {
     flex: 1,
     backgroundColor: mainBackgroundColor,
     borderRadius: 12,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 5,
@@ -91,16 +100,16 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   iconContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     marginBottom: 5,
   },
   buttonText: {
     fontSize: 12,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: mainBackgroundColor,
     marginTop: 5,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });
 
