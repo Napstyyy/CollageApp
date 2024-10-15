@@ -1,8 +1,11 @@
-import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet, Modal } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { mainBackgroundColor, iconColor } from '@/constants/Colors';
 import { usePagerView } from '@/hooks/usePagerView';
+import MainTable from '@/components/Tables/mainTable'; // Importa el componente MainTable
+import { Ionicons } from '@expo/vector-icons';
+
 
 interface Icon {
   title: string;
@@ -16,6 +19,7 @@ interface CarouselActionsProps {
 const ACTIONS_PER_PAGE = 3;
 
 const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
+  const [modalVisible, setModalVisible] = useState(false);
   const actionEntries = Object.entries(actions);
   const pages: Array<Array<[string, Icon]>> = [];
 
@@ -24,6 +28,17 @@ const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
   }
 
   const { pagerViewRef, pageIndex, setPageIndex, handlePageScroll, extendedPages } = usePagerView(pages);
+
+  const handlePress = (id: string) => {
+    switch (id) {
+      case 'Register':
+        setModalVisible(true); // Mostrar el modal si el id es 'register'
+        break;
+      // Aquí puedes agregar más casos para manejar otros botones
+      default:
+        console.log(`Acción no definida para el id: ${id}`);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -38,7 +53,7 @@ const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
           <View style={styles.page} key={pageIndex}>
             <View style={styles.buttonGroup}>
               {pageButtons.map(([key, { title, component }]: [string, Icon], index: number) => (
-                <TouchableOpacity key={index} style={styles.button}>
+                <TouchableOpacity key={index} style={styles.button} onPress={() => handlePress(key)}>
                   <View style={styles.iconContainer}>
                     {component}
                   </View>
@@ -49,6 +64,26 @@ const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
           </View>
         ))}
       </PagerView>
+
+      {/* Modal para la acción 'register' mostrando MainTable */}
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => setModalVisible(false)} // Cerrar el modal con el botón de back
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalView}>
+            {/* Botón de retroceso */}
+            <TouchableOpacity style={styles.backButton} onPress={() => setModalVisible(false)}>
+              <Ionicons name="arrow-back" size={24} color="#fff" />
+              <Text style={styles.backButtonText}>Volver</Text>
+            </TouchableOpacity>
+            {/* Contenido del Modal */}
+            <MainTable />
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -94,6 +129,27 @@ const styles = StyleSheet.create({
     color: iconColor,
     marginTop: 5,
     textAlign: 'center',
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalView: {
+    flex: 1,
+    width: '100%',
+  },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10,
+  },
+  backButtonText: {
+    marginLeft: 5,
+    fontSize: 16,
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
 

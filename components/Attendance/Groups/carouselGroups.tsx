@@ -1,40 +1,59 @@
-import React, { useRef } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import PagerView from 'react-native-pager-view';
-import { mainBackgroundColor, iconColor } from '@/constants/Colors';
+import { mainBackgroundColor, iconColor, SecondaryButtonColor } from '@/constants/Colors';
 import { usePagerView } from '@/hooks/usePagerView';
 
 interface ButtonGroupProps {
   buttons: string[];
 }
 
-const BUTTONS_PER_PAGE = 3; // Número de botones por página
+const BUTTONS_PER_PAGE = 3; // Number of buttons per page
 
 const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons }) => {
-  // Divide los botones en páginas
+  const [selectedButton, setSelectedButton] = useState<string | null>(null); // Track selected button
+
+  // Divide the buttons into pages
   const pages = [];
   for (let i = 0; i < buttons.length; i += BUTTONS_PER_PAGE) {
     pages.push(buttons.slice(i, i + BUTTONS_PER_PAGE));
   }
 
-
   const { pagerViewRef, pageIndex, setPageIndex, handlePageScroll, extendedPages } = usePagerView(pages);
+
+  const handleButtonPress = (button: string) => {
+    setSelectedButton(button); // Update selected button state
+  };
 
   return (
     <View style={styles.container}>
       <PagerView
         ref={pagerViewRef}
         style={styles.pager}
-        initialPage={1} // Comienza en la primera página real
-        onPageScrollStateChanged={(e) => {setPageIndex(e.nativeEvent.position)}}
+        initialPage={1} // Start on the first real page
+        onPageSelected={(e) => setPageIndex(e.nativeEvent.position)} // Use onPageSelected
         onPageScroll={handlePageScroll}
       >
         {extendedPages.map((pageButtons, pageIndex) => (
           <View style={styles.page} key={pageIndex}>
             <View style={styles.buttonGroup}>
               {pageButtons.map((button: string, index: number) => (
-                <TouchableOpacity key={index} style={styles.button}>
-                  <Text style={styles.buttonText}>{button}</Text>
+                <TouchableOpacity
+                  key={index}
+                  style={[
+                    styles.button,
+                    selectedButton === button && styles.selectedButton, // Apply selected style
+                  ]}
+                  onPress={() => handleButtonPress(button)} // Handle button press
+                >
+                  <Text
+                    style={[
+                      styles.buttonText,
+                      selectedButton === button && styles.selectedButtonText, // Change text color when selected
+                    ]}
+                  >
+                    {button}
+                  </Text>
                 </TouchableOpacity>
               ))}
             </View>
@@ -75,10 +94,16 @@ const styles = StyleSheet.create({
     elevation: 5,
     paddingVertical: 10,
   },
+  selectedButton: {
+    backgroundColor: iconColor, // Change background color when selected
+  },
   buttonText: {
     fontSize: 32,
     fontWeight: 'bold',
     color: iconColor,
+  },
+  selectedButtonText: {
+    color: mainBackgroundColor, // Change text color when selected
   },
 });
 
