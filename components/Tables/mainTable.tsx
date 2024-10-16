@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, FlatList, Dimensions } from 'react-native';
-import { mainBackgroundColor } from '@/constants/Colors';
+import { mainBackgroundColor, appColor } from '@/constants/Colors';
 
 // Obtener dimensiones de la pantalla
 const { width, height } = Dimensions.get('window');
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   tableHeader: {
     flexDirection: 'row',
-    backgroundColor: '#4CAF50',
+    backgroundColor: appColor,
     paddingVertical: 12,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,

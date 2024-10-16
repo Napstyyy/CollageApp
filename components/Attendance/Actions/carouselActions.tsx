@@ -5,6 +5,7 @@ import { mainBackgroundColor, iconColor } from '@/constants/Colors';
 import { usePagerView } from '@/hooks/usePagerView';
 import MainTable from '@/components/Tables/mainTable'; // Importa el componente MainTable
 import { Ionicons } from '@expo/vector-icons';
+import CustomModal from '@/components/Modals/customModal';
 
 
 interface Icon {
@@ -65,25 +66,9 @@ const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
         ))}
       </PagerView>
 
-      {/* Modal para la acción 'register' mostrando MainTable */}
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)} // Cerrar el modal con el botón de back
-      >
-        <View style={styles.modalContainer}>
-          <View style={styles.modalView}>
-            {/* Botón de retroceso */}
-            <TouchableOpacity style={styles.backButton} onPress={() => setModalVisible(false)}>
-              <Ionicons name="arrow-back" size={24} color="#fff" />
-              <Text style={styles.backButtonText}>Volver</Text>
-            </TouchableOpacity>
-            {/* Contenido del Modal */}
-            <MainTable />
-          </View>
-        </View>
-      </Modal>
+      <CustomModal visible={modalVisible} onClose={() => setModalVisible(false)}>
+        <MainTable />
+      </CustomModal>
     </View>
   );
 };

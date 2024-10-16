@@ -14,8 +14,9 @@ export default function ClientsLogin() {
         style={styles.background}
       />
       {/* Título de bienvenida */}
+      <View style={styles.header}>
       <Text style={styles.title}>Bienvenido a Collage</Text>
-
+      </View>
       {/* Imagen de bienvenida */}
       <Image source={require('@/assets/images/collage-logo.png')} style={styles.logo} />
 
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     top: 0,
-    height: '50%',
+    height: '60%',
   },
   logo: {
     width: 200,
@@ -47,6 +48,9 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 60,  // Ajusta este valor para mover el logo hacia abajo
     marginBottom: 30,
+  },
+  header: {
+    width: '100%',
   },
   title: {
     fontSize: 24,

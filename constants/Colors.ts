@@ -34,6 +34,9 @@ export const iconColor = '#22487A';
 export const lightGray = '#EEEEEE';
 export const gray = '#B4B2B2';
 
+// App Color
+export const appColor = '#22487A';
+
 // Colors Object
 export const Colors = {
   light: {
