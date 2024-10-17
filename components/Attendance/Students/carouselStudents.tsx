@@ -1,7 +1,7 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import PagerView from "react-native-pager-view";
-import { mainBackgroundColor, iconColor } from "@/constants/Colors";
+import { Colors } from "@/constants/Colors";
 import { usePagerView } from "@/hooks/usePagerView";
 
 interface Icon {
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
   },
   button: {
     flex: 1,
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
     borderRadius: 12,
     width: "100%",
     alignItems: "center",
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 12,
     fontWeight: "bold",
-    color: mainBackgroundColor,
+    color: Colors.background.main,
     marginTop: 5,
     textAlign: "center",
   },

@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { AntDesign, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
-import { iconColor, mainBackgroundColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 const Card: React.FC = () => {
   return (
@@ -20,14 +20,14 @@ const Card: React.FC = () => {
       <View style={styles.cardFooter1}>
         <View style={styles.leftIcons}>
           <TouchableOpacity>
-            <AntDesign name="hearto" size={22} color={iconColor} />
+            <AntDesign name="hearto" size={22} color={Colors.icons.default} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.commentIcon}>
-            <FontAwesome5 name="comment-alt" size={20} color={iconColor} />
+            <FontAwesome5 name="comment-alt" size={20} color={Colors.icons.default} />
           </TouchableOpacity>
         </View>
         <TouchableOpacity>
-          <SimpleLineIcons name="options-vertical" size={22} color={iconColor} />
+          <SimpleLineIcons name="options-vertical" size={22} color={Colors.icons.default} />
         </TouchableOpacity>
       </View>
     </View>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     flex: 0.4,
     width: '100%',
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },

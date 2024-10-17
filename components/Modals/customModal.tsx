@@ -2,7 +2,7 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { mainBackgroundColor, iconColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 interface CustomModalProps {
   visible: boolean;
@@ -22,7 +22,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ visible, onClose, children })
         <View style={styles.modalView}>
           {/* BotÃ³n de retroceso */}
           <TouchableOpacity style={styles.backButton} onPress={onClose}>
-            <Ionicons name="arrow-back" size={24} color={iconColor} />
+            <Ionicons name="arrow-back" size={24} color={Colors.icons.default} />
             <Text style={styles.backButtonText}>Volver</Text>
           </TouchableOpacity>
           {/* Contenido del Modal */}
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
   },
   modalView: {
     flex: 1,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   backButtonText: {
     marginLeft: 5,
     fontSize: 16,
-    color: iconColor,
+    color: Colors.icons.default,
     fontWeight: 'bold',
   },
 });

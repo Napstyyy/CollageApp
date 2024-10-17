@@ -6,7 +6,7 @@ import { NavigationController } from '@/navigation/controllers/NavigationControl
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList, Routes } from '../navigation/routes';
-import { mainBackgroundColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 const BottomClientsLoginContainer: React.FC = () => {
   const navigationController = new NavigationController();
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     width: '100%', // Para que el contenedor ocupe el ancho completo
   },
   buttonContainer: {
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.gray.dark,
     width: '100%',
     height: '18%', // Altura fija para el contenedor
     alignItems: 'center',

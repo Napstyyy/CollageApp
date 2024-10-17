@@ -3,7 +3,7 @@ import Card from '@/components/Attendance/card';
 import CardHeader from '@/components/Attendance/cardHeader';
 import CarouselStudents from '@/components/Attendance/Students/carouselStudents';
 import { MaterialIcons } from '@expo/vector-icons';
-import { iconColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import { groups } from '@/data/groups';
 import Entypo from '@expo/vector-icons/Entypo';
 import DateAndDay from '@/components/Attendance/Date/dateAndDay';
@@ -14,7 +14,7 @@ const StudentsCard: React.FC = () => {
 
   return (
     <Card 
-      icon={<Fontisto name="person" size={40} color={ iconColor } />}
+      icon={<Fontisto name="person" size={40} color={ Colors.icons.default } />}
       title="Estudiantes"
       gradientColors={['#3E84E0', '#22487A']}>
       <CarouselStudents students={actions} />

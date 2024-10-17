@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet} from 'react-native';
-import { mainTextColor, secondayTextColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 
 const DrawerContentTextContainer: React.FC = () => {
@@ -16,12 +16,12 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: mainTextColor,
+    color: Colors.text.main,
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: secondayTextColor,
+    color: Colors.text.secondary,
   },
   
 });

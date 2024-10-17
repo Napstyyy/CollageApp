@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal } from 'react-native';
 import PagerView from 'react-native-pager-view';
-import { mainBackgroundColor, iconColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import { usePagerView } from '@/hooks/usePagerView';
 import MainTable from '@/components/Tables/mainTable'; // Importa el componente MainTable
 import { Ionicons } from '@expo/vector-icons';
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   button: {
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
     borderRadius: 12,
     width: '28%',
     alignItems: 'center',
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 12,
     fontWeight: 'bold',
-    color: iconColor,
+    color: Colors.icons.default,
     marginTop: 5,
     textAlign: 'center',
   },

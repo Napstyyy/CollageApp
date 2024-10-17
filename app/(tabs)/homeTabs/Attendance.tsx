@@ -4,7 +4,7 @@ import Header from '@/components/Home/header';
 import GroupsCard from '@/components/Attendance/Groups/groupsCard';
 import DateCard from '@/components/Attendance/Date/dateCard';
 import ActionCard from '@/components/Attendance/Actions/actionCard';
-import { mainBackgroundColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import StudentsCard from '@/components/Attendance/Students/studentsCard';
 import BlankComponent from '@/components/BlankComponent';
 
@@ -27,7 +27,7 @@ export default function Attendance() {
 // Estilos para el componente
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
     flex: 1,
   },
   body: {

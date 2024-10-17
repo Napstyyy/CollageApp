@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import PagerView from 'react-native-pager-view';
-import { mainBackgroundColor, iconColor, SecondaryButtonColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import { usePagerView } from '@/hooks/usePagerView';
 
 interface ButtonGroupProps {
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     width: '90%',
   },
   button: {
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
     borderRadius: 12,
     width: '28%',
     alignItems: 'center',
@@ -95,15 +95,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
   selectedButton: {
-    backgroundColor: iconColor, // Change background color when selected
+    backgroundColor: Colors.icons.default, // Change background color when selected
   },
   buttonText: {
     fontSize: 32,
     fontWeight: 'bold',
-    color: iconColor,
+    color: Colors.icons.default,
   },
   selectedButtonText: {
-    color: mainBackgroundColor, // Change text color when selected
+    color: Colors.background.main, // Change text color when selected
   },
 });
 

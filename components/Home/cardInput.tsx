@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { AntDesign, MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { iconColor, mainBackgroundColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import phoneWindow from '@/constants/Dimensions';
 
 const CardInput: React.FC = () => {
@@ -20,16 +20,16 @@ const CardInput: React.FC = () => {
       <View style={styles.cardFooter2}>
         <View style={styles.leftIcons}>
           <TouchableOpacity style={styles.iconButton}>
-            <MaterialIcons name="folder-open" size={26} color={iconColor} />
+            <MaterialIcons name="folder-open" size={26} color={Colors.icons.default} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton}>
-            <Ionicons name="image-outline" size={26} color={iconColor} />
+            <Ionicons name="image-outline" size={26} color={Colors.icons.default} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton}>
-            <Ionicons name="videocam-outline" size={26} color={iconColor} />
+            <Ionicons name="videocam-outline" size={26} color={Colors.icons.default} />
           </TouchableOpacity>
           <TouchableOpacity style={styles.iconButton}>
-            <AntDesign name="link" size={26} color={iconColor} />
+            <AntDesign name="link" size={26} color={Colors.icons.default} />
           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.submitButton}>
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     height: phoneWindow.height * 0.34,
     width: phoneWindow.width * 0.9,
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
     borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     width: 50,
     height: 42,
     borderRadius: 8,
-    backgroundColor: iconColor,
+    backgroundColor: Colors.icons.default,
     paddingTop: 2,
     alignItems: 'center',
     justifyContent: 'center',

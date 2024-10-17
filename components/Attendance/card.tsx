@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, ViewStyle } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { mainBackgroundColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import ButtonGroup from '@/components/Attendance/Groups/carouselGroups';
 import BlankComponent from '@/components/BlankComponent';
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   iconContainer: {
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
     height: 70,
     width: 70,
     borderRadius: 40,

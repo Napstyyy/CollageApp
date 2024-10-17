@@ -2,9 +2,8 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import FormContainer from '@/components/Login/FormContainer';
 import { LinearGradient } from 'expo-linear-gradient';
-import { BackgroundColor1, BackgroundColor2 } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import { NavigationController } from '@/navigation/controllers/NavigationController';
-import { gradientBackgroundColor1, gradientBackgroundColor2 } from '@/constants/Colors';
 
 export default function Login() {
   const navigationController = new NavigationController();
@@ -13,7 +12,7 @@ export default function Login() {
     <View style={styles.container}>
     <LinearGradient
         // Background Linear Gradient
-        colors={[gradientBackgroundColor1, gradientBackgroundColor2]}
+        colors={[Colors.background.gradient1, Colors.background.gradient2]}
         style={styles.background}
       />
       {/* Contenedor para el botón de "Go Back", el título y la imagen */}

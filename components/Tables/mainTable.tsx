@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, FlatList, Dimensions } from 'react-native';
-import { mainBackgroundColor, appColor } from '@/constants/Colors';
+import { Colors} from '@/constants/Colors';
 
 // Obtener dimensiones de la pantalla
 const { width, height } = Dimensions.get('window');
@@ -87,12 +87,12 @@ const MainTable: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
     padding: 16,
   },
   tableHeader: {
     flexDirection: 'row',
-    backgroundColor: appColor,
+    backgroundColor: Colors.appColor,
     paddingVertical: 12,
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8,

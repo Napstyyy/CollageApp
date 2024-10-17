@@ -12,7 +12,7 @@ import ReasonableAdjustments from '@/app/(tabs)/homeTabs/ReasonableAdjustments';
 import Subjects from '@/app/(tabs)/homeTabs/Subjects';
 import CustomDrawerContent from '@/components/Home/DrawerContent/CustomDrawerContent'; // Importa el componente personalizado
 import { Ionicons } from '@expo/vector-icons'; // Asegúrate de tener este import
-import { iconColor, lightGray, gray } from '@/constants/Colors'; // Asegúrate de tener iconColor definido
+import { Colors } from '@/constants/Colors'; // Asegúrate de tener iconColor definido
 import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
@@ -29,8 +29,8 @@ export default function Home() {
       screenOptions={{
         headerShown: false,
         drawerPosition: 'right',
-        drawerActiveTintColor: iconColor, // Color del ícono activo
-        drawerInactiveTintColor: gray, // Color del ícono inactivo
+        drawerActiveTintColor: Colors.icons.default, // Color del ícono activo
+        drawerInactiveTintColor: Colors.gray.normal, // Color del ícono inactivo
         drawerLabelStyle: {
           fontSize: 18, // Tamaño de fuente
           marginLeft: -16, // Margen izquierdo

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { lightGray, iconColor, PlaceHolderInputColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import BlankComponent from '@/components/BlankComponent';
 import CardInput from '@/components/Home/cardInput';
 
@@ -14,7 +14,7 @@ const InputComponent: React.FC = () => {
       <TouchableOpacity style={styles.inputComponent} onPress={() => setModalVisible(true)}>
         <View style={styles.leftColumn}>
           <TouchableOpacity style={styles.profileIcon}>
-            <Ionicons name="person-outline" size={24} color={iconColor} />
+            <Ionicons name="person-outline" size={24} color={Colors.icons.default} />
           </TouchableOpacity>
         </View>
         <View style={styles.rightColumn}>
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25,
-    backgroundColor: lightGray,
+    backgroundColor: Colors.gray.light,
     justifyContent: 'center',
     alignItems: 'center',
   },
   placeholderText: {
-    color: PlaceHolderInputColor,
+    color: Colors.inputs.placeholder,
     fontSize: 16,
   },
   modalBackground: {

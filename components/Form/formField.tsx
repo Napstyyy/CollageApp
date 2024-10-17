@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { mainTextColor, InputFieldColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import * as DocumentPicker from 'expo-document-picker';
 
 type FormFieldProps = {
@@ -71,11 +71,11 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 16,
     marginBottom: 5,
-    color: mainTextColor,
+    color: Colors.text.main,
   },
   input: {
     borderWidth: 1,
-    borderColor: InputFieldColor,
+    borderColor: Colors.inputs.main,
     padding: 10,
     borderRadius: 5,
   },

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Switch } from 'react-native';
-import { MainInputColor, OptionsText } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import InputField from '@/components/Login/InputField';
 
 const RememberMeContainer: React.FC = () => {
@@ -11,7 +11,7 @@ const RememberMeContainer: React.FC = () => {
               value={rememberMe} 
               onValueChange={value => setRememberMe(value)}
               trackColor={{ false: '#E5E5E5', true: '#E5E5E5' }} // Colores para off y on
-                thumbColor={rememberMe ? OptionsText : '#f4f3f4'} // Color del círculo
+                thumbColor={rememberMe ? Colors.text.options : '#f4f3f4'} // Color del círculo
             />
             <Text style={styles.rememberMeText}>Recordarme</Text>
           </View>
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   },
   rememberMeText: {
     marginLeft: 8,
-    color: OptionsText,
+    color:  Colors.text.options,
   },
 });
 

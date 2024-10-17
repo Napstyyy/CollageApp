@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import Header from '@/components/Home/header';
 import Body from '@/components/Home/body';
 import Footer from '@/components/Footer';
-import { mainBackgroundColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 const HomeContent: React.FC = () => {
   return (
@@ -18,7 +18,7 @@ const HomeContent: React.FC = () => {
 
 const styles = StyleSheet.create({
   mainContainer: {
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
     flex: 1,
   },
 });

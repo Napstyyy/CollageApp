@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet} from 'react-native';
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { iconColor, mainTextColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import Menu from '@/components/Home/menu';
 
 
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     fontWeight: "bold",
-    color: mainTextColor,
+    color: Colors.text.main,
   },
   iconsContainer: {
     flexDirection: 'row',

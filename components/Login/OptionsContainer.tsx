@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Switch } from 'react-native';
-import { MainInputColor, OptionsText } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import InputField from '@/components/Login/InputField';
 import RememberMeContainer from '@/components/Login/RememberMeContainer';
 
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     marginTop: -16,
   },
   forgotPasswordText: {
-    color: OptionsText,
+    color: Colors.text.options,
     textDecorationLine: 'underline',
   },
 });

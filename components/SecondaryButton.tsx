@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { SecondaryButtonColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 
 interface SecondaryButtonProps {
@@ -18,7 +18,7 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({ text, controller }) =
 
 const styles = StyleSheet.create({
     Button: {
-    backgroundColor: SecondaryButtonColor ,
+    backgroundColor: Colors.buttons.secondary, // Color de fondo del botón,
     borderRadius: 16,
     paddingVertical: '4%',
     paddingHorizontal: '4%',

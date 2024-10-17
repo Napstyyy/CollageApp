@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import FormField from '@/components/Form/formField';
 import SecondaryButton from '@/components/SecondaryButton';
-import { mainTextColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 type FieldType = 'text' | 'email' | 'phone' | 'file';
 
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '300',
     marginBottom: 24,
-    color: mainTextColor,
+    color: Colors.text.main,
   },
     buttonContainer: {
         alignItems: 'center',

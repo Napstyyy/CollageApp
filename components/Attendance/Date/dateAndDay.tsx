@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Modal, FlatList, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { mainBackgroundColor, mainTextColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 const daysOfWeek = ['Domingo ','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
@@ -112,15 +112,15 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 10,
     width: '40%',  // Reducido para dejar espacio al otro botón
-    backgroundColor: mainBackgroundColor,
+    backgroundColor: Colors.background.main,
   },
   dateText: {
     fontSize: 16,
-    color: mainTextColor,
+    color: Colors.text.main,
   },
   arrow: {
     fontSize: 18,
-    color: mainTextColor,
+    color: Colors.text.main,
   },
   modalContainer: {
     flex: 1,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     borderBottomColor: '#ddd',
   },
   dayText: {
-    color: mainTextColor,
+    color: Colors.text.main,
     fontSize: 16,
     textAlign: 'center',
   },

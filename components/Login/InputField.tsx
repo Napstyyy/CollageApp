@@ -1,6 +1,6 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
-import { MainInputColor, PlaceHolderInputColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 
 
 interface InputFieldProps {
@@ -10,14 +10,14 @@ interface InputFieldProps {
 
 const InputField: React.FC<InputFieldProps> = ({ text, controller }) => {
   return (
-    <TextInput style={styles.input} placeholder={ text } placeholderTextColor={ PlaceHolderInputColor } />
+    <TextInput style={styles.input} placeholder={ text } placeholderTextColor={ Colors.inputs.placeholder } />
   );
 };
 
 const styles = StyleSheet.create({
     input: {
     height: '12%',
-    borderColor: MainInputColor,
+    borderColor: Colors.inputs.main,
     borderWidth: 1,
     borderRadius: 16,
     marginBottom: 15,

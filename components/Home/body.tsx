@@ -1,7 +1,5 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, FlatListComponent } from 'react-native';
-import { Ionicons, MaterialIcons, Feather, AntDesign } from '@expo/vector-icons';
-import { lightGray, iconColor, PlaceHolderInputColor } from '@/constants/Colors';
 import BlankComponent from '@/components/BlankComponent';
 import InputComponent from '@/components/Home/inputComponent';
 import Card from '@/components/Home/card';

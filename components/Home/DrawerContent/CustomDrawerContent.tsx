@@ -2,8 +2,7 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList, DrawerContentComponentProps } from '@react-navigation/drawer';
 import { Ionicons, MaterialIcons, AntDesign } from '@expo/vector-icons';
-import { iconColor, lightGray } from '@/constants/Colors';
-import { mainTextColor, secondayTextColor } from '@/constants/Colors';
+import { Colors } from '@/constants/Colors';
 import DrawerContentHeader from '@/components/Home/DrawerContent/header';
 import DrawerContentTextContainer from '@/components/Home/DrawerContent/textContainer';
 import BlankComponent from '@/components/BlankComponent';
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 100,
-    backgroundColor: lightGray,
+    backgroundColor: Colors.gray.light,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -51,12 +50,12 @@ const styles = StyleSheet.create({
   userName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: mainTextColor,
+    color: Colors.text.main,
   },
   title: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: secondayTextColor,
+    color: Colors.text.secondary,
   },
   
 });
