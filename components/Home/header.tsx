@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet} from 'react-native';
-import AntDesign from "@expo/vector-icons/AntDesign";
 import Menu from '@/components/Home/menu';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
@@ -37,7 +36,7 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     paddingHorizontal: 16,
   },
   logo: {
-    width: "16%",
+    width: "10%",
     height: "60%",
     resizeMode: "contain",
   },
