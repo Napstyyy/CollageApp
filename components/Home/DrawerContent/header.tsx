@@ -1,9 +1,14 @@
 import React from 'react';
 import { View, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons} from '@expo/vector-icons';
-import { Colors } from '@/constants/Colors';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 const DrawerContentHeader: React.FC = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
   return (
       <View style={styles.header}>
       <TouchableOpacity style={styles.profileIcon}>
@@ -14,7 +19,7 @@ const DrawerContentHeader: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',

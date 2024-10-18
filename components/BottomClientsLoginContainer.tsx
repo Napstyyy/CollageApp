@@ -6,10 +6,16 @@ import { NavigationController } from '@/navigation/controllers/NavigationControl
 import { useNavigation } from '@react-navigation/native';
 import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList, Routes } from '../navigation/routes';
-import { Colors } from '@/constants/Colors';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 const BottomClientsLoginContainer: React.FC = () => {
   const navigationController = new NavigationController();
+
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
 
   return (
     <View style={styles.bottomContainer}>
@@ -21,7 +27,7 @@ const BottomClientsLoginContainer: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   bottomContainer: {
     flex: 1,
     justifyContent: 'flex-end',
@@ -29,7 +35,7 @@ const styles = StyleSheet.create({
     width: '100%', // Para que el contenedor ocupe el ancho completo
   },
   buttonContainer: {
-    backgroundColor: Colors.gray.dark,
+    backgroundColor: Colors.background.main,
     width: '100%',
     height: '18%', // Altura fija para el contenedor
     alignItems: 'center',

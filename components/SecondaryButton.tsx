@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { Colors } from '@/constants/Colors';
-
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 interface SecondaryButtonProps {
   text: string;
@@ -9,6 +9,10 @@ interface SecondaryButtonProps {
 }
 
 const SecondaryButton: React.FC<SecondaryButtonProps> = ({ text, controller }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
   return (
     <TouchableOpacity style={styles.Button}>
         <Text style={styles.Text}>{ text }</Text>
@@ -16,7 +20,7 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({ text, controller }) =
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     Button: {
     backgroundColor: Colors.buttons.secondary, // Color de fondo del botón,
     borderRadius: 16,

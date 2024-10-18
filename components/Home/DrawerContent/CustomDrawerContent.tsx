@@ -2,12 +2,17 @@ import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { DrawerContentScrollView, DrawerItemList, DrawerContentComponentProps } from '@react-navigation/drawer';
 import { Ionicons, MaterialIcons, AntDesign } from '@expo/vector-icons';
-import { Colors } from '@/constants/Colors';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import DrawerContentHeader from '@/components/Home/DrawerContent/header';
 import DrawerContentTextContainer from '@/components/Home/DrawerContent/textContainer';
 import BlankComponent from '@/components/BlankComponent';
 
 const CustomDrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
   return (
     <DrawerContentScrollView {...props} style={styles.mainContainer}>
       <DrawerContentHeader />
@@ -19,7 +24,7 @@ const CustomDrawerContent: React.FC<DrawerContentComponentProps> = (props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   mainContainer: {
     paddingHorizontal: 16,
     flexGrow: 1,

@@ -1,15 +1,19 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet} from 'react-native';
 import AntDesign from "@expo/vector-icons/AntDesign";
-import { Colors } from '@/constants/Colors';
 import Menu from '@/components/Home/menu';
-
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 interface HeaderProps {
   title: string;
 }
 
 const Header: React.FC<HeaderProps> = ({ title }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
   return (
     <View style={styles.header}>
       <Image
@@ -24,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ title }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     header: {
     flex: 0.08,
     paddingTop: "12%",

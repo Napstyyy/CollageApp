@@ -1,9 +1,10 @@
 import React from 'react';
 import { StyleSheet, View, Text, ViewStyle } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Colors } from '@/constants/Colors';
 import ButtonGroup from '@/components/Attendance/Groups/carouselGroups';
 import BlankComponent from '@/components/BlankComponent';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 interface CardProps {
   icon: React.ReactNode; // Recibe un componente de ícono
@@ -13,6 +14,11 @@ interface CardProps {
 }
 
 const Card: React.FC<CardProps> = ({ icon, title, gradientColors, children }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
+
   return (
     <LinearGradient colors={gradientColors} style={styles.cardContainer}>
       <View style={styles.header}>
@@ -25,7 +31,7 @@ const Card: React.FC<CardProps> = ({ icon, title, gradientColors, children }) =>
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   cardContainer: {
     width: '100%',
     borderRadius: 18,

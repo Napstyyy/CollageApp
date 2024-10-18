@@ -1,9 +1,14 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { AntDesign, FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
-import { Colors } from '@/constants/Colors';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 const Card: React.FC = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardImage}>
@@ -34,7 +39,7 @@ const Card: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   cardContainer: {
     flex: 0.4,
     width: '100%',

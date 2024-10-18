@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, Switch } from 'react-native';
-import { Colors } from '@/constants/Colors';
 import InputField from '@/components/Login/InputField';
 import RememberMeContainer from '@/components/Login/RememberMeContainer';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
+
 
 const OptionsContainer: React.FC = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
   return (
         <View style={styles.optionsContainer}>
           <RememberMeContainer/>
@@ -15,7 +21,7 @@ const OptionsContainer: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) =>  StyleSheet.create({
   optionsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -1,22 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
-import { Picker } from '@react-native-picker/picker'; // Importamos Picker desde @react-native-picker/picker
 import BottomClientsLoginContainer from '@/components/BottomClientsLoginContainer';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Colors } from '@/constants/Colors';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
+import ColorPicker from '@/components/Pickers/ColorPicker';
 
 export default function ClientsLogin() {
-  const [selectedColor, setSelectedColor] = useState('#FFFFFF'); // Estado para el color de la bolita
-
-  // Opciones de colores para el Picker
-  const colorOptions = [
-    { label: 'Rojo', value: '#FF0000' },
-    { label: 'Verde', value: '#00FF00' },
-    { label: 'Azul', value: '#0000FF' },
-    { label: 'Amarillo', value: '#FFFF00' },
-    { label: 'Naranja', value: '#FFA500' },
-  ];
-
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors = themeMap[theme]; // Obtener los colores del tema actual
+  const styles = createStyles(Colors);
+  console.log('Gradient Colors:', Colors.background.gradient1, Colors.background.gradient2, Colors.buttons.main, Colors.buttons.secondary);
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -25,20 +19,7 @@ export default function ClientsLogin() {
       />
       <View style={styles.header}>
         <Text style={styles.title}>Bienvenido a Collage</Text>
-        <View style={styles.colorPickerContainer}>
-          {/* Bolita que cambia de color */}
-          <View style={[styles.colorCircle, { backgroundColor: selectedColor }]} />
-          {/* Menú desplegable */}
-          <Picker
-            selectedValue={selectedColor}
-            style={styles.picker}
-            onValueChange={(itemValue) => setSelectedColor(itemValue)}
-          >
-            {colorOptions.map((option) => (
-              <Picker.Item label={option.label} value={option.value} key={option.value} />
-            ))}
-          </Picker>
-        </View>
+      <ColorPicker />
       </View>
       <Image source={require('@/assets/images/collage-logo.png')} style={styles.logo} />
       <BottomClientsLoginContainer />
@@ -46,7 +27,7 @@ export default function ClientsLogin() {
   );
 }
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'flex-start',
@@ -59,6 +40,7 @@ const styles = StyleSheet.create({
     right: 0,
     top: 0,
     height: '60%',
+    backgroundColor: 'transparent',
   },
   logo: {
     width: 200,
@@ -81,23 +63,5 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     alignSelf: 'flex-start',
     width: 150,
-  },
-  colorPickerContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  colorCircle: {
-    width: 30,
-    height: 30,
-    borderRadius: 15,
-    marginRight: 10,
-    borderWidth: 1,
-    borderColor: '#FFFFFF',
-  },
-  picker: {
-    height: 50,
-    width: 50,
-    color: '#FFFFFF',
-    backgroundColor: 'white',
   },
 });

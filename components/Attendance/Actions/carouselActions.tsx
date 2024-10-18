@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal } from 'react-native';
 import PagerView from 'react-native-pager-view';
-import { Colors } from '@/constants/Colors';
 import { usePagerView } from '@/hooks/usePagerView';
 import MainTable from '@/components/Tables/mainTable'; // Importa el componente MainTable
 import { Ionicons } from '@expo/vector-icons';
 import CustomModal from '@/components/Modals/customModal';
-
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 interface Icon {
   title: string;
@@ -20,6 +20,12 @@ interface CarouselActionsProps {
 const ACTIONS_PER_PAGE = 3;
 
 const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors); // Crear estilos usando los colores del tema
+
+
   const [modalVisible, setModalVisible] = useState(false);
   const actionEntries = Object.entries(actions);
   const pages: Array<Array<[string, Icon]>> = [];
@@ -73,7 +79,7 @@ const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) =>  StyleSheet.create({
   container: {
     height: 120,
   },

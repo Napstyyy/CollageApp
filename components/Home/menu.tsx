@@ -2,9 +2,13 @@ import React from 'react';
 import { DrawerActions, useNavigation } from '@react-navigation/native';
 import { TouchableOpacity, StyleSheet } from 'react-native';
 import Feather from "@expo/vector-icons/Feather";
-import { Colors } from '@/constants/Colors';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap } from '@/constants/Colors'; 
 
 const Menu: React.FC = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors = themeMap[theme]; // Obtener los colores del tema actual
+
   const navigation = useNavigation();
 
   const openDrawer = () => {

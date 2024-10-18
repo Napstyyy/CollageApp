@@ -1,8 +1,9 @@
 import React from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { INavigationController } from '@/navigation//interfaces/INavigationController';
-import { Colors } from '@/constants/Colors';
 import { RootStackParamList } from '@/navigation/routes';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 interface MainButtonProps {
   text: string;
@@ -11,6 +12,10 @@ interface MainButtonProps {
 }
 
 const MainButton: React.FC<MainButtonProps> = ({ text, controller, route }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
   return (
     <TouchableOpacity style={styles.Button} onPress={() => controller.navigate(route)}>
       <Text style={styles.Text}>{text}</Text>
@@ -18,7 +23,7 @@ const MainButton: React.FC<MainButtonProps> = ({ text, controller, route }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) =>  StyleSheet.create({
     Button: {
     backgroundColor: Colors.buttons.main, // Color de fondo del botón,
     borderRadius: 16,

@@ -1,8 +1,9 @@
 import React from "react";
 import { View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import PagerView from "react-native-pager-view";
-import { Colors } from "@/constants/Colors";
 import { usePagerView } from "@/hooks/usePagerView";
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 interface Icon {
   title: string;
@@ -16,6 +17,10 @@ interface CarouselStudentsProps {
 const STUDENTS_PER_PAGE = 3;
 
 const CarouselStudents: React.FC<CarouselStudentsProps> = ({ students }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+  const styles = createStyles(Colors); 
+
   const actionEntries = Object.entries(students);
   const pages: Array<Array<[string, Icon]>> = [];
 
@@ -64,7 +69,7 @@ const CarouselStudents: React.FC<CarouselStudentsProps> = ({ students }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
     height: 120,
   },

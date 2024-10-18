@@ -12,16 +12,20 @@ import ReasonableAdjustments from '@/app/(tabs)/homeTabs/ReasonableAdjustments';
 import Subjects from '@/app/(tabs)/homeTabs/Subjects';
 import CustomDrawerContent from '@/components/Home/DrawerContent/CustomDrawerContent'; // Importa el componente personalizado
 import { Ionicons } from '@expo/vector-icons'; // Asegúrate de tener este import
-import { Colors } from '@/constants/Colors'; // Asegúrate de tener iconColor definido
 import Entypo from '@expo/vector-icons/Entypo';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap } from '@/constants/Colors';
+
 
 const Drawer = createDrawerNavigator();
 
 export default function Home() {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors = themeMap[theme]; // Obtener los colores del tema actual
   return (
     <Drawer.Navigator
       initialRouteName="Home"

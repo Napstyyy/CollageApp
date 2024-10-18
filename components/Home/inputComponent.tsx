@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/Colors';
 import BlankComponent from '@/components/BlankComponent';
 import CardInput from '@/components/Home/cardInput';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 const InputComponent: React.FC = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
+
   const [modalVisible, setModalVisible] = useState(false); // Estado para controlar el modal
 
   return (
@@ -44,7 +50,7 @@ const InputComponent: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   inputComponent: {
     width: '100%',
     flex: 0.08,

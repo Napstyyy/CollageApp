@@ -1,10 +1,17 @@
 import React from 'react';
 import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { AntDesign, MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/Colors';
 import phoneWindow from '@/constants/Dimensions';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
+
 
 const CardInput: React.FC = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
+
   return (
     <View style={styles.cardContainer}>
       <View style={styles.cardImage}>
@@ -40,7 +47,7 @@ const CardInput: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   cardContainer: {
     height: phoneWindow.height * 0.34,
     width: phoneWindow.width * 0.9,

@@ -1,8 +1,9 @@
 // CustomModal.tsx
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Modal } from 'react-native';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import { Ionicons } from '@expo/vector-icons';
-import { Colors } from '@/constants/Colors';
 
 interface CustomModalProps {
   visible: boolean;
@@ -11,6 +12,11 @@ interface CustomModalProps {
 }
 
 const CustomModal: React.FC<CustomModalProps> = ({ visible, onClose, children }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
+
   return (
     <Modal
       animationType="slide"
@@ -33,7 +39,7 @@ const CustomModal: React.FC<CustomModalProps> = ({ visible, onClose, children })
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   modalContainer: {
     flex: 1,
     justifyContent: 'center',

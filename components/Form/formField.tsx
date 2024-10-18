@@ -1,8 +1,10 @@
 import React from 'react';
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-import { Colors } from '@/constants/Colors';
 import * as DocumentPicker from 'expo-document-picker';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors';
+
 
 type FormFieldProps = {
   title: string;
@@ -12,6 +14,10 @@ type FormFieldProps = {
 };
 
 const FormField: React.FC<FormFieldProps> = ({ title, value, onChange, type = 'text' }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors); 
   const renderField = () => {
     switch (type) {
       case 'text':
@@ -64,7 +70,7 @@ const FormField: React.FC<FormFieldProps> = ({ title, value, onChange, type = 't
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
     marginVertical: 10,
   },

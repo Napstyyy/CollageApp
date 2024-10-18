@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import PagerView from 'react-native-pager-view';
-import { Colors } from '@/constants/Colors';
 import { usePagerView } from '@/hooks/usePagerView';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 interface ButtonGroupProps {
   buttons: string[];
@@ -11,6 +12,11 @@ interface ButtonGroupProps {
 const BUTTONS_PER_PAGE = 3; // Number of buttons per page
 
 const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
+
   const [selectedButton, setSelectedButton] = useState<string | null>(null); // Track selected button
 
   // Divide the buttons into pages
@@ -64,7 +70,7 @@ const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
     height: 120,
   },

@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, Button, StyleSheet } from 'react-native';
 import FormField from '@/components/Form/formField';
 import SecondaryButton from '@/components/SecondaryButton';
-import { Colors } from '@/constants/Colors';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
+
 
 type FieldType = 'text' | 'email' | 'phone' | 'file';
 
@@ -19,6 +21,11 @@ type FormProps = {
 };
 
 const Form: React.FC<FormProps> = ({ title, fields, onSubmit }) => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors); 
+
   const [formData, setFormData] = useState<{ [key: string]: any }>(
     fields.reduce((acc, field) => ({
       ...acc,
@@ -49,7 +56,7 @@ const Form: React.FC<FormProps> = ({ title, fields, onSubmit }) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
     flex: 1,
     width: '90%',

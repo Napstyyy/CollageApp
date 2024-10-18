@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, View, Text, ScrollView, FlatList, Dimensions } from 'react-native';
-import { Colors} from '@/constants/Colors';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 // Obtener dimensiones de la pantalla
 const { width, height } = Dimensions.get('window');
@@ -43,6 +44,11 @@ const columns = [
 ];
 
 const MainTable: React.FC = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors);
+
   // Renderizar cada fila de la tabla
   const renderItem = ({ item, index }: { item: TableRowData; index: number }) => (
     <View
@@ -84,7 +90,7 @@ const MainTable: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.background.main,

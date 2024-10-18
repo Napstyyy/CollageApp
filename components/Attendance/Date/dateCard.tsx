@@ -3,18 +3,21 @@ import Card from '@/components/Attendance/card';
 import CardHeader from '@/components/Attendance/cardHeader';
 import CarouselGroups from '@/components/Attendance/Groups/carouselGroups';
 import { MaterialIcons } from '@expo/vector-icons';
-import { Colors } from '@/constants/Colors';
 import { groups } from '@/data/groups';
 import Entypo from '@expo/vector-icons/Entypo';
 import DateAndDay from '@/components/Attendance/Date/dateAndDay';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap } from '@/constants/Colors'; 
 
 const NotificationCard: React.FC = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors = themeMap[theme]; // Obtener los colores del tema actual
 
   return (
     <Card 
       icon={<Entypo name="calendar" size={40} color={Colors.icons.default} />}
       title="Fecha y dia de la semana"
-      gradientColors={['#3E84E0', '#22487A']}>
+      gradientColors={[Colors.card.gradient2, Colors.card.gradient1]}>
       <DateAndDay />
     </Card>
   );

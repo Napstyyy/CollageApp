@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Modal, FlatList, Platform } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { Colors } from '@/constants/Colors';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 
 const daysOfWeek = ['Domingo ','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
 const DateAndDay: React.FC = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  const styles = createStyles(Colors); 
+
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false); // Controlar la visibilidad del modal
@@ -97,7 +103,7 @@ const DateAndDay: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
     justifyContent: 'space-between',
     alignItems: 'center',

@@ -2,11 +2,15 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import FormContainer from '@/components/Login/FormContainer';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Colors } from '@/constants/Colors';
 import { NavigationController } from '@/navigation/controllers/NavigationController';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap } from '@/constants/Colors'; 
+
 
 export default function Login() {
   const navigationController = new NavigationController();
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors = themeMap[theme]; // Obtener los colores del tema actual
 
   return (
     <View style={styles.container}>
