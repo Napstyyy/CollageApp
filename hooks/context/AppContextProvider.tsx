@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react';
 import { ThemeProvider } from '@/hooks/context/ThemeContext';
+import { AuthProvider } from '@/hooks/context/AuthContext';
 
 interface AppContextProviderProps {
   children: ReactNode;
@@ -9,7 +10,9 @@ interface AppContextProviderProps {
 const AppContextProvider: React.FC<AppContextProviderProps> = ({ children }) => {
   return (
       <ThemeProvider>
+        <AuthProvider>
         {children}
+      </AuthProvider>
       </ThemeProvider>
   );
 };

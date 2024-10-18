@@ -119,6 +119,7 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     borderRadius: 10,
     width: '40%',  // Reducido para dejar espacio al otro botón
     backgroundColor: Colors.background.main,
+    borderColor: Colors.background.main,
   },
   dateText: {
     fontSize: 16,

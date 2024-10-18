@@ -1,10 +1,7 @@
-// icons.ts
 import { MaterialIcons } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { FontAwesome5 } from '@expo/vector-icons';
 import { useTheme } from '@/hooks/context/ThemeContext';
-import { themeMap } from '@/constants/Colors'; 
+import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import Entypo from '@expo/vector-icons/Entypo';
 import Feather from '@expo/vector-icons/Feather';
 
@@ -14,33 +11,41 @@ interface Icon {
   component: JSX.Element; // Componente del ícono
 }
 
-// Creamos un diccionario de íconos
-const ActionsDictionary: Record<string, Icon> = {
-  Register: { 
-    title: 'Registros', 
-    component: <FontAwesome name="list-alt" size={24} color={'black'} /> 
-  },
-  Report: { 
-    title: 'Informe', 
-    component: <Entypo name="text-document" size={24} color={'black'} /> 
-  },
-  Consolidated: { 
-    title: 'Consolidado', 
-    component: <MaterialIcons name="dashboard" size={24} color={'black'} /> 
-  },
-  Excuse: { 
-    title: 'Excusa', 
-    component: <Feather name="alert-circle" size={24} color={'black'} /> 
-  },
-  Delete: { 
-    title: 'Borrar', 
-    component: <Entypo name="trash" size={24} color={'black'} />
-  },
-  Offline: {  
-    title: 'Sin conexión', 
-    component: <MaterialIcons name="signal-cellular-off" size={24} color={'black'} /> 
-  },
+// Creamos un hook personalizado para obtener el diccionario de acciones
+const useActionsDictionary = () => {
+  const { theme } = useTheme(); // Obtener el tema actual
+  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+
+  // Creamos un diccionario de íconos
+  const ActionsDictionary: Record<string, Icon> = {
+    Register: { 
+      title: 'Registros', 
+      component: <FontAwesome name="list-alt" size={24} color={Colors.icons.default} /> 
+    },
+    Report: { 
+      title: 'Informe', 
+      component: <Entypo name="text-document" size={24} color={Colors.icons.default} /> 
+    },
+    Consolidated: { 
+      title: 'Consolidado', 
+      component: <MaterialIcons name="dashboard" size={24} color={Colors.icons.default} /> 
+    },
+    Excuse: { 
+      title: 'Excusa', 
+      component: <Feather name="alert-circle" size={24} color={Colors.icons.default} /> 
+    },
+    Delete: { 
+      title: 'Borrar', 
+      component: <Entypo name="trash" size={24} color={Colors.icons.default} />
+    },
+    Offline: {  
+      title: 'Sin conexión', 
+      component: <MaterialIcons name="signal-cellular-off" size={24} color={Colors.icons.default} /> 
+    },
+  };
+
+  return ActionsDictionary;
 };
 
-// Exportamos el diccionario para su uso en otros módulos
-export default ActionsDictionary;
+// Exportamos el hook para su uso en otros módulos
+export default useActionsDictionary;
