@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Text, StyleSheet, Modal } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import PagerView from 'react-native-pager-view';
 import { usePagerView } from '@/hooks/usePagerView';
 import MainTable from '@/components/Tables/mainTable'; // Importa el componente MainTable
@@ -7,6 +7,8 @@ import { Ionicons } from '@expo/vector-icons';
 import CustomModal from '@/components/Modals/customModal';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
+import BottomMenu from '@/components/Menus/BottomMenu';
+import BottomMenuBody from '@/components/Attendance/Actions/bottomMenuBody';
 
 interface Icon {
   title: string;
@@ -22,10 +24,9 @@ const ACTIONS_PER_PAGE = 3;
 const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
-
   const styles = createStyles(Colors); // Crear estilos usando los colores del tema
 
-
+  const [isBottomMenuVisible, setIsBottomMenuVisible] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
   const actionEntries = Object.entries(actions);
   const pages: Array<Array<[string, Icon]>> = [];
@@ -39,7 +40,10 @@ const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
   const handlePress = (id: string) => {
     switch (id) {
       case 'Register':
-        setModalVisible(true); // Mostrar el modal si el id es 'register'
+        setModalVisible(true); // Mostrar el modal si el id es 'Register'
+        break;
+      case 'Consolidated':
+        setIsBottomMenuVisible(true); // Mostrar el BottomMenu si el id es 'Consolidated'
         break;
       // Aquí puedes agregar más casos para manejar otros botones
       default:
@@ -75,6 +79,10 @@ const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
       <CustomModal visible={modalVisible} onClose={() => setModalVisible(false)}>
         <MainTable />
       </CustomModal>
+
+      <BottomMenu isVisible={isBottomMenuVisible} onClose={() => setIsBottomMenuVisible(false)}>
+        <BottomMenuBody />
+      </BottomMenu>
     </View>
   );
 };
