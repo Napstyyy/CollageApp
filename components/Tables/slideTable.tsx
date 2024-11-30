@@ -1,8 +1,12 @@
-import React from 'react';
-import { View, Text, StyleSheet, Modal, Dimensions } from 'react-native';
-import PagerView from 'react-native-pager-view';
+import React, { useState, useCallback } from 'react';
+import { View, Text, StyleSheet, Modal, Dimensions, LayoutChangeEvent, TouchableOpacity, Image } from 'react-native';
+import Carousel from 'react-native-reanimated-carousel';
+import Icon from 'react-native-vector-icons/MaterialIcons'; // Asegúrate de importar un ícono válido
 import RegisterCard from '@/components/Tables/Register/registerCard';
 import Student from '@/interfaces/IStudent';
+import { useTheme } from '@/hooks/context/ThemeContext';
+import { themeMap, IColorTheme } from '@/constants/Colors';
+import phoneWindow from '@/constants/Dimensions';
 
 interface SlideTableProps {
   data: Record<number, Student>;
@@ -11,8 +15,17 @@ interface SlideTableProps {
 }
 
 const SlideTable: React.FC<SlideTableProps> = ({ data, isVisible, onClose }) => {
+  const { theme } = useTheme();
+  const Colors: IColorTheme = themeMap[theme];
+  const styles = createStyles(Colors);
+
   const entries = Object.entries(data);
-  const screenWidth = Dimensions.get('window').width; // Obtener el ancho de la pantalla
+  const [dynamicSize, setDynamicSize] = useState({ width: 0, height: 0 });
+
+  const handleLayout = useCallback((event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    setDynamicSize({ width, height });
+  }, []);
 
   return (
     <Modal
@@ -22,42 +35,63 @@ const SlideTable: React.FC<SlideTableProps> = ({ data, isVisible, onClose }) => 
       onRequestClose={onClose}
     >
       <View style={styles.overlay}>
-        <PagerView style={styles.pageView} initialPage={0}>
-          {entries.map(([key, student]) => (
-            <View style={[styles.cardContainer, { width: screenWidth * 0.8 }]} key={key}>
-              <RegisterCard
-                title={`Estudiante: ${student.name} ${student.lastname}`}
-              >
-                <Text style={styles.studentName}>{`${student.name} ${student.lastname}`}</Text>
-                <Text style={styles.subtitle}>Detalle del estudiante</Text>
-              </RegisterCard>
+        <Carousel
+          width={phoneWindow.width}
+          height={phoneWindow.height}
+          data={entries}
+          mode="parallax"
+          modeConfig={{
+            parallaxScrollingScale: 0.9,
+            parallaxScrollingOffset: 50,
+          }}
+          renderItem={({ item: [key, student] }) => (
+            <View style={styles.cardContainer} key={key}>
+              <View style={styles.carouselContainer} onLayout={handleLayout}>
+                {/* Botón de cierre */}
+        <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+          <Icon name="close" size={24} color="#fff" />
+        </TouchableOpacity>
+                <RegisterCard
+                  title={`Estudiante: ${student.name} ${student.lastname}`}
+                >
+                  <Text style={styles.studentName}>{`${student.name} ${student.lastname}`}</Text>
+                  <Text style={styles.subtitle}>Detalle del estudiante</Text>
+                 
+                </RegisterCard>
+              </View>
             </View>
-          ))}
-        </PagerView>
+          )}
+          loop={false}
+        />
       </View>
     </Modal>
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (Colors: IColorTheme) =>
+  StyleSheet.create({
   overlay: {
     flex: 1,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  pageView: {
-    flex: 1,
-    width: '100%',
-    alignItems: 'center',
+  closeButton: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    backgroundColor: Colors.buttons.main,
+    borderRadius: 32,
+    padding: 8,
+    zIndex: 10,
   },
   cardContainer: {
-    marginHorizontal: 10,
-    alignItems: 'center',
-    padding: 10,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 8,
-    overflow: 'hidden',  // Asegura que el contenido no se salga del borde
+    marginTop: '62%',
+  },
+  carouselContainer: {
+    width: '100%',
+    height: phoneWindow.height * 0.6,
+    backgroundColor: 'transparent',
   },
   studentName: {
     fontSize: 16,

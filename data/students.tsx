@@ -27,6 +27,11 @@ const useStudentsDictionary = () => {
       name: 'Michael',
       lastname: 'Johnson',
     },
+    4: {
+      image: StudentImage,
+      name: 'Mateo',
+      lastname: 'Giraldo Arboleda',
+    },
     // Add more students as needed
   };
 

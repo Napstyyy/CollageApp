@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import phoneWindow from '@/constants/Dimensions';
 
 interface RegisterCardProps {
   title?: string;
@@ -19,12 +20,11 @@ const RegisterCard: React.FC<RegisterCardProps> = ({ title, subtitle, children }
 
 const styles = StyleSheet.create({
   card: {
-    width: '90%',
-    maxHeight: '80%',
-    margin: 10,
+    width: phoneWindow.width,
+    height: phoneWindow.height * 0.6,
     padding: 20,
     backgroundColor: 'white',
-    borderRadius: 10,
+    borderRadius: 24,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,

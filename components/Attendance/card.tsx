@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({
 }) => {
   const { theme } = useTheme();
   const Colors: IColorTheme = themeMap[theme];
-
+  
   const styles = createStyles(Colors);
 
   return isTouchable ? (
