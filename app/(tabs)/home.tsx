@@ -19,7 +19,7 @@ import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap } from '@/constants/Colors';
-
+import Settings from '@/app/(tabs)/homeTabs/Settings';
 
 const Drawer = createDrawerNavigator();
 
@@ -122,6 +122,15 @@ export default function Home() {
         options={{
           drawerIcon: ({ size, color }) => (
             <AntDesign name="idcard" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Configuración"
+        component={Settings}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <MaterialIcons name="settings" size={size} color={color} />
           ),
         }}
       />

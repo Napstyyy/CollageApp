@@ -21,8 +21,8 @@ export default function Attendance() {
       <ScrollView style={styles.body} contentContainerStyle={styles.contentContainer}>
         <GroupsCard/>
         <DateCard/>
-        <ActionCard/>
         <StudentsCard/>
+        <ActionCard/>
         <BlankComponent BCheight={20} BCwidth={undefined}/>
       </ScrollView>
     </View>
