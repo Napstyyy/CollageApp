@@ -16,7 +16,7 @@ export default function Settings() {
     </>
   );
 }
-
+ 
 // Estilos para el componente
 const styles = StyleSheet.create({
 });
