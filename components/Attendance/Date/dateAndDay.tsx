@@ -3,15 +3,15 @@ import { StyleSheet, Text, View, TouchableOpacity, Modal, FlatList, Platform } f
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
-
-const daysOfWeek = ['Domingo ','Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+import { useTranslation } from 'react-i18next';
 
 const DateAndDay: React.FC = () => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+  const { t } = useTranslation(); // Traducción
 
   const styles = createStyles(Colors); 
-
+  const daysOfWeek = [t('Domnigo'),t('Lunes'), t('Martes'), t('Miercoles'), t('Jueves'), t('Viernes'), t('Sabado')];
   const [date, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
   const [showModal, setShowModal] = useState(false); // Controlar la visibilidad del modal

@@ -8,9 +8,11 @@ import { NavigationProp } from '@react-navigation/native';
 import { RootStackParamList, Routes } from '../navigation/routes';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
+import { useTranslation } from 'react-i18next';
 
 const BottomClientsLoginContainer: React.FC = () => {
   const navigationController = new NavigationController();
+  const { t } = useTranslation();
 
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
@@ -21,7 +23,7 @@ const BottomClientsLoginContainer: React.FC = () => {
     <View style={styles.bottomContainer}>
       <ClientList />
       <View style={styles.buttonContainer}>
-        <MainButton text={'Ingresar'} controller={navigationController} route={Routes.login} />
+        <MainButton text={t('Ingresar')} controller={navigationController} route={Routes.login} />
       </View>
     </View>
   );

@@ -4,6 +4,7 @@ import { Picker } from '@react-native-picker/picker';
 import * as DocumentPicker from 'expo-document-picker';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
+import { useTranslation } from 'react-i18next';
 
 
 type FormFieldProps = {
@@ -16,6 +17,7 @@ type FormFieldProps = {
 const FormField: React.FC<FormFieldProps> = ({ title, value, onChange, type = 'text' }) => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+  const { t } = useTranslation(); // Traducción
 
   const styles = createStyles(Colors); 
   const renderField = () => {
@@ -54,7 +56,7 @@ const FormField: React.FC<FormFieldProps> = ({ title, value, onChange, type = 't
               }
             }}
           >
-            <Text>{value || 'Subir archivo'}</Text>
+            <Text>{value || t('Subir_archivo')}</Text>
           </TouchableOpacity>
         );
       default:

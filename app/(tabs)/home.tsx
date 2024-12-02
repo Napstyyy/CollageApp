@@ -20,12 +20,14 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap } from '@/constants/Colors';
 import Settings from '@/app/(tabs)/homeTabs/Settings';
+import { useTranslation } from 'react-i18next';
 
 const Drawer = createDrawerNavigator();
 
 export default function Home() {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors = themeMap[theme]; // Obtener los colores del tema actual
+  const { t } = useTranslation(); // Traducción
   return (
     <Drawer.Navigator
       initialRouteName="Home"
@@ -45,7 +47,7 @@ export default function Home() {
       }}
     >
       <Drawer.Screen
-        name="Inicio"
+        name={t('Inicio')}
         component={HomeContent}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -54,7 +56,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name="Ajustes Razonables"
+        name={t('Ajustes_razonables')}
         component={ReasonableAdjustments}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -63,7 +65,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name="Agenda"
+        name={t('Agenda')}
         component={Agenda}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -72,7 +74,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name="Aprendizajes"
+        name={t('Aprendizajes')}
         component={Learnings}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -81,7 +83,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name="Asignaturas"
+        name={t('Aignaturas')}
         component={AcademicAssignment}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -90,7 +92,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name="Asistencia"
+        name={t('Asistencia')}
         component={Attendance}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -99,7 +101,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name="Auditoría"
+        name={t('Auditoria')}
         component={Audit}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -108,7 +110,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name="Asig. académica"
+        name={t('Asig_academica')}
         component={AcademicAssignment}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -117,7 +119,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name="Carnés"
+        name={t('Carnes')}
         component={IDCards}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -126,7 +128,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name="Configuración"
+        name={t('Configuracion')}
         component={Settings}
         options={{
           drawerIcon: ({ size, color }) => (

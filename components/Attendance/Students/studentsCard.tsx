@@ -6,10 +6,12 @@ import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
 import SlideTable from '@/components/Tables/slideTable';
 import useStudentsDictionary from '@/data/students';
+import { useTranslation } from 'react-i18next';
 
 const StudentsCard: React.FC = () => {
   const { theme } = useTheme();
   const Colors: IColorTheme = themeMap[theme];
+  const { t } = useTranslation();
 
   const [isCarouselVisible, setCarouselVisible] = useState(false);
 
@@ -19,7 +21,7 @@ const StudentsCard: React.FC = () => {
     <>
       <Card
         icon={<Fontisto name="person" size={40} color={Colors.icons.default} />}
-        title="Estudiantes"
+        title={t('Estudiantes')}
         gradientColors={[Colors.card.gradient2, Colors.card.gradient1]}
         isTouchable
         onPress={() => setCarouselVisible(true)}

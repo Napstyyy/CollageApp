@@ -5,10 +5,12 @@ import BlankComponent from '@/components/BlankComponent';
 import CardInput from '@/components/Home/cardInput';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
+import { useTranslation } from 'react-i18next';
 
 const InputComponent: React.FC = () => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+  const { t } = useTranslation();
 
   const styles = createStyles(Colors);
 
@@ -24,7 +26,7 @@ const InputComponent: React.FC = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.rightColumn}>
-          <Text style={styles.placeholderText}>¿En qué estás pensando?</Text>
+          <Text style={styles.placeholderText}>{t('En_que_estas_pensando')}</Text>
           <BlankComponent BCwidth="100%" BCheight="40%" />
         </View>
       </TouchableOpacity>

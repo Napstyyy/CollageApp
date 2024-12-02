@@ -5,12 +5,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import ColorPicker from '@/components/Pickers/ColorPicker';
+import { useTranslation } from 'react-i18next';
 
 export default function ClientsLogin() {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors = themeMap[theme]; // Obtener los colores del tema actual
   const styles = createStyles(Colors);
   console.log('Gradient Colors:', Colors.background.gradient1, Colors.background.gradient2, Colors.buttons.main, Colors.buttons.secondary);
+  const { t } = useTranslation();
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -18,7 +20,7 @@ export default function ClientsLogin() {
         style={styles.background}
       />
       <View style={styles.header}>
-        <Text style={styles.title}>Bienvenido a Collage</Text>
+        <Text style={styles.title}>{t('Bienvenido_a_Collage')}</Text>
       <ColorPicker />
       </View>
       <Image source={require('@/assets/images/collage-logo.png')} style={styles.logo} />

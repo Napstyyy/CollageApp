@@ -2,11 +2,13 @@ import React from 'react';
 import { FlatList, View, Text, StyleSheet, ScrollView } from 'react-native';
 import ClientItem from "./ClientItem";
 import { clients } from '@/models/clients';
+import { useTranslation } from 'react-i18next';
 
 const ClientList: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <ScrollView style={styles.clientContainer}>
-      <Text style={styles.clientTitle}>Nuestros clientes</Text>
+      <Text style={styles.clientTitle}>{t('Nuestros_clientes')}</Text>
       <FlatList
         data={clients}
         renderItem={({ item }) => <ClientItem name={item.name} logo={item.logo} />}

@@ -2,7 +2,6 @@ import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import Student from '@/interfaces/IStudent';
 // Import local images
-import StudentImage from '@/assets/images/Students/Student1.png';
 
 
 // Creamos un hook personalizado para obtener el diccionario de estudiantes
@@ -13,22 +12,22 @@ const useStudentsDictionary = () => {
   // Creamos un diccionario de estudiantes
   const StudentsDictionary: Record<number, Student> = {
     1: {
-      image: StudentImage,
+      image: '@/assets/images/Students/Student1.png',
       name: 'John',
       lastname: 'Doe',
     },
     2: {
-      image: StudentImage,
+      image: '@/assets/images/Students/Student1.png',
       name: 'Jane',
       lastname: 'Smith',
     },
     3: {
-      image: StudentImage,
+      image: '@/assets/images/Students/Student1.png',
       name: 'Michael',
       lastname: 'Johnson',
     },
     4: {
-      image: StudentImage,
+      image: '@/assets/images/Students/Student1.png',
       name: 'Mateo',
       lastname: 'Giraldo Arboleda',
     },

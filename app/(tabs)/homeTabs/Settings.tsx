@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, StyleSheet } from 'react-native';
 import Header from '@/components/Home/header';
 import ColorPicker from '@/components/Pickers/ColorPicker';
+import LanguageSwitcher from '@/components/Language/LanguageSwitcher';
 
 export default function Settings() {
 
@@ -10,6 +11,8 @@ export default function Settings() {
     <Header title="Configuración"/>
     <Text>Configuración</Text>
     <ColorPicker />
+    <LanguageSwitcher />
+
     </>
   );
 }

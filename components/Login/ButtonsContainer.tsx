@@ -4,15 +4,17 @@ import MainButton from '@/components/MainButton';
 import SecondaryButton from '@/components/SecondaryButton';
 import { NavigationController } from '@/navigation/controllers/NavigationController';
 import { Routes } from '@/navigation/routes';
+import { useTranslation } from 'react-i18next';
 
 
 const ButtonsContainer: React.FC = () => {
+  const { t } = useTranslation();
   const navigationController = new NavigationController();
   return (
     <View style={styles.container}>
-    <MainButton text={'Ingresar'} controller={navigationController} route={ Routes.home } />
+    <MainButton text={t('Ingresar')} controller={navigationController} route={ Routes.home } />
     <View style={styles.sizebox}></View>
-    <SecondaryButton text={'Solicitar cupo'} controller={undefined} />
+    <SecondaryButton text={t('Solicitar_cupo')} controller={undefined} />
     </View>
   );
 };

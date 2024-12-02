@@ -4,11 +4,13 @@ import { AntDesign, MaterialIcons, Ionicons } from '@expo/vector-icons';
 import phoneWindow from '@/constants/Dimensions';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
+import { useTranslation } from 'react-i18next';
 
 
 const CardInput: React.FC = () => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+  const { t } = useTranslation();
 
   const styles = createStyles(Colors);
 
@@ -21,7 +23,7 @@ const CardInput: React.FC = () => {
         />
       </View>
       <View style={styles.cardText}>
-        <Text style={styles.text}>¿En qué estás pensando?</Text>
+        <Text style={styles.text}>{t('En_que_estas_pensando')}</Text>
       </View>
 
       <View style={styles.cardFooter2}>

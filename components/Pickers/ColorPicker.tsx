@@ -2,18 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { useTheme } from '@/hooks/context/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const ColorPicker: React.FC = () => {
   const { theme, setThemeColor } = useTheme();
   const [selectedColor, setSelectedColor] = useState(theme); // Inicializa con el tema actual
+  const { t } = useTranslation();
 
   // Opciones de colores para el Picker
   const colorOptions = [
-    { label: 'Rojo', value: 'red' },
-    { label: 'Verde', value: 'green' },
-    { label: 'Azul', value: 'blue' },
-    { label: 'Amarillo', value: 'yellow' },
-    { label: 'Naranja', value: 'orange' },
+    { label: t('Rojo'), value: 'red' },
+    { label: t('Verde'), value: 'green' },
+    { label: t('Azul'), value: 'blue' },
+    { label: t('Amarillo'), value: 'yellow' },
+    { label: t('Naranja'), value: 'orange' },
   ];
 
   // Actualiza el tema cuando el color seleccionado cambia

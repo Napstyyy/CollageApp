@@ -4,6 +4,7 @@ import FormField from '@/components/Form/formField';
 import SecondaryButton from '@/components/SecondaryButton';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
+import { useTranslation } from 'react-i18next';
 
 
 type FieldType = 'text' | 'email' | 'phone' | 'file';
@@ -23,6 +24,7 @@ type FormProps = {
 const Form: React.FC<FormProps> = ({ title, fields, onSubmit }) => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+  const { t } = useTranslation(); // Traducción
 
   const styles = createStyles(Colors); 
 
@@ -50,7 +52,7 @@ const Form: React.FC<FormProps> = ({ title, fields, onSubmit }) => {
         />
       ))}
     <View style={styles.buttonContainer}>
-      <SecondaryButton text={'Guardar Datos Generales'} controller={undefined} />
+      <SecondaryButton text={t('Guardar_Datos')} controller={undefined} />
       </View>
     </View>
   );
