@@ -3,6 +3,7 @@ import { View, Text, StyleSheet} from 'react-native';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import { useTranslation } from 'react-i18next';
+
 const DrawerContentTextContainer: React.FC = () => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual

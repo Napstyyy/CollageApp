@@ -7,6 +7,7 @@ import { themeMap, IColorTheme } from '@/constants/Colors';
 import SlideTable from '@/components/Tables/slideTable';
 import useStudentsDictionary from '@/data/students';
 import { useTranslation } from 'react-i18next';
+import renderStudentCard from '@/components/Attendance/Students/renderStudentCard';
 
 const StudentsCard: React.FC = () => {
   const { theme } = useTheme();
@@ -31,6 +32,8 @@ const StudentsCard: React.FC = () => {
         data={studentsDictionary}
         isVisible={isCarouselVisible}
         onClose={() => setCarouselVisible(false)}
+        renderCard={renderStudentCard}
+        searchKey="name"
       />
     </>
   );

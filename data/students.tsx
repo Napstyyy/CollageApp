@@ -12,24 +12,24 @@ const useStudentsDictionary = () => {
   // Creamos un diccionario de estudiantes
   const StudentsDictionary: Record<number, Student> = {
     1: {
-      image: '@/assets/images/Students/Student1.png',
       name: 'John',
       lastname: 'Doe',
+      image: '@/assets/images/Students/Student1.png',
     },
     2: {
-      image: '@/assets/images/Students/Student1.png',
       name: 'Jane',
       lastname: 'Smith',
+      image: '@/assets/images/Students/Student1.png',
     },
     3: {
-      image: '@/assets/images/Students/Student1.png',
       name: 'Michael',
       lastname: 'Johnson',
+      image: '@/assets/images/Students/Student1.png',
     },
     4: {
-      image: '@/assets/images/Students/Student1.png',
       name: 'Mateo',
       lastname: 'Giraldo Arboleda',
+      image: '@/assets/images/Students/Student1.png',
     },
     // Add more students as needed
   };
