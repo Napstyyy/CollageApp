@@ -28,7 +28,7 @@ const FormField: React.FC<FormFieldProps> = ({ title, value, onChange, type = 't
             style={styles.input}
             value={value as string}
             onChangeText={onChange}
-            placeholder={`Ingresa tu ${title.toLowerCase()}`}
+            placeholder={t('Ingresa_tu_nombre_social')}
           />
         );
       case 'email':
@@ -38,7 +38,7 @@ const FormField: React.FC<FormFieldProps> = ({ title, value, onChange, type = 't
             value={value as string}
             onChangeText={onChange}
             keyboardType="email-address"
-            placeholder="Correo Electrónico"
+            placeholder={t('Correo_Electronico')}
           />
         );
         case 'file':

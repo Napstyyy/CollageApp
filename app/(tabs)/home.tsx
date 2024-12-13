@@ -83,7 +83,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name={t('Aignaturas')}
+        name={t('Asignaturas')}
         component={AcademicAssignment}
         options={{
           drawerIcon: ({ size, color }) => (
