@@ -1,6 +1,6 @@
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
-import Student from '@/interfaces/IStudent';
+import Student from '@/interfaces/Students/IStudent';
 // Import local images
 
 

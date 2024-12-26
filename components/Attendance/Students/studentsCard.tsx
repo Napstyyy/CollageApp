@@ -4,7 +4,7 @@ import Card from '@/components/Attendance/card';
 import Fontisto from '@expo/vector-icons/Fontisto';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
-import SlideTable from '@/components/Tables/slideTable';
+import SlideTable from '@/components/Tables/SlideTable/slideTable';
 import useStudentsDictionary from '@/data/students';
 import { useTranslation } from 'react-i18next';
 import renderStudentCard from '@/components/Attendance/Students/renderStudentCard';
