@@ -1,11 +1,11 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { 
-  View, 
-  TextInput, 
-  StyleSheet, 
-  Modal, 
-  LayoutChangeEvent, 
-  TouchableOpacity 
+import {
+  View,
+  TextInput,
+  StyleSheet,
+  Modal,
+  LayoutChangeEvent,
+  TouchableOpacity
 } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -89,20 +89,20 @@ const SlideTable = <T,>({
             }}
             renderItem={({ item: [key, value] }) => (
               <View style={styles.cardContainer} key={key}>
-      <View style={styles.scrollWrapper}>
-        <ScrollView
-          style={styles.carouselContainer}
-          contentContainerStyle={styles.scrollContent}
-          onLayout={handleLayout}
-        >
-          <TouchableOpacity style={styles.closeButton} onPress={onClose}>
-            <Icon name="close" size={24} color="#fff" />
-          </TouchableOpacity>
-          {renderCard(value)}
-        </ScrollView>
-      </View>
-    </View>
-            )}
+                <View style={styles.scrollWrapper}>
+                  <ScrollView
+                    style={styles.carouselContainer}
+                    contentContainerStyle={styles.scrollContent}
+                    onLayout={handleLayout}
+                  >
+                    <TouchableOpacity style={styles.closeButton} onPress={onClose}>
+                      <Icon name="close" size={24} color="#fff" />
+                    </TouchableOpacity>
+                    {renderCard(value)}
+                  </ScrollView>
+                </View>
+              </View>
+            )} 
             loop={false}
             onSnapToItem={(index) => {
               setCarouselIndex(index);
@@ -138,7 +138,7 @@ const createStyles = (Colors: IColorTheme) =>
       borderRadius: 8,
       padding: 10,
       fontSize: 16,
-      marginBottom: -phoneWindow.height * 0.024,
+      marginBottom: -phoneWindow.height * 0.012,
     },
     closeButton: {
       position: 'absolute',

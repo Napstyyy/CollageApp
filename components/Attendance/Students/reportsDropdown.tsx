@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Dropdown } from 'react-native-element-dropdown';
 import IReportItem from '@/interfaces/Students/IReportsItem';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
 import { useTranslation } from 'react-i18next';
 import Icon from 'react-native-vector-icons/MaterialIcons'; // Asegúrate de tener esta librería instalada
+import BouncyCheckbox from "react-native-bouncy-checkbox";
+import MultiSelect from '@/components/Fields/MultiSelector/MultiSelectDropdown';
+import CustomMultiSelect from '@/components/Fields/MultiSelector/MultiSelectDropdown';
 
 interface ReportsDropdownProps {
   items: IReportItem[];
   placeholder?: string;
-  onSelectItem: (value: string) => void;
+  onSelectItem: (values: string[]) => void;
 }
-
 const ReportsDropdown: React.FC<ReportsDropdownProps> = ({
   items,
-  placeholder = 'Select an item',
+  placeholder = 'Select items',
   onSelectItem,
 }) => {
   const { theme } = useTheme(); // Obtener el tema actual
@@ -23,61 +24,36 @@ const ReportsDropdown: React.FC<ReportsDropdownProps> = ({
   const styles = createStyles(Colors);
   const { t } = useTranslation(); // Traducción
 
-  const [value, setValue] = useState<string | null>(null);
-  const [isFocus, setIsFocus] = useState(false);
-
+  const itemsm = ['Apple', 'Banana', 'Orange', 'Pineapple', 'Mango'];
   return (
-    <View>
-      <Dropdown
-        style={[styles.dropdown, isFocus && { borderColor: Colors.buttons.main }]}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
-        data={items}
-        maxHeight={300}
-        labelField="label"
-        valueField="value"
-        placeholder={placeholder}
-        value={value}
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
-        onChange={(item) => {
-          setValue(item.value);
-          onSelectItem(item.value);
-          setIsFocus(false);
-        }}
-        renderRightIcon={() => (
-          <Icon 
-            name="arrow-drop-down" 
-            size={24} 
-            color={isFocus ? Colors.buttons.main : Colors.buttons.secondary} 
-          />
-        )}
+    <View style={styles.container}>
+      <BouncyCheckbox
+        size={25}
+        fillColor={Colors.buttons.main}
+        unFillColor={Colors.background.main}
+        iconStyle={{ borderColor: Colors.buttons.main }}
+        innerIconStyle={{ borderWidth: 1.6 }}
+        onPress={(isChecked: boolean) => { console.log(isChecked); }}
+        style={styles.checkbox}
       />
+      <CustomMultiSelect/>
     </View>
   );
 };
 
 const createStyles = (Colors: IColorTheme) => StyleSheet.create({
-  dropdown: {
-    height: 50,
-    borderColor: Colors.buttons.main,
-    borderWidth: 1,
-    borderRadius: 8,
-    paddingHorizontal: 8,
-    marginBottom: 16,
+  container: {
+    height: '16%',
+    width: '100%',
+    flexDirection: 'row', // Coloca los componentes uno al lado del otro
+    alignItems: 'center', // Alinea los elementos verticalmente al centro
+    justifyContent: 'space-between', // Espacio entre los elementos
+    gap: 16, // Espacio entre los elementos
+    padding: 16,
   },
-  placeholderStyle: {
-    fontSize: 16,
-    color: Colors.buttons.main,
-  },
-  selectedTextStyle: {
-    fontSize: 16,
-    color: Colors.buttons.main,
-  },
-  inputSearchStyle: {
-    height: 40,
-    fontSize: 16,
+  checkbox: {
+    height: '16%',
+    width: '8%', // Ajusta el tamaño según lo necesites
   },
 });
 

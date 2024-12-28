@@ -15,8 +15,8 @@ const renderStudentCard: React.FC<IStudent> = ({ name, lastname, image }) => {
   const styles = createStyles(Colors);
   const { t } = useTranslation(); // Traducción
 
-  const handleSelectItem = (value: string) => {
-    console.log('Selected:', value);
+  const handleSelectItem = (values: string[]) => {
+    console.log('Selected:', values);
   };
   return (
     <View style={styles.card}>
@@ -58,7 +58,6 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     width: '100%',
     height: '50%',
     borderRadius: 8,
-    backgroundColor: 'green',
   },
 });
 
