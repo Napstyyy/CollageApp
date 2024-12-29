@@ -29,16 +29,16 @@ const SlideTable = <T,>({
   onClose,
   renderCard,
   searchKey,
-}: SlideTableProps<T>) => {
+}: SlideTableProps<T>): JSX.Element => {
   const { theme } = useTheme();
   const Colors: IColorTheme = themeMap[theme];
   const styles = createStyles(Colors);
   const { t } = useTranslation();
 
-  const [dynamicSize, setDynamicSize] = useState({ width: 0, height: 0 });
-  const [searchText, setSearchText] = useState('');
-  const [carouselIndex, setCarouselIndex] = useState(0);
-  const [userHasSlid, setUserHasSlid] = useState(false);
+  const [dynamicSize, setDynamicSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
+  const [searchText, setSearchText] = useState<string>('');
+  const [carouselIndex, setCarouselIndex] = useState<number>(0);
+  const [userHasSlid, setUserHasSlid] = useState<boolean>(false);
 
   // Calcula las dimensiones dinámicas del carrusel
   const handleLayout = useCallback((event: LayoutChangeEvent) => {
@@ -56,7 +56,7 @@ const SlideTable = <T,>({
     if (!userHasSlid) setCarouselIndex(0);
   }, [filteredEntries, userHasSlid]);
 
-  const handleSearchChange = (text: string) => {
+  const handleSearchChange = (text: string): void => {
     setSearchText(text);
     setUserHasSlid(false);
   };
@@ -93,7 +93,8 @@ const SlideTable = <T,>({
                   <ScrollView
                     style={styles.carouselContainer}
                     contentContainerStyle={styles.scrollContent}
-                    onLayout={handleLayout}
+                    nestedScrollEnabled={true}
+                    showsVerticalScrollIndicator={false}
                   >
                     <TouchableOpacity style={styles.closeButton} onPress={onClose}>
                       <Icon name="close" size={24} color="#fff" />
@@ -104,7 +105,7 @@ const SlideTable = <T,>({
               </View>
             )} 
             loop={false}
-            onSnapToItem={(index) => {
+            onSnapToItem={(index: number): void => {
               setCarouselIndex(index);
               setUserHasSlid(true);
             }}
@@ -150,21 +151,24 @@ const createStyles = (Colors: IColorTheme) =>
       zIndex: 10,
     },
     cardContainer: {
+      flex: 1, // Asegura que ocupe el espacio disponible
       width: '100%',
     },
     scrollWrapper: {
+      flex: 1, // Permite que el ScrollView crezca dentro del contenedor
       width: '100%',
       borderRadius: 8,
-      overflow: 'hidden', // Esto asegura que el contenido respete los bordes redondeados
-      backgroundColor: Colors.background.main, // Fondo para destacar los bordes
+      overflow: 'hidden',
+      backgroundColor: Colors.background.main,
     },
     carouselContainer: {
-      width: '100%',
+      flex: 1, // Permite que el ScrollView utilice todo el espacio
       backgroundColor: 'transparent',
     },
     scrollContent: {
+      flexGrow: 1, // Permite que el contenido crezca sin restricciones
+      paddingBottom: 20, // Espacio adicional al final
     },
   });
-
 
 export default SlideTable;

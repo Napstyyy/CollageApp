@@ -1,59 +1,76 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import IReportItem from '@/interfaces/Students/IReportsItem';
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
-import { useTranslation } from 'react-i18next';
-import Icon from 'react-native-vector-icons/MaterialIcons'; // Asegúrate de tener esta librería instalada
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import MultiSelect from '@/components/Fields/MultiSelector/MultiSelectDropdown';
 import CustomMultiSelect from '@/components/Fields/MultiSelector/MultiSelectDropdown';
 
 interface ReportsDropdownProps {
-  items: IReportItem[];
-  placeholder?: string;
-  onSelectItem: (values: string[]) => void;
+  report: string[];
 }
-const ReportsDropdown: React.FC<ReportsDropdownProps> = ({
-  items,
-  placeholder = 'Select items',
-  onSelectItem,
-}) => {
-  const { theme } = useTheme(); // Obtener el tema actual
-  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
-  const styles = createStyles(Colors);
-  const { t } = useTranslation(); // Traducción
 
-  const itemsm = ['Apple', 'Banana', 'Orange', 'Pineapple', 'Mango'];
+const ReportsDropdown: React.FC<ReportsDropdownProps> = ({
+  report
+}) => {
+  const { theme } = useTheme();
+  const Colors: IColorTheme = themeMap[theme];
+  const styles = createStyles(Colors);
+
+  // Estado para manejar el estado del checkbox
+  const [isChecked, setIsChecked] = useState(false);
+
   return (
-    <View style={styles.container}>
-      <BouncyCheckbox
-        size={25}
-        fillColor={Colors.buttons.main}
-        unFillColor={Colors.background.main}
-        iconStyle={{ borderColor: Colors.buttons.main }}
-        innerIconStyle={{ borderWidth: 1.6 }}
-        onPress={(isChecked: boolean) => { console.log(isChecked); }}
-        style={styles.checkbox}
-      />
-      <CustomMultiSelect/>
-    </View>
+    <TouchableOpacity
+      style={styles.container}
+      onPress={() => setIsChecked((prev) => !prev)}
+      activeOpacity={0.8}
+    >
+      {/* Primera fila: Checkbox y Texto */}
+      <View style={styles.row}>
+        <BouncyCheckbox
+          isChecked={isChecked}
+          size={20}
+          fillColor={Colors.buttons.main}
+          unFillColor={Colors.background.main}
+          iconStyle={{ borderColor: Colors.buttons.main }}
+          innerIconStyle={{ borderWidth: 1.6 }}
+          onPress={() => setIsChecked((prev) => !prev)} // Sincroniza con el estado global
+          style={styles.checkbox}
+        />
+        <Text style={styles.text}>{report}</Text>
+      </View>
+
+      {/* Segunda fila: CustomMultiSelect */}
+      <View style={styles.row}>
+        <CustomMultiSelect />
+      </View>
+    </TouchableOpacity>
   );
 };
 
 const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
-    height: '16%',
     width: '100%',
-    flexDirection: 'row', // Coloca los componentes uno al lado del otro
-    alignItems: 'center', // Alinea los elementos verticalmente al centro
-    justifyContent: 'space-between', // Espacio entre los elementos
-    gap: 16, // Espacio entre los elementos
+    maxWidth: 400,
     padding: 16,
+    backgroundColor: Colors.background.main,
+    borderRadius: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 3,
+    elevation: 5,
+  },
+  row: {
+    width: '100%',
+    flexDirection: 'row',
   },
   checkbox: {
-    height: '16%',
-    width: '8%', // Ajusta el tamaño según lo necesites
+    marginRight: 8, // Espacio entre el checkbox y el texto
+  },
+  text: {
+    fontSize: 16,
+    color: Colors.text.main,
   },
 });
 

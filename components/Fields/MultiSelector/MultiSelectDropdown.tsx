@@ -2,35 +2,29 @@ import React, { useState } from 'react';
   import { StyleSheet, View } from 'react-native';
   import { MultiSelect } from 'react-native-element-dropdown';
   import AntDesign from '@expo/vector-icons/AntDesign';
-
-  const data = [
-    { label: 'Item 1', value: '1' },
-    { label: 'Item 2', value: '2' },
-    { label: 'Item 3', value: '3' },
-    { label: 'Item 4', value: '4' },
-    { label: 'Item 5', value: '5' },
-    { label: 'Item 6', value: '6' },
-    { label: 'Item 7', value: '7' },
-    { label: 'Item 8', value: '8' },
-  ];
+  import Asignatures from '@/data/Asignatures/Asignatures';
+  import { useTranslation } from 'react-i18next';
 
   const CustomMultiSelect = () => {
     const [selected, setSelected] = useState<string[]>([]);
+    const { t } = useTranslation(); // Traducción
 
     return (
       <View style={styles.container}>
         <MultiSelect
+          visibleSelectedItem={true}
           style={styles.dropdown}
           placeholderStyle={styles.placeholderStyle}
+          selectedStyle={styles.selectedStyle}
           selectedTextStyle={styles.selectedTextStyle}
           inputSearchStyle={styles.inputSearchStyle}
           iconStyle={styles.iconStyle}
           search
-          data={data}
+          data={Asignatures}
           labelField="label"
           valueField="value"
-          placeholder="Select item"
-          searchPlaceholder="Search..."
+          placeholder={t('Seleccione_asignatura')}
+          searchPlaceholder={t('Buscar')}
           value={selected}
           onChange={item => {
             setSelected(item);
@@ -43,8 +37,6 @@ import React, { useState } from 'react';
               size={20}
             />
           )}
-          selectedStyle={styles.selectedStyle}
-          alwaysRenderSelectedItem={false}
         />
       </View>
     );
