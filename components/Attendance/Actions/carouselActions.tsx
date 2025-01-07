@@ -17,11 +17,12 @@ interface Icon {
 
 interface CarouselActionsProps {
   actions: Record<string, Icon>;
+  onActionComplete: () => void;
 }
 
 const ACTIONS_PER_PAGE = 3;
 
-const CarouselActions: React.FC<CarouselActionsProps> = ({ actions }) => {
+const CarouselActions: React.FC<CarouselActionsProps> = ({ actions, onActionComplete}) => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
   const styles = createStyles(Colors); // Crear estilos usando los colores del tema

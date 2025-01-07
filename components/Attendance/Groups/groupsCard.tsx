@@ -8,19 +8,24 @@ import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap } from '@/constants/Colors'; 
 import { useTranslation } from 'react-i18next';
 
-const NotificationCard: React.FC = () => {
-  const { theme } = useTheme(); // Obtener el tema actual
-const Colors = themeMap[theme]; // Obtener los colores del tema actual
-  const { t } = useTranslation(); // Traducción
+const GroupsCard: React.FC<{ onSelectGroup: (group: string) => void }> = ({ onSelectGroup }) => {
+  const { theme } = useTheme();
+  const Colors = themeMap[theme];
+  const { t } = useTranslation();
+
+  const handleGroupSelect = (group: string) => {
+    onSelectGroup(group); // Notifica al componente principal
+  };
 
   return (
-    <Card 
-      icon={<MaterialIcons name="groups" size={40} color={Colors.icons.default} />} 
+    <Card
+      icon={<MaterialIcons name="groups" size={40} color={Colors.icons.default} />}
       title={t('Grupo')}
-      gradientColors={[Colors.card.gradient1, Colors.card.gradient2]}>
-      <CarouselGroups buttons={groups} />
+      gradientColors={[Colors.card.gradient1, Colors.card.gradient2]}
+    >
+      <CarouselGroups buttons={groups} onSelect={handleGroupSelect} />
     </Card>
   );
 };
 
-export default NotificationCard;
+export default GroupsCard;

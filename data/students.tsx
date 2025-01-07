@@ -15,21 +15,49 @@ const useStudentsDictionary = () => {
       name: 'John',
       lastname: 'Doe',
       image: '@/assets/images/Students/Student1.png',
+      grade: '10',
     },
     2: {
       name: 'Jane',
       lastname: 'Smith',
       image: '@/assets/images/Students/Student1.png',
+      grade: '12',
     },
     3: {
       name: 'Michael',
       lastname: 'Johnson',
       image: '@/assets/images/Students/Student1.png',
+      grade: '5',
     },
     4: {
       name: 'Mateo',
       lastname: 'Giraldo Arboleda',
       image: '@/assets/images/Students/Student1.png',
+      grade: '4',
+    },
+    5: {
+      name: 'John',
+      lastname: 'Doe',
+      image: '@/assets/images/Students/Student1.png',
+      grade: '10',
+    },
+    6: {
+      name: 'Jane',
+      lastname: 'Smith',
+      image: '@/assets/images/Students/Student1.png',
+      grade: '12',
+    },
+    7: {
+      name: 'Michael',
+      lastname: 'Johnson',
+      image: '@/assets/images/Students/Student1.png',
+      grade: '5',
+    },
+    8: {
+      name: 'Mateo',
+      lastname: 'Giraldo Arboleda',
+      image: '@/assets/images/Students/Student1.png',
+      grade: '4',
     },
     // Add more students as needed
   };

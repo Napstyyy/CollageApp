@@ -5,7 +5,11 @@ import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import { useTranslation } from 'react-i18next';
 
-const DateAndDay: React.FC = () => {
+interface IDateAndDayProps {
+  onDatePress: (date: string) => void;
+}
+
+const DateAndDay: React.FC<IDateAndDayProps> = ({ onDatePress }) => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
   const { t } = useTranslation(); // Traducción
@@ -23,6 +27,7 @@ const DateAndDay: React.FC = () => {
     setShow(Platform.OS === 'ios');
     setDate(currentDate);
     setSelectedDay(daysOfWeek[currentDate.getDay()]); // Actualizar día seleccionado basado en la fecha
+    onDatePress(currentDate.toISOString()); // Notificar al componente padre
   };
 
   // Función para abrir el selector de fecha

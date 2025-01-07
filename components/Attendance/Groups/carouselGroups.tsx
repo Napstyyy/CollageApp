@@ -7,11 +7,12 @@ import { themeMap, IColorTheme } from '@/constants/Colors';
 
 interface ButtonGroupProps {
   buttons: string[];
+  onSelect: (selected: string) => void;
 }
 
 const BUTTONS_PER_PAGE = 3; // Number of buttons per page
 
-const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons }) => {
+const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons, onSelect }) => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
 
@@ -28,7 +29,8 @@ const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons }) => {
   const { pagerViewRef, pageIndex, setPageIndex, handlePageScroll, extendedPages } = usePagerView(pages);
 
   const handleButtonPress = (button: string) => {
-    setSelectedButton(button); // Update selected button state
+    setSelectedButton(button); // Actualiza el estado local
+    onSelect(button); // Notifica al componente padre
   };
 
   return (

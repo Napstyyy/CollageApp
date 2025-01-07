@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, StyleSheet, View, ViewStyle, ScrollView } from 'react-native';
 import Header from '@/components/Home/header';
 import GroupsCard from '@/components/Attendance/Groups/groupsCard';
@@ -7,30 +7,40 @@ import ActionCard from '@/components/Attendance/Actions/actionCard';
 import StudentsCard from '@/components/Attendance/Students/studentsCard';
 import BlankComponent from '@/components/BlankComponent';
 import { useTheme } from '@/hooks/context/ThemeContext';
-import { themeMap, IColorTheme } from '@/constants/Colors'; 
+import { themeMap, IColorTheme } from '@/constants/Colors';
+import RowCard from '@/components/Tables/ListTable/Row/RowCard';
+import useStudentsDictionary from '@/data/students';
+import StudentsList from '@/components/Attendance/Students/studentsList';
 
 export default function Attendance() {
-  const { theme } = useTheme(); // Obtener el tema actual
-  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
+  const { theme } = useTheme();
+  const Colors = themeMap[theme];
+  const styles = createStyles(Colors);
 
-  const styles = createStyles(Colors); // Crear estilos usando los colores del tema
+  // Estados para controlar el flujo
+  const [selectedGroup, setSelectedGroup] = useState<string | null>(null);
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [studentsLoaded, setStudentsLoaded] = useState<boolean>(false);
+  const [actionCompleted, setActionCompleted] = useState<boolean>(false);
 
   return (
     <View style={styles.mainContainer}>
       <Header title="Asistencia" />
       <ScrollView style={styles.body} contentContainerStyle={styles.contentContainer}>
-        <GroupsCard/>
-        <DateCard/>
-        <StudentsCard/>
-        <ActionCard/>
-        <BlankComponent BCheight={20} BCwidth={undefined}/>
+        {/* Tarjetas condicionales */}
+        <GroupsCard onSelectGroup={(group) => setSelectedGroup(group)} />
+        <DateCard onSelectDate={(date) => setSelectedDate(date)} />
+        {/* {selectedGroup && <StudentsCard onLoadStudents={() => setStudentsLoaded(true)} />} */}
+        {studentsLoaded && <ActionCard onCompleteAction={() => setActionCompleted(true)} />}
+        <StudentsList />
+        <BlankComponent BCheight={20} BCwidth={undefined} />
       </ScrollView>
     </View>
   );
 }
 
 // Función para crear estilos dinámicamente
-const createStyles = (Colors: IColorTheme) => 
+const createStyles = (Colors: IColorTheme) =>
   StyleSheet.create({
     mainContainer: {
       backgroundColor: Colors.background.main,

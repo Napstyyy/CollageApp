@@ -10,22 +10,27 @@ import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap } from '@/constants/Colors'; 
 import { useTranslation } from 'react-i18next';
 
-const NotificationCard: React.FC = () => {
-  const { theme } = useTheme(); // Obtener el tema actual
-  const Colors = themeMap[theme]; // Obtener los colores del tema actual
-  const { t } = useTranslation(); //
+const DateCard: React.FC<{ onSelectDate: (date: string) => void }> = ({ onSelectDate }) => {
+  const { theme } = useTheme();
+  const Colors = themeMap[theme];
+  const { t } = useTranslation();
+
+  const handleDateSelect = (date: string) => {
+    onSelectDate(date); // Notifica al componente principal
+  };
 
   return (
-    <Card 
+    <Card
       icon={<Entypo name="calendar" size={40} color={Colors.icons.default} />}
       title={t('Fecha_y_dia_de_la_semana')}
-      gradientColors={[Colors.card.gradient2, Colors.card.gradient1]}>
-      <DateAndDay />
+      gradientColors={[Colors.card.gradient2, Colors.card.gradient1]}
+    >
+      <DateAndDay onDatePress={handleDateSelect} />
     </Card>
   );
 };
 
-export default NotificationCard;
+export default DateCard;
 
 
 
