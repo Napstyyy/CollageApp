@@ -5,7 +5,7 @@ import {
   StyleSheet,
   Modal,
   LayoutChangeEvent,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import Carousel from 'react-native-reanimated-carousel';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -21,6 +21,7 @@ interface SlideTableProps<T> {
   onClose: () => void;
   renderCard: (item: T) => React.ReactNode;
   searchKey: keyof T;
+  defaultIndex?: number; // Índice inicial
 }
 
 const SlideTable = <T,>({
@@ -29,6 +30,7 @@ const SlideTable = <T,>({
   onClose,
   renderCard,
   searchKey,
+  defaultIndex = 0,
 }: SlideTableProps<T>): JSX.Element => {
   const { theme } = useTheme();
   const Colors: IColorTheme = themeMap[theme];
@@ -37,8 +39,16 @@ const SlideTable = <T,>({
 
   const [dynamicSize, setDynamicSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
   const [searchText, setSearchText] = useState<string>('');
-  const [carouselIndex, setCarouselIndex] = useState<number>(0);
+  const [carouselIndex, setCarouselIndex] = useState<number>(defaultIndex); // Usa el defaultIndex
   const [userHasSlid, setUserHasSlid] = useState<boolean>(false);
+
+  // 📌 Asegurar que el índice inicial se ajuste al abrir el modal
+  useEffect(() => {
+    if (isVisible) {
+      setCarouselIndex(defaultIndex);
+      setUserHasSlid(false);
+    }
+  }, [isVisible, defaultIndex]);
 
   // Calcula las dimensiones dinámicas del carrusel
   const handleLayout = useCallback((event: LayoutChangeEvent) => {
@@ -50,11 +60,6 @@ const SlideTable = <T,>({
   const filteredEntries = Object.entries(data).filter(([_, value]) =>
     String(value[searchKey]).toLowerCase().includes(searchText.toLowerCase())
   );
-
-  // Restablece el índice del carrusel cuando cambia la búsqueda
-  useEffect(() => {
-    if (!userHasSlid) setCarouselIndex(0);
-  }, [filteredEntries, userHasSlid]);
 
   const handleSearchChange = (text: string): void => {
     setSearchText(text);
@@ -103,13 +108,13 @@ const SlideTable = <T,>({
                   </ScrollView>
                 </View>
               </View>
-            )} 
+            )}
             loop={false}
             onSnapToItem={(index: number): void => {
               setCarouselIndex(index);
               setUserHasSlid(true);
             }}
-            defaultIndex={carouselIndex}
+            defaultIndex={carouselIndex} // Usa el índice correcto
           />
         </View>
       </View>
@@ -151,23 +156,23 @@ const createStyles = (Colors: IColorTheme) =>
       zIndex: 10,
     },
     cardContainer: {
-      flex: 1, // Asegura que ocupe el espacio disponible
+      flex: 1,
       width: '100%',
     },
     scrollWrapper: {
-      flex: 1, // Permite que el ScrollView crezca dentro del contenedor
+      flex: 1,
       width: '100%',
       borderRadius: 8,
       overflow: 'hidden',
       backgroundColor: Colors.background.main,
     },
     carouselContainer: {
-      flex: 1, // Permite que el ScrollView utilice todo el espacio
+      flex: 1,
       backgroundColor: 'transparent',
     },
     scrollContent: {
-      flexGrow: 1, // Permite que el contenido crezca sin restricciones
-      paddingBottom: 20, // Espacio adicional al final
+      flexGrow: 1,
+      paddingBottom: 20,
     },
   });
 

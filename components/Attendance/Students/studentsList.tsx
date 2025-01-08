@@ -1,20 +1,47 @@
-import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
-import RowCard from '@/components/Tables/ListTable/Row/RowCard';
+import React, { useState } from 'react';
+import { View, ScrollView, StyleSheet } from 'react-native';
+import SlideTable from '@/components/Tables/SlideTable/slideTable';
 import useStudentsDictionary from '@/data/students';
-import IStudent from '@/interfaces/Students/IStudent'; // Importa la interfaz del estudiante
+import renderStudentCard from '@/components/Attendance/Students/renderStudentCard';
+import IStudent from '@/interfaces/Students/IStudent';
+import RowCard from '@/components/Tables/ListTable/Row/RowCard';
 
-const StudentsList: React.FC = () => {
-  const StudentsDictionary = useStudentsDictionary(); // Obtener el diccionario de estudiantes
-
-  // Convertimos el diccionario en un array para iterar
+const StudentList: React.FC = () => {
+  const StudentsDictionary = useStudentsDictionary();
   const students = Object.values(StudentsDictionary);
+  const [isCarouselVisible, setCarouselVisible] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState<number>(0); // Índice seleccionad
+
+  // Manejar clic en una tarjeta
+  const handleCardPress = (index: number) => {
+    setSelectedIndex(index); // Establece el índice seleccionado
+    setCarouselVisible(true); // Abre el carrusel
+  };
+
+  const handleCloseCarousel = () => {
+    setCarouselVisible(false); // Cierra el carrusel
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       {students.map((student: IStudent, index: number) => (
-        <RowCard key={index} student={student} />
+        <RowCard 
+        key={index} // Clave única para React
+        student={student} // Pasar datos del estudiante
+        index={index} // Pasar el índice de la tarjeta
+        onPress={handleCardPress} // Callback al presionar
+      />
       ))}
+
+      {/* SlideTable */}
+      <SlideTable
+        data={students}
+        isVisible={isCarouselVisible}
+        onClose={handleCloseCarousel}
+        renderCard={renderStudentCard}
+        searchKey="name"
+        defaultIndex={selectedIndex} // Índice inicial para el carrusel
+      />
     </ScrollView>
   );
 };
@@ -28,4 +55,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default StudentsList;
+export default StudentList;
