@@ -27,7 +27,7 @@ const renderStudentCard: React.FC<IStudent> = ({ name, lastname, image }) => {
       <BlankComponent BCwidth={undefined} BCheight={16} />
       {reports.map((report, index) => (
         <React.Fragment key={index}>
-          <ReportsDropdown report={[report]} />
+          <ReportsDropdown report={[report]} gradientColors={[Colors.background.main, Colors.background.main]}/>
           {/* Añade BlankComponent si no es el último elemento */}
           {index < reports.length - 1 && (
             <BlankComponent BCwidth={undefined} BCheight={16} />

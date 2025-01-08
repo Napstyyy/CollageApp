@@ -4,13 +4,16 @@ import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import CustomMultiSelect from '@/components/Fields/MultiSelector/MultiSelectDropdown';
+import { LinearGradient } from 'expo-linear-gradient';
 
 interface ReportsDropdownProps {
   report: string[];
+  gradientColors: string[]; // Los colores del gradiente
 }
 
 const ReportsDropdown: React.FC<ReportsDropdownProps> = ({
-  report
+  report,
+  gradientColors,
 }) => {
   const { theme } = useTheme();
   const Colors: IColorTheme = themeMap[theme];
@@ -25,12 +28,13 @@ const ReportsDropdown: React.FC<ReportsDropdownProps> = ({
       onPress={() => setIsChecked((prev) => !prev)}
       activeOpacity={0.8}
     >
+      <LinearGradient colors={gradientColors} style={styles.gradientContainer}>
       {/* Primera fila: Checkbox y Texto */}
       <View style={styles.row}>
         <BouncyCheckbox
           isChecked={isChecked}
           size={20}
-          fillColor={Colors.buttons.main}
+          fillColor={Colors.background.secondary}
           unFillColor={Colors.background.main}
           iconStyle={{ borderColor: Colors.buttons.main }}
           innerIconStyle={{ borderWidth: 1.6 }}
@@ -44,6 +48,7 @@ const ReportsDropdown: React.FC<ReportsDropdownProps> = ({
       <View style={styles.row}>
         <CustomMultiSelect />
       </View>
+      </LinearGradient>
     </TouchableOpacity>
   );
 };
@@ -52,14 +57,17 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
     width: '100%',
     maxWidth: 400,
-    padding: 16,
     backgroundColor: Colors.background.main,
-    borderRadius: 10,
+    borderRadius: 18,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 3,
     elevation: 5,
+  },
+  gradientContainer: {
+    borderRadius: 18,
+    padding: 20,
   },
   row: {
     width: '100%',
@@ -70,7 +78,7 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: Colors.text.main,
+    color: Colors.background.main,
   },
 });
 

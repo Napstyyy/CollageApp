@@ -11,6 +11,8 @@ import { themeMap, IColorTheme } from '@/constants/Colors';
 import RowCard from '@/components/Tables/ListTable/Row/RowCard';
 import useStudentsDictionary from '@/data/students';
 import StudentsList from '@/components/Attendance/Students/studentsList';
+import { reports } from '@/data/Reports/reports';
+import ReportsDropdown from '@/components/Attendance/Students/reportsDropdown';
 
 export default function Attendance() {
   const { theme } = useTheme();
@@ -29,9 +31,25 @@ export default function Attendance() {
       <ScrollView style={styles.body} contentContainerStyle={styles.contentContainer}>
         {/* Tarjetas condicionales */}
         <GroupsCard onSelectGroup={(group) => setSelectedGroup(group)} />
-        <DateCard onSelectDate={(date) => setSelectedDate(date)} />
-        {/* {selectedGroup && <StudentsCard onLoadStudents={() => setStudentsLoaded(true)} />} */}
+        {selectedGroup && <DateCard onSelectDate={(date) => setSelectedDate(date)} />}
         {studentsLoaded && <ActionCard onCompleteAction={() => setActionCompleted(true)} />}
+        {selectedGroup &&
+          reports.map((report, index) => {
+            // Alternar colores de gradiente según índice
+            const gradientColors =
+              index % 2 === 0
+                ? [Colors.card.gradient1, Colors.card.gradient2]
+                : [Colors.card.gradient2, Colors.card.gradient1];
+
+            return (
+              <React.Fragment key={index}>
+                <ReportsDropdown report={[report]} gradientColors={gradientColors} />
+                {index < reports.length - 1 && (
+                  <BlankComponent BCwidth={undefined} BCheight={16} />
+                )}
+              </React.Fragment>
+            );
+          })}
         <StudentsList />
         <BlankComponent BCheight={20} BCwidth={undefined} />
       </ScrollView>
