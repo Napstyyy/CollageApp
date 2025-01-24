@@ -18,7 +18,7 @@ const DateCard: React.FC<{ onSelectDate: (date: string) => void }> = ({ onSelect
   const styles = createStyles(Colors);
 
   const { selectedReason, setSelectedReason } = useAttendanceState();
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isManual, setIsManual] = useState<boolean>(false);
   const [selectedSubject, setSelectedSubject] = useState<string>('Matemáticas'); // Estado para Materia
   const [selectedHour, setSelectedHour] = useState<string>('1'); // Estado para Hora
 
@@ -26,9 +26,14 @@ const DateCard: React.FC<{ onSelectDate: (date: string) => void }> = ({ onSelect
     onSelectDate(date);
   };
 
+  //Simulador de respuestas:
+  const simulateResponse = (): boolean => {
+    const manualResponse = true; 
+    return manualResponse !== null ? manualResponse : Math.random() > 0.5;
+  };
+
   return (
     <Card gradientColors={[Colors.card.gradient2, Colors.card.gradient1]}>
-      {/* Picker dentro de un contenedor estilizado */}
       <View style={styles.dropdownContainer}>
         <Picker
           selectedValue={selectedReason}
@@ -42,26 +47,25 @@ const DateCard: React.FC<{ onSelectDate: (date: string) => void }> = ({ onSelect
         </Picker>
       </View>
 
-      {/* Componente DateAndDay */}
       <DateAndDay onDatePress={handleDateSelect} />
 
-      {/* Checkbox */}
+
       <View style={styles.checkboxRow}>
         <BouncyCheckbox
-          isChecked={isChecked}
+          isChecked={isManual}
           size={20}
           fillColor={Colors.background.secondary}
           unFillColor={Colors.background.main}
           iconStyle={{ borderColor: Colors.buttons.main }}
           innerIconStyle={{ borderWidth: 1.6 }}
-          onPress={() => setIsChecked((prev) => !prev)}
+          onPress={() => setIsManual((prev) => !prev)}
           style={styles.checkbox}
         />
         <Text style={styles.text}>Manual?</Text>
       </View>
 
       {/* Renderizar dropdowns solo si "Manual" está seleccionado */}
-      {isChecked && (
+      {isManual && (
         <View style={styles.row}>
           {/* Dropdown para Materia */}
           <View style={[styles.dropdownContainer, styles.dropdownHalf]}>

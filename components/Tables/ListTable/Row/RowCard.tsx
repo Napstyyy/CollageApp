@@ -1,5 +1,13 @@
-import React from 'react';
-import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import {
+  View,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Modal,
+  ActivityIndicator,
+} from 'react-native';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
 import IStudent from '@/interfaces/Students/IStudent';
@@ -15,13 +23,42 @@ interface RowCardProps {
 const RowCard: React.FC<RowCardProps> = ({ student, onPress, index }) => {
   const { theme } = useTheme();
   const Colors: IColorTheme = themeMap[theme];
-
   const styles = createStyles(Colors);
 
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+  const [modalIcon, setModalIcon] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  // Simulación de respuesta (manual o aleatoria)
+  const simulateResponse = (): boolean => {
+    const manualResponse = null; // Cambia a true o false para controlar la respuesta manualmente
+    return manualResponse !== null ? manualResponse : Math.random() > 0.5;
+  };
+
+  const handleCheckboxPress = (isChecked: boolean) => {
+    // Solo ejecutar lógica si el checkbox es seleccionado
+    if (!isChecked) return;
+
+    setModalVisible(true);
+    setLoading(true);
+
+    setTimeout(() => {
+      setLoading(false);
+
+      const response = simulateResponse();
+      if (response) {
+        setModalMessage('Guardado exitosamente');
+        setModalIcon('✅');
+      } else {
+        setModalMessage('Petición rechazada');
+        setModalIcon('❌');
+      }
+    }, 2000);
+  };
+
   return (
-    <View
-      style={styles.cardContainer}
-    >
+    <View style={styles.cardContainer}>
       {/* Contenedor de la lupa */}
       <TouchableOpacity style={styles.iconContainer} onPress={() => onPress(index)}>
         <Ionicons name="search" size={24} color={Colors.text.main} />
@@ -57,11 +94,38 @@ const RowCard: React.FC<RowCardProps> = ({ student, onPress, index }) => {
           fillColor={Colors.buttons.main}
           unFillColor={Colors.background.main}
           iconStyle={{ borderColor: Colors.text.main }}
-          onPress={(isChecked: boolean) => {
-            console.log(`Checkbox está ahora: ${isChecked ? 'Checked' : 'Unchecked'}`);
-          }}
+          onPress={(isChecked: boolean) => handleCheckboxPress(isChecked)}
         />
       </View>
+
+      {/* Modal */}
+      <Modal
+        transparent={true}
+        visible={modalVisible}
+        animationType="fade"
+        onRequestClose={() => setModalVisible(false)}
+      >
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            {loading ? (
+              <ActivityIndicator size="large" color={Colors.buttons.main} />
+            ) : (
+              <>
+                <Text style={styles.modalIcon}>{modalIcon}</Text>
+                <Text style={styles.modalMessage}>{modalMessage}</Text>
+              </>
+            )}
+            {!loading && (
+              <TouchableOpacity
+                style={styles.closeButton}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={styles.closeButtonText}>Cerrar</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -116,6 +180,39 @@ const createStyles = (Colors: IColorTheme) =>
       position: 'absolute',
       bottom: 10,
       right: 0,
+    },
+    modalContainer: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalContent: {
+      width: '80%',
+      padding: 20,
+      backgroundColor: Colors.background.main,
+      borderRadius: 10,
+      alignItems: 'center',
+    },
+    modalIcon: {
+      fontSize: 40,
+      marginBottom: 10,
+    },
+    modalMessage: {
+      fontSize: 18,
+      textAlign: 'center',
+      marginBottom: 20,
+      color: Colors.text.main,
+    },
+    closeButton: {
+      backgroundColor: Colors.buttons.main,
+      borderRadius: 5,
+      paddingVertical: 10,
+      paddingHorizontal: 20,
+    },
+    closeButtonText: {
+      color: '#fff',
+      fontSize: 16,
     },
   });
 
