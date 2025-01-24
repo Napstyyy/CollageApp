@@ -1,19 +1,20 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
+import CheckBox from 'react-native-bouncy-checkbox';
 import IStudent from '@/interfaces/Students/IStudent';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
 import { useTranslation } from 'react-i18next';
-import phoneWindow from '@/constants/Dimensions';
 import BlankComponent from '@/components/BlankComponent';
-import ReportsDropdown from '@/components/Attendance/Students/reportsDropdown';
-import { reports } from '@/data/Reports/reports';
+import { useAttendanceState } from '@/hooks/context/AttendanceContext';
 
 const renderStudentCard: React.FC<IStudent> = ({ name, lastname, image }) => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
   const styles = createStyles(Colors);
   const { t } = useTranslation(); // Traducción
+
+  const { selectedReason } = useAttendanceState();
 
   return (
     <View style={styles.card}>
@@ -25,22 +26,27 @@ const renderStudentCard: React.FC<IStudent> = ({ name, lastname, image }) => {
         />
       </View>
       <BlankComponent BCwidth={undefined} BCheight={16} />
-      {reports.map((report, index) => {
-            // Alternar colores de gradiente según índice
-            const gradientColors =
-              index % 2 === 0
-                ? [Colors.card.gradient1, Colors.card.gradient2]
-                : [Colors.card.gradient2, Colors.card.gradient1];
 
-            return (
-              <React.Fragment key={index}>
-                <ReportsDropdown report={[report]} gradientColors={gradientColors} />
-                {index < reports.length - 1 && (
-                  <BlankComponent BCwidth={undefined} BCheight={16} />
-                )}
-              </React.Fragment>
-            );
-          })}
+      {/* Contenedor para "Hola mundo" */}
+      <View style={styles.helloContainer}>
+        <Text style={styles.helloText}>{selectedReason}</Text>
+      </View>
+
+      {/* Serie de checkboxes */}
+      <View style={styles.checkboxContainer}>
+        {[...Array(7)].map((_, index) => (
+          <CheckBox
+            key={index}
+            size={25}
+            fillColor={Colors.buttons.main}
+            unFillColor="#FFFFFF"
+            text={` ${index + 1}`}
+            iconStyle={{ borderColor: Colors.buttons.main }}
+            textStyle={styles.checkboxText}
+            style={styles.checkbox}
+          />
+        ))}
+      </View>
     </View>
   );
 };
@@ -69,6 +75,28 @@ const createStyles = (Colors: IColorTheme) =>
       width: '100%',
       height: 320,
       borderRadius: 8,
+    },
+    helloContainer: {
+      backgroundColor: Colors.buttons.main,
+      borderRadius: 16,
+      padding: 12,
+      alignItems: 'center',
+      marginBottom: 16,
+    },
+    helloText: {
+      color: '#FFFFFF',
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    checkboxContainer: {
+      marginTop: 8,
+    },
+    checkbox: {
+      marginBottom: 12,
+    },
+    checkboxText: {
+      textDecorationLine: 'none',
+      fontSize: 16,
     },
   });
 

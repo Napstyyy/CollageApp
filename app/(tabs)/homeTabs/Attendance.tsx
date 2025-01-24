@@ -31,12 +31,12 @@ export default function Attendance() {
       <ScrollView style={styles.body} contentContainerStyle={styles.contentContainer}>
         {/* Tarjetas condicionales */}
         <GroupsCard onSelectGroup={(group) => setSelectedGroup(group)} />
+        {selectedGroup && <ActionCard onCompleteAction={() => setActionCompleted(true)} />}
         {selectedGroup && <DateCard onSelectDate={(date) => setSelectedDate(date)} />}
-        {studentsLoaded && <ActionCard onCompleteAction={() => setActionCompleted(true)} />}
-        {selectedGroup &&
+        {/* {selectedGroup &&
           reports.map((report, index) => {
             // Alternar colores de gradiente según índice
-            const gradientColors =
+            const gradientColors = 
               index % 2 === 0
                 ? [Colors.card.gradient1, Colors.card.gradient2]
                 : [Colors.card.gradient2, Colors.card.gradient1];
@@ -50,7 +50,8 @@ export default function Attendance() {
               </React.Fragment>
             );
           })}
-        <StudentsList />
+            */}
+        {selectedGroup && <StudentsList />}
         <BlankComponent BCheight={20} BCwidth={undefined} />
       </ScrollView>
     </View>

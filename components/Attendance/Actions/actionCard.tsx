@@ -21,7 +21,7 @@ const ActionCard: React.FC<{ onCompleteAction: () => void }> = ({ onCompleteActi
   return (
     <Card
       icon={<Entypo name="tools" size={40} color={Colors.icons.default} />}
-      title={t('Acciones')}
+      title={t('Reportes')}
       gradientColors={[Colors.card.gradient1, Colors.card.gradient2]}
     >
       <CarouselActions actions={useActionsDictionary()} onActionComplete={handleActionComplete} />

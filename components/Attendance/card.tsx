@@ -1,13 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, Text, ViewStyle, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import BlankComponent from '@/components/BlankComponent';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
 
 interface CardProps {
-  icon: React.ReactNode; // Recibe un componente de ícono
-  title: string;         // El título que se mostrará en la tarjeta
+  icon?: React.ReactNode; // Ahora es opcional
+  title?: string;         // Ahora es opcional
   gradientColors: string[]; // Los colores del gradiente
   children?: React.ReactNode; // Componente hijo que se pasará desde otra vista
   isTouchable?: boolean; // Si la tarjeta es presionable
@@ -27,17 +27,21 @@ const Card: React.FC<CardProps> = ({
   
   const styles = createStyles(Colors);
 
+  const Header = () => (
+    <View style={styles.header}>
+      {icon && <View style={styles.iconContainer}>{icon}</View>}
+      {title && <Text style={styles.title}>{title}</Text>}
+    </View>
+  );
+
   return isTouchable ? (
     <TouchableOpacity
       activeOpacity={0.7}
       onPress={onPress}
-      style={styles.cardContainer} // Este estilo aplica los bordes redondeados
+      style={styles.cardContainer}
     >
       <LinearGradient colors={gradientColors} style={styles.gradientContainer}>
-        <View style={styles.header}>
-          <View style={styles.iconContainer}>{icon}</View>
-          <Text style={styles.title}>{title}</Text>
-        </View>
+        {(icon || title) && <Header />}
         <BlankComponent BCheight={16} BCwidth={undefined} />
         {children}
       </LinearGradient>
@@ -45,10 +49,7 @@ const Card: React.FC<CardProps> = ({
   ) : (
     <View style={styles.cardContainer}>
       <LinearGradient colors={gradientColors} style={styles.gradientContainer}>
-        <View style={styles.header}>
-          <View style={styles.iconContainer}>{icon}</View>
-          <Text style={styles.title}>{title}</Text>
-        </View>
+        {(icon || title) && <Header />}
         <BlankComponent BCheight={16} BCwidth={undefined} />
         {children}
       </LinearGradient>
@@ -67,7 +68,7 @@ const createStyles = (Colors: IColorTheme) =>
       shadowOpacity: 0.3,
       shadowRadius: 5,
       elevation: 5,
-      overflow: 'hidden', // Este asegura que los bordes redondeados se apliquen correctamente
+      overflow: 'hidden',
     },
     gradientContainer: {
       borderRadius: 18,
@@ -96,5 +97,3 @@ const createStyles = (Colors: IColorTheme) =>
   });
 
 export default Card;
-
-

@@ -3,11 +3,13 @@ import { View, Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors';
 import IStudent from '@/interfaces/Students/IStudent';
+import { Ionicons } from '@expo/vector-icons'; // Asegúrate de instalar @expo/vector-icons
+import BouncyCheckbox from 'react-native-bouncy-checkbox'; // Instalar con `npm install react-native-bouncy-checkbox`
 
 interface RowCardProps {
-  student: IStudent; // Usar la interfaz IStudent
-  onPress: (index: number) => void; // Propiedad de función
-  index: number; // Índice del estudiante
+  student: IStudent;
+  onPress: (index: number) => void;
+  index: number;
 }
 
 const RowCard: React.FC<RowCardProps> = ({ student, onPress, index }) => {
@@ -17,16 +19,20 @@ const RowCard: React.FC<RowCardProps> = ({ student, onPress, index }) => {
   const styles = createStyles(Colors);
 
   return (
-    <TouchableOpacity
+    <View
       style={styles.cardContainer}
-      onPress={() => onPress(index)} // Pasa el índice al callback
     >
+      {/* Contenedor de la lupa */}
+      <TouchableOpacity style={styles.iconContainer} onPress={() => onPress(index)}>
+        <Ionicons name="search" size={24} color={Colors.text.main} />
+      </TouchableOpacity>
+
       <View style={styles.cardImage}>
         <Image
           source={
             student.image.startsWith('http')
-              ? { uri: student.image } // Imágenes desde URL
-              : require('@/assets/images/Students/Student1.png') // Imágenes locales estáticas
+              ? { uri: student.image }
+              : require('@/assets/images/Students/Student1.png')
           }
           style={styles.image}
           onError={(error) =>
@@ -43,7 +49,20 @@ const RowCard: React.FC<RowCardProps> = ({ student, onPress, index }) => {
           <Text style={styles.subtitleText}>Grado: {student.grade}</Text>
         )}
       </View>
-    </TouchableOpacity>
+
+      {/* Checkbox en la esquina inferior derecha */}
+      <View style={styles.checkboxContainer}>
+        <BouncyCheckbox
+          size={25}
+          fillColor={Colors.buttons.main}
+          unFillColor={Colors.background.main}
+          iconStyle={{ borderColor: Colors.text.main }}
+          onPress={(isChecked: boolean) => {
+            console.log(`Checkbox está ahora: ${isChecked ? 'Checked' : 'Unchecked'}`);
+          }}
+        />
+      </View>
+    </View>
   );
 };
 
@@ -60,6 +79,7 @@ const createStyles = (Colors: IColorTheme) =>
       shadowRadius: 3,
       elevation: 5,
       overflow: 'hidden',
+      position: 'relative', // Necesario para posicionar la lupa y el checkbox
     },
     cardImage: {
       height: 150,
@@ -85,6 +105,17 @@ const createStyles = (Colors: IColorTheme) =>
     subtitleText: {
       fontSize: 14,
       color: Colors.text.secondary,
+    },
+    iconContainer: {
+      position: 'absolute',
+      top: 10,
+      right: 10,
+      zIndex: 10,
+    },
+    checkboxContainer: {
+      position: 'absolute',
+      bottom: 10,
+      right: 0,
     },
   });
 

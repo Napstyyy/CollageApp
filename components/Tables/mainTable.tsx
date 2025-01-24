@@ -1,10 +1,13 @@
-import React from 'react';
-import { StyleSheet, View, Text, ScrollView, FlatList, Dimensions } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, Text, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
 import { useTheme } from '@/hooks/context/ThemeContext';
-import { themeMap, IColorTheme } from '@/constants/Colors'; 
+import { themeMap, IColorTheme } from '@/constants/Colors';
 
 // Obtener dimensiones de la pantalla
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
+
+// Definir la altura fija de las filas
+const ROW_HEIGHT = 40;
 
 // Definir la interfaz para los elementos de la tabla
 interface TableRowData {
@@ -25,14 +28,10 @@ const data: TableRowData[] = [
   { id: '3', name: 'Carlos López', age: 22, city: 'Madrid', email: 'carlos.lopez@example.com', phone: '555-8765', department: 'Desarrollo', position: 'Ingeniero' },
   { id: '4', name: 'Ana Fernández', age: 29, city: 'Lima', email: 'ana.fernandez@example.com', phone: '555-4321', department: 'Recursos Humanos', position: 'Coordinadora' },
   { id: '5', name: 'Luis Gómez', age: 31, city: 'Santiago', email: 'luis.gomez@example.com', phone: '555-6789', department: 'Finanzas', position: 'Analista' },
-  { id: '6', name: 'Laura Sánchez', age: 27, city: 'Bogotá', email: 'laura.sanchez@example.com', phone: '555-9876', department: 'Soporte', position: 'Técnico' },
-  { id: '7', name: 'Pedro Martínez', age: 35, city: 'Caracas', email: 'pedro.martinez@example.com', phone: '555-3456', department: 'Operaciones', position: 'Supervisor' },
-  { id: '8', name: 'Lucía Ruiz', age: 24, city: 'Quito', email: 'lucia.ruiz@example.com', phone: '555-6543', department: 'Logística', position: 'Coordinadora' },
-  // Puedes agregar más datos según necesites
 ];
 
-// Definir las columnas de la tabla
-const columns = [
+// Definir columnas desplazables
+const allColumns = [
   { key: 'id', label: 'ID', width: 60 },
   { key: 'name', label: 'Nombre', width: 150 },
   { key: 'age', label: 'Edad', width: 80 },
@@ -44,48 +43,67 @@ const columns = [
 ];
 
 const MainTable: React.FC = () => {
-  const { theme } = useTheme(); // Obtener el tema actual
-  const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
-
+  const { theme } = useTheme();
+  const Colors: IColorTheme = themeMap[theme];
   const styles = createStyles(Colors);
 
-  // Renderizar cada fila de la tabla
-  const renderItem = ({ item, index }: { item: TableRowData; index: number }) => (
-    <View
-      style={[
-        styles.tableRow,
-        index % 2 === 0 ? styles.rowEven : styles.rowOdd,
-      ]}
-    >
-      {columns.map((column) => (
-        <Text key={column.key} style={[styles.cellText, { width: column.width }]}>
-          {item[column.key as keyof TableRowData]}
-        </Text>
-      ))}
-    </View>
-  );
+  // Estado para la columna fija (inicialmente ninguna)
+  const [fixedColumn, setFixedColumn] = useState<string | null>(null);
+
+  // Función para cambiar la columna fija
+  const handleColumnClick = (key: string) => {
+    setFixedColumn(key === fixedColumn ? null : key);
+  };
 
   return (
     <View style={styles.container}>
-      <ScrollView horizontal>
-        <View>
-          {/* Encabezado de la tabla */}
-          <View style={styles.tableHeader}>
-            {columns.map((column) => (
-              <Text key={column.key} style={[styles.headerText, { width: column.width }]}>
-                {column.label}
+      <View style={styles.tableWrapper}>
+        {/* Si hay una columna fija, mostrarla aquí */}
+        {fixedColumn && (
+          <View style={styles.fixedColumn}>
+            <TouchableOpacity onPress={() => handleColumnClick(fixedColumn)} style={styles.fixedHeader}>
+              <Text style={[styles.headerText, { width: allColumns.find(c => c.key === fixedColumn)?.width }]}>
+                {allColumns.find(c => c.key === fixedColumn)?.label}
               </Text>
+            </TouchableOpacity>
+            {data.map((item, index) => (
+              <View key={item.id} style={[styles.fixedRow, index % 2 === 0 ? styles.rowEven : styles.rowOdd]}>
+                <Text style={[styles.cellText, { width: allColumns.find(c => c.key === fixedColumn)?.width }]}>
+                  {item[fixedColumn as keyof TableRowData]}
+                </Text>
+              </View>
             ))}
           </View>
-          {/* Cuerpo de la tabla */}
-          <FlatList
-            data={data}
-            keyExtractor={(item) => item.id}
-            renderItem={renderItem}
-            contentContainerStyle={styles.tableBody}
-          />
-        </View>
-      </ScrollView>
+        )}
+
+        {/* Scroll horizontal para las demás columnas */}
+        <ScrollView horizontal contentContainerStyle={styles.scrollContainer}>
+          <View>
+            {/* Encabezado de columnas desplazables */}
+            <View style={styles.tableHeader}>
+              {allColumns.map((column) => (
+                fixedColumn !== column.key && (
+                  <TouchableOpacity key={column.key} onPress={() => handleColumnClick(column.key)}>
+                    <Text style={[styles.headerText, { width: column.width }]}>{column.label}</Text>
+                  </TouchableOpacity>
+                )
+              ))}
+            </View>
+            {/* Filas desplazables */}
+            {data.map((item, index) => (
+              <View key={item.id} style={[styles.tableRow, index % 2 === 0 ? styles.rowEven : styles.rowOdd]}>
+                {allColumns.map((column) => (
+                  fixedColumn !== column.key && (
+                    <Text key={column.key} style={[styles.cellText, { width: column.width }]}>
+                      {item[column.key as keyof TableRowData]}
+                    </Text>
+                  )
+                ))}
+              </View>
+            ))}
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -96,12 +114,32 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     backgroundColor: Colors.background.main,
     padding: 16,
   },
+  tableWrapper: {
+    flexDirection: 'row',
+    borderRadius: 8,
+    overflow: 'hidden',
+  },
+  fixedColumn: {
+    backgroundColor: Colors.background.secondary,
+    borderRightWidth: 1,
+    borderRightColor: '#ddd',
+  },
+  fixedHeader: {
+    backgroundColor: Colors.appColor,
+    paddingVertical: 12,
+  },
+  fixedRow: {
+    height: ROW_HEIGHT,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  scrollContainer: {
+    flexGrow: 1,
+  },
   tableHeader: {
     flexDirection: 'row',
     backgroundColor: Colors.appColor,
     paddingVertical: 12,
-    borderTopLeftRadius: 8,
-    borderTopRightRadius: 8,
   },
   headerText: {
     fontWeight: 'bold',
@@ -109,16 +147,13 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     textAlign: 'center',
     paddingHorizontal: 8,
   },
-  tableBody: {
-    // Añadir un borde inferior al encabezado
-    borderBottomLeftRadius: 8,
-    borderBottomRightRadius: 8,
-  },
   tableRow: {
     flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-    paddingVertical: 10,
+    height: ROW_HEIGHT,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   rowEven: {
     backgroundColor: '#f9f9f9',
