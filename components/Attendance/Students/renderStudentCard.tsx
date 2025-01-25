@@ -7,6 +7,7 @@ import { themeMap, IColorTheme } from '@/constants/Colors';
 import { useTranslation } from 'react-i18next';
 import BlankComponent from '@/components/BlankComponent';
 import { useAttendanceState } from '@/hooks/context/AttendanceContext';
+import { Picker } from '@react-native-picker/picker';
 
 const renderStudentCard: React.FC<IStudent> = ({ name, lastname, image }) => {
   const { theme } = useTheme(); // Obtener el tema actual
@@ -14,7 +15,7 @@ const renderStudentCard: React.FC<IStudent> = ({ name, lastname, image }) => {
   const styles = createStyles(Colors);
   const { t } = useTranslation(); // Traducción
 
-  const { selectedReason } = useAttendanceState();
+  const { selectedReason, setSelectedReason } = useAttendanceState();
 
   const [modalVisible, setModalVisible] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
@@ -59,8 +60,17 @@ const renderStudentCard: React.FC<IStudent> = ({ name, lastname, image }) => {
       </View>
       <BlankComponent BCwidth={undefined} BCheight={16} />
 
-      <View style={styles.helloContainer}>
-        <Text style={styles.helloText}>{selectedReason}</Text>
+      <View style={styles.dropdownContainer}>
+        <Picker
+          selectedValue={selectedReason}
+          onValueChange={(itemValue) => setSelectedReason(itemValue)}
+          style={styles.picker}
+          dropdownIconColor={Colors.background.main}
+          mode="dropdown"
+        >
+          <Picker.Item label={t('Sin excusa')} value={t('Sin excusa')} color={Colors.text.main} />
+          <Picker.Item label={t('Con excusa')} value={t('Con excusa')} color={Colors.text.main} />
+        </Picker>
       </View>
 
       {/* Serie de checkboxes */}
@@ -114,6 +124,18 @@ const renderStudentCard: React.FC<IStudent> = ({ name, lastname, image }) => {
 
 const createStyles = (Colors: IColorTheme) =>
   StyleSheet.create({
+    dropdownContainer: {
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: 'transparent',
+      borderRadius: 8,
+      backgroundColor: Colors.buttons.main,
+      overflow: 'hidden',
+    },
+    picker: {
+      height: 50,
+      color: Colors.background.main,
+    },
     card: {
       flexGrow: 1,
       padding: 16,
@@ -136,18 +158,6 @@ const createStyles = (Colors: IColorTheme) =>
       width: '100%',
       height: 320,
       borderRadius: 8,
-    },
-    helloContainer: {
-      backgroundColor: Colors.buttons.main,
-      borderRadius: 16,
-      padding: 12,
-      alignItems: 'center',
-      marginBottom: 16,
-    },
-    helloText: {
-      color: '#FFFFFF',
-      fontSize: 16,
-      fontWeight: 'bold',
     },
     checkboxContainer: {
       marginTop: 8,

@@ -3,20 +3,22 @@ import { initReactI18next } from 'react-i18next';
 
 import en from '@/src/i18n/Translations/en.json';
 import es from '@/src/i18n/Translations/es.json';
+import fr from '@/src/i18n/Translations/fr.json';
 
 const resources = {
   en: { translation: en },
   es: { translation: es },
+  fr: { translation: fr },
 };
 
 i18n
   .use(initReactI18next)
   .init({
     resources,
-    lng: 'es', // Idioma predeterminado
-    fallbackLng: 'es', // Idioma a usar si el actual no está disponible
+    lng: 'es',
+    fallbackLng: 'es', 
     interpolation: {
-      escapeValue: false, // React ya se encarga de la seguridad
+      escapeValue: false, 
     },
   });
 

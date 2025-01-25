@@ -6,12 +6,13 @@ import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import ColorPicker from '@/components/Pickers/ColorPicker';
 import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from '@/components/Language/LanguageSwitcher';
+import BlankComponent from '@/components/BlankComponent';
 
 export default function ClientsLogin() {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors = themeMap[theme]; // Obtener los colores del tema actual
   const styles = createStyles(Colors);
-  console.log('Gradient Colors:', Colors.background.gradient1, Colors.background.gradient2, Colors.buttons.main, Colors.buttons.secondary);
   const { t } = useTranslation();
   return (
     <View style={styles.container}>
@@ -21,6 +22,9 @@ export default function ClientsLogin() {
       />
       <View style={styles.header}>
         <Text style={styles.title}>{t('Bienvenido_a_Collage')}</Text>
+        <BlankComponent BCwidth={'28%'} BCheight={undefined} />
+        <LanguageSwitcher />
+        <BlankComponent BCwidth={16} BCheight={undefined} />
       <ColorPicker />
       </View>
       <Image source={require('@/assets/images/collage-logo.png')} style={styles.logo} />
@@ -55,7 +59,6 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     width: '100%',
     alignItems: 'center',
   flexDirection: 'row',
-  justifyContent: 'space-between',
   marginTop: 48,
     paddingHorizontal: 20,
 },

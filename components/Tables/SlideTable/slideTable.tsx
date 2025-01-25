@@ -1,7 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
-  TextInput,
   StyleSheet,
   Modal,
   LayoutChangeEvent,
@@ -14,14 +13,16 @@ import { themeMap, IColorTheme } from '@/constants/Colors';
 import phoneWindow from '@/constants/Dimensions';
 import { useTranslation } from 'react-i18next';
 import { ScrollView } from 'react-native-gesture-handler';
+import DropDownPicker from 'react-native-dropdown-picker';
+import useStudentsDictionary from '@/data/students';
 
 interface SlideTableProps<T> {
-  data: Record<number, T>;
+  data: Record<string | number, T>;
   isVisible: boolean;
   onClose: () => void;
   renderCard: (item: T) => React.ReactNode;
   searchKey: keyof T;
-  defaultIndex?: number; // Índice inicial
+  defaultIndex?: number;
 }
 
 const SlideTable = <T,>({
@@ -36,13 +37,14 @@ const SlideTable = <T,>({
   const Colors: IColorTheme = themeMap[theme];
   const styles = createStyles(Colors);
   const { t } = useTranslation();
+  const students = useStudentsDictionary();
 
   const [dynamicSize, setDynamicSize] = useState<{ width: number; height: number }>({ width: 0, height: 0 });
-  const [searchText, setSearchText] = useState<string>('');
-  const [carouselIndex, setCarouselIndex] = useState<number>(defaultIndex); // Usa el defaultIndex
+  const [carouselIndex, setCarouselIndex] = useState<number>(defaultIndex);
   const [userHasSlid, setUserHasSlid] = useState<boolean>(false);
+  const [selectedStudent, setSelectedStudent] = useState<number | null>(null);
+  const [openDropdown, setOpenDropdown] = useState<boolean>(false);
 
-  // 📌 Asegurar que el índice inicial se ajuste al abrir el modal
   useEffect(() => {
     if (isVisible) {
       setCarouselIndex(defaultIndex);
@@ -50,43 +52,34 @@ const SlideTable = <T,>({
     }
   }, [isVisible, defaultIndex]);
 
-  // Calcula las dimensiones dinámicas del carrusel
   const handleLayout = useCallback((event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
     setDynamicSize({ width, height });
   }, []);
 
-  // Filtra los datos según el texto de búsqueda
-  const filteredEntries = Object.entries(data).filter(([_, value]) =>
-    String(value[searchKey]).toLowerCase().includes(searchText.toLowerCase())
-  );
-
-  const handleSearchChange = (text: string): void => {
-    setSearchText(text);
-    setUserHasSlid(false);
-  };
+  const studentOptions = Object.entries(students).map(([id, student]) => ({
+    label: `${student.name} ${student.lastname}`,
+    value: Number(id),
+  }));
 
   return (
-    <Modal
-      visible={isVisible}
-      transparent
-      animationType="slide"
-      onRequestClose={onClose}
-    >
+    <Modal visible={isVisible} transparent animationType="slide" onRequestClose={onClose}>
       <View style={styles.overlay}>
         <View style={styles.mainContainer}>
           <View style={styles.searchContainer}>
-            <TextInput
-              style={styles.searchInput}
-              placeholder={t('Buscar')}
-              placeholderTextColor="#999"
-              value={searchText}
-              onChangeText={handleSearchChange}
+            <DropDownPicker
+              open={openDropdown}
+              value={selectedStudent}
+              items={studentOptions}
+              setOpen={setOpenDropdown}
+              setValue={setSelectedStudent}
+              placeholder={t('Seleccionar estudiante')}
+              style={styles.dropdown}
             />
           </View>
           <Carousel
             width={phoneWindow.width}
-            data={filteredEntries}
+            data={selectedStudent !== null ? [[String(selectedStudent), students[selectedStudent]]] : Object.entries(data)}
             mode="parallax"
             modeConfig={{
               parallaxScrollingScale: 0.9,
@@ -114,7 +107,7 @@ const SlideTable = <T,>({
               setCarouselIndex(index);
               setUserHasSlid(true);
             }}
-            defaultIndex={carouselIndex} // Usa el índice correcto
+            defaultIndex={carouselIndex}
           />
         </View>
       </View>
@@ -139,12 +132,9 @@ const createStyles = (Colors: IColorTheme) =>
       width: '90%',
       alignSelf: 'center',
     },
-    searchInput: {
+    dropdown: {
       backgroundColor: Colors.background.main,
       borderRadius: 8,
-      padding: 10,
-      fontSize: 16,
-      marginBottom: -phoneWindow.height * 0.012,
     },
     closeButton: {
       position: 'absolute',

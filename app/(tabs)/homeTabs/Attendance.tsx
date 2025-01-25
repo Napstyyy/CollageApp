@@ -13,6 +13,7 @@ import useStudentsDictionary from '@/data/students';
 import StudentsList from '@/components/Attendance/Students/studentsList';
 import { reports } from '@/data/Reports/reports';
 import ReportsDropdown from '@/components/Attendance/Students/reportsDropdown';
+import { useTranslation } from 'react-i18next';
 
 export default function Attendance() {
   const { theme } = useTheme();
@@ -24,10 +25,11 @@ export default function Attendance() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [studentsLoaded, setStudentsLoaded] = useState<boolean>(false);
   const [actionCompleted, setActionCompleted] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   return (
     <View style={styles.mainContainer}>
-      <Header title="Asistencia" />
+      <Header title={t("Asistencia")} />
       <ScrollView style={styles.body} contentContainerStyle={styles.contentContainer}>
         {/* Tarjetas condicionales */}
         <GroupsCard onSelectGroup={(group) => setSelectedGroup(group)} />
