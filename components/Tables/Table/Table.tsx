@@ -1,11 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, StyleSheet, Modal, TouchableOpacity, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { GestureHandlerRootView, Swipeable } from 'react-native-gesture-handler';
-import { matrixData, MatrixItem } from '@/data/matrixData';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap } from '@/constants/Colors';
 import { IColorTheme } from '@/constants/Colors';
+import { API_BASE_URL } from '@/config';
+
+interface Candidato {
+  Nombre: string;
+  Apellido: string;
+  DocumentoIdentidad: string;
+  Correo: string;
+  Telefono: string;
+  CandidatoID: number;
+}
 
 const MatrixComponent: React.FC = () => {
   const { theme } = useTheme();
@@ -13,73 +22,75 @@ const MatrixComponent: React.FC = () => {
   const styles = createStyles(Colors);
 
   const [modalVisible, setModalVisible] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<MatrixItem | null>(null);
+  const [selectedItem, setSelectedItem] = useState<Candidato | null>(null);
+  const [candidatos, setCandidatos] = useState<Candidato[]>([]);
+  const [refreshing, setRefreshing] = useState(false); // 👈 Estado de refresco
 
-  const openModal = (item: MatrixItem) => {
+  const fetchCandidatos = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/candidatos/`, {
+        headers: {
+          accept: 'application/json',
+        },
+      });
+      const data = await response.json();
+      setCandidatos(data);
+    } catch (error) {
+      console.error('Error fetching candidatos:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCandidatos();
+  }, []);
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    await fetchCandidatos();
+    setRefreshing(false);
+  };
+
+  const openModal = (item: Candidato) => {
     setSelectedItem(item);
     setModalVisible(true);
   };
 
-  const renderRightActions = (progress: Animated.AnimatedInterpolation<number>, item: MatrixItem) => {
-    const translateX = progress.interpolate({
-      inputRange: [0, 1],
-      outputRange: [100, 0],
-      extrapolate: 'clamp',
-    });
+  const renderItem = ({ item }: { item: Candidato }) => (
+    <Swipeable
+      renderLeftActions={(progress) => renderLeftActions(progress, item)}
+      renderRightActions={(progress) => renderRightActions(progress, item)}
+    >
+      <View style={styles.row}>
+        <Text style={styles.cell}>{item.Nombre} {item.Apellido}</Text>
+        <Text style={styles.cell}>{item.DocumentoIdentidad}</Text>
+        <Text style={styles.cell}>{item.Correo}</Text>
+      </View>
+    </Swipeable>
+  );
 
-    return (
-      <Animated.View style={[styles.actionContainer, { transform: [{ translateX }] }]}>
-        <TouchableOpacity style={[styles.actionButton, { backgroundColor: '#4CAF50' }]} onPress={() => openModal(item)}>
-          <Icon name="edit" size={20} color={Colors.background.main} />
-          <Text style={styles.actionText}>Editar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.actionButton, { backgroundColor: '#2196F3' }]} onPress={() => alert('Otra acción')}>
-          <Icon name="info-circle" size={20} color={Colors.background.main} />
-          <Text style={styles.actionText}>Info</Text>
-        </TouchableOpacity>
-      </Animated.View>
-    );
-  };
-
-  const renderLeftActions = (progress: Animated.AnimatedInterpolation<number>, item: MatrixItem) => {
-    const translateX = progress.interpolate({
-      inputRange: [0, 1],
-      outputRange: [-100, 0],
-      extrapolate: 'clamp',
-    });
-
+  const renderLeftActions = (progress: Animated.AnimatedInterpolation<number>, item: Candidato) => {
+    const translateX = progress.interpolate({ inputRange: [0, 1], outputRange: [-100, 0], extrapolate: 'clamp' });
     return (
       <Animated.View style={[styles.actionContainer, { transform: [{ translateX }] }]}>
         <TouchableOpacity style={[styles.actionButton, { backgroundColor: '#ff6464' }]} onPress={() => alert('Eliminar')}>
           <Icon name="trash" size={20} color={Colors.background.main} />
           <Text style={styles.actionText}>Eliminar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.actionButton, { backgroundColor: '#FFC107' }]} onPress={() => alert('Marcar como importante')}>
-          <Icon name="star" size={20} color={Colors.background.main} />
-          <Text style={styles.actionText}>Importante</Text>
-        </TouchableOpacity>
       </Animated.View>
     );
   };
 
-  const renderItem = ({ item }: { item: MatrixItem }) => (
-    <Swipeable
-      renderLeftActions={(progress) => renderLeftActions(progress, item)}
-      renderRightActions={(progress) => renderRightActions(progress, item)}
-    >
-      <View style={styles.row}>
-        <Text style={styles.cell}>{item.Nombre}</Text>
-        <Text style={styles.cell}>{item.Cargo}</Text>
-        <View style={styles.cell}>
-          {item.Estado === 1 ? (
-            <Icon name="check" size={20} color="#8cc8b4" style={styles.icon} />
-          ) : (
-            <Icon name="close" size={20} color="#ff6464" style={styles.icon} />
-          )}
-        </View>
-      </View>
-    </Swipeable>
-  );
+  const renderRightActions = (progress: Animated.AnimatedInterpolation<number>, item: Candidato) => {
+    const translateX = progress.interpolate({ inputRange: [0, 1], outputRange: [100, 0], extrapolate: 'clamp' });
+    return (
+      <Animated.View style={[styles.actionContainer, { transform: [{ translateX }] }]}>
+        <TouchableOpacity style={[styles.actionButton, { backgroundColor: '#4CAF50' }]} onPress={() => openModal(item)}>
+          <Icon name="edit" size={20} color={Colors.background.main} />
+          <Text style={styles.actionText}>Editar</Text>
+        </TouchableOpacity>
+      </Animated.View>
+    );
+  };
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -87,20 +98,23 @@ const MatrixComponent: React.FC = () => {
         ListHeaderComponent={
           <>
             <View style={styles.headerTopBar}>
-              <Text style={styles.headerTopBarText}>Datos Generales</Text>
+              <Text style={styles.headerTopBarText}>Candidatos</Text>
             </View>
             <View style={styles.header}>
               <Text style={styles.heading}>Nombre</Text>
-              <Text style={styles.heading}>Cargo</Text>
-              <Text style={styles.heading}>Estado</Text>
+              <Text style={styles.heading}>DNI</Text>
+              <Text style={styles.heading}>Correo</Text>
             </View>
           </>
         }
-        data={matrixData}
-        keyExtractor={(item) => item.id.toString()}
+        data={candidatos}
+        keyExtractor={(item) => item.CandidatoID.toString()}
         renderItem={renderItem}
         contentContainerStyle={styles.container}
+        refreshing={refreshing} // 👈 Habilita el spinner de recarga
+        onRefresh={handleRefresh} // 👈 Función para recargar al arrastrar hacia abajo
       />
+
       <Modal
         visible={modalVisible}
         transparent={true}
@@ -110,12 +124,11 @@ const MatrixComponent: React.FC = () => {
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
             <Text style={styles.modalTitle}>
-              {selectedItem ? `Detalle de ${selectedItem.Nombre}` : ''}
+              {selectedItem ? `Detalle de ${selectedItem.Nombre} ${selectedItem.Apellido}` : ''}
             </Text>
-            <Text style={styles.modalText}>Cargo: {selectedItem?.Cargo}</Text>
-            <Text style={styles.modalText}>
-              Estado: {selectedItem?.Estado === 1 ? 'Activo' : 'Inactivo'}
-            </Text>
+            <Text style={styles.modalText}>DNI: {selectedItem?.DocumentoIdentidad}</Text>
+            <Text style={styles.modalText}>Correo: {selectedItem?.Correo}</Text>
+            <Text style={styles.modalText}>Teléfono: {selectedItem?.Telefono}</Text>
             <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
               <Text style={styles.closeButtonText}>Cerrar</Text>
             </TouchableOpacity>

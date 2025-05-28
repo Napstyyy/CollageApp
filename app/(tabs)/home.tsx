@@ -83,7 +83,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name={t('Agenda')}
+        name={t('verCandidatos')}
         component={Agenda}
         options={{
           drawerIcon: ({ size, color }) => (
@@ -101,7 +101,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name={t('Auditoria')}
+        name={t('crearCandidatos')}
         component={Audit}
         options={{
           drawerIcon: ({ size, color }) => (

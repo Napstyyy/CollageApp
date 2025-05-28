@@ -74,5 +74,11 @@
     "exameMedicoAprobado": "Approved Medical Exam",
     "contratado" : "Hired",
     "observaciones": "Observations",
-    "verSeleccionados": "View Selected"
+    "verSeleccionados": "View Selected",
+    "crearCandidatos": "Create Candidates",
+    "nombre": "Name",
+    "apellido": "Last Name",
+    "DocumentoIdentidad": "Identity Document",
+    "telefono": "Phone",
+    "candidatoId": "Candidate ID"
 }
