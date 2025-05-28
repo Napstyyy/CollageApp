@@ -74,7 +74,7 @@ const Body: React.FC = () => {
       )}
 
       <TouchableOpacity style={styles.button} onPress={handleLoad}>
-        <Text style={styles.buttonText}>nueva seleccion</Text>
+        <Text style={styles.buttonText}>Abrir Nueva Selección</Text>
       </TouchableOpacity>
     </View>
   );
