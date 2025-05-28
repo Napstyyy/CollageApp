@@ -10,7 +10,7 @@ interface ButtonGroupProps {
   onSelect: (selected: string) => void;
 }
 
-const BUTTONS_PER_PAGE = 3; // Number of buttons per page
+const BUTTONS_PER_PAGE = 4; // Number of buttons per page
 
 const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons, onSelect }) => {
   const { theme } = useTheme(); // Obtener el tema actual
@@ -38,9 +38,10 @@ const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons, onSelect }) => {
       <PagerView
         ref={pagerViewRef}
         style={styles.pager}
-        initialPage={1} // Start on the first real page
-        onPageSelected={(e) => setPageIndex(e.nativeEvent.position)} // Use onPageSelected
+        initialPage={1}
+        onPageSelected={(e) => setPageIndex(e.nativeEvent.position)}
         onPageScroll={handlePageScroll}
+        orientation="vertical" // Añade esta línea para desplazamiento vertical
       >
         {extendedPages.map((pageButtons, pageIndex) => (
           <View style={styles.page} key={pageIndex}>
@@ -50,16 +51,14 @@ const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons, onSelect }) => {
                   key={index}
                   style={[
                     styles.button,
-                    selectedButton === button && styles.selectedButton, // Apply selected style
+                    selectedButton === button && styles.selectedButton,
                   ]}
-                  onPress={() => handleButtonPress(button)} // Handle button press
+                  onPress={() => handleButtonPress(button)}
                 >
-                  <Text
-                    style={[
-                      styles.buttonText,
-                      selectedButton === button && styles.selectedButtonText, // Change text color when selected
-                    ]}
-                  >
+                  <Text style={[
+                    styles.buttonText,
+                    selectedButton === button && styles.selectedButtonText,
+                  ]}>
                     {button}
                   </Text>
                 </TouchableOpacity>
@@ -74,25 +73,27 @@ const CarouselGroups: React.FC<ButtonGroupProps> = ({ buttons, onSelect }) => {
 
 const createStyles = (Colors: IColorTheme) => StyleSheet.create({
   container: {
-    height: 120,
+    height: 300, // Aumenta la altura para acomodar más botones
   },
   pager: {
     flex: 1,
   },
   page: {
-    justifyContent: 'center',
+    justifyContent: 'flex-start', // Alinea los botones en la parte superior
     alignItems: 'center',
   },
   buttonGroup: {
-    flex: 0.8,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    flex: 1,
+    flexDirection: 'column', // Cambia a columna para disposición vertical
+    justifyContent: 'flex-start',
     width: '90%',
+    gap: 15, // Espacio entre botones
   },
   button: {
     backgroundColor: Colors.background.main,
     borderRadius: 12,
-    width: '28%',
+    width: '100%', // Ocupa todo el ancho disponible
+    height: 60, // Altura fija para cada botón
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#000',
@@ -100,7 +101,6 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 5,
     elevation: 5,
-    paddingVertical: 10,
   },
   selectedButton: {
     backgroundColor: Colors.icons.default, // Change background color when selected

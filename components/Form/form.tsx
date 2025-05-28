@@ -5,14 +5,16 @@ import SecondaryButton from '@/components/SecondaryButton';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import { useTranslation } from 'react-i18next';
+import { ScrollView } from 'react-native-gesture-handler';
 
 
-type FieldType = 'text' | 'email' | 'phone' | 'file';
+type FieldType = 'text' | 'email' | 'phone' | 'file' | 'select' | 'checkbox' | 'number'; // Añade esta línea
 
 type Field = {
   name: string;
   label: string;
   type: FieldType;
+  options?: { label: string; value: string }[]; // Añade esta línea
 };
 
 type FormProps = {
@@ -40,7 +42,7 @@ const Form: React.FC<FormProps> = ({ title, fields, onSubmit }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       {fields.map((field) => (
         <FormField
@@ -49,12 +51,13 @@ const Form: React.FC<FormProps> = ({ title, fields, onSubmit }) => {
           value={formData[field.name]}
           onChange={(value) => handleFieldChange(field.name, value)}
           type={field.type}
+          options={field.options}
         />
       ))}
     <View style={styles.buttonContainer}>
-      <SecondaryButton text={t('Guardar_Datos')} controller={undefined} />
+      <SecondaryButton text={t('Guardar_Datos')} controller={() => onSubmit(formData)} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

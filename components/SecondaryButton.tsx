@@ -14,7 +14,7 @@ const SecondaryButton: React.FC<SecondaryButtonProps> = ({ text, controller }) =
 
   const styles = createStyles(Colors);
   return (
-    <TouchableOpacity style={styles.Button}>
+    <TouchableOpacity style={styles.Button} onPress={controller}>
         <Text style={styles.Text}>{ text }</Text>
       </TouchableOpacity>
   );

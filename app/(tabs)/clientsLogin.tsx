@@ -20,6 +20,7 @@ export default function ClientsLogin() {
         colors={[Colors.background.gradient1, Colors.background.gradient2]}
         style={styles.background}
       />
+
       <View style={styles.header}>
         <Text style={styles.title}>{t('Bienvenido_a_Collage')}</Text>
         <BlankComponent BCwidth={'28%'} BCheight={undefined} />
@@ -27,6 +28,7 @@ export default function ClientsLogin() {
         <BlankComponent BCwidth={16} BCheight={undefined} />
       <ColorPicker />
       </View>
+      
       <Image source={require('@/assets/images/collage-logo.png')} style={styles.logo} />
       <BottomClientsLoginContainer />
     </View>

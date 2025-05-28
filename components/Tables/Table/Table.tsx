@@ -8,10 +8,9 @@ import { themeMap } from '@/constants/Colors';
 import { IColorTheme } from '@/constants/Colors';
 
 const MatrixComponent: React.FC = () => {
-    const { theme } = useTheme();
-    const Colors = themeMap[theme];
-    const styles = createStyles(Colors);
-
+  const { theme } = useTheme();
+  const Colors = themeMap[theme];
+  const styles = createStyles(Colors);
 
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState<MatrixItem | null>(null);
@@ -70,12 +69,12 @@ const MatrixComponent: React.FC = () => {
     >
       <View style={styles.row}>
         <Text style={styles.cell}>{item.Nombre}</Text>
-        <Text style={styles.cell}>{item.Valor}</Text>
+        <Text style={styles.cell}>{item.Cargo}</Text>
         <View style={styles.cell}>
           {item.Estado === 1 ? (
-            <Icon name="close" size={20} color="#ff6464" style={styles.icon} />
-          ) : (
             <Icon name="check" size={20} color="#8cc8b4" style={styles.icon} />
+          ) : (
+            <Icon name="close" size={20} color="#ff6464" style={styles.icon} />
           )}
         </View>
       </View>
@@ -92,7 +91,7 @@ const MatrixComponent: React.FC = () => {
             </View>
             <View style={styles.header}>
               <Text style={styles.heading}>Nombre</Text>
-              <Text style={styles.heading}>Valor</Text>
+              <Text style={styles.heading}>Cargo</Text>
               <Text style={styles.heading}>Estado</Text>
             </View>
           </>
@@ -113,7 +112,10 @@ const MatrixComponent: React.FC = () => {
             <Text style={styles.modalTitle}>
               {selectedItem ? `Detalle de ${selectedItem.Nombre}` : ''}
             </Text>
-            <Text>{selectedItem?.Valor}</Text>
+            <Text style={styles.modalText}>Cargo: {selectedItem?.Cargo}</Text>
+            <Text style={styles.modalText}>
+              Estado: {selectedItem?.Estado === 1 ? 'Activo' : 'Inactivo'}
+            </Text>
             <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
               <Text style={styles.closeButtonText}>Cerrar</Text>
             </TouchableOpacity>
@@ -125,61 +127,61 @@ const MatrixComponent: React.FC = () => {
 };
 
 const createStyles = (Colors: IColorTheme) =>
-    StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.background.main,
-    paddingVertical: 30,
-    paddingHorizontal: 30,
-    borderRadius: 16,
-  },
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    marginVertical: 8,
-    marginHorizontal: 2,
-    elevation: 1,
-    borderRadius: 3,
-    backgroundColor: Colors.background.main,
-  },
-  headerTopBar: {
-    backgroundColor: Colors.buttons.main,
-    paddingVertical: 10,
-    borderRadius: 5,
-    elevation: 2,
-    marginBottom: 15,
-    width: '100%',
-  },
-  headerTopBarText: {
-    color: Colors.background.main,
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    padding: 10,
-  },
-  heading: {
-    flex: 1,
-    fontSize: 15,
-    textAlign: 'center',
-  },
-  cell: {
-    fontSize: 15,
-    textAlign: 'center',
-    flex: 1,
-  },
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: Colors.background.main,
+      paddingVertical: 30,
+      paddingHorizontal: 30,
+      borderRadius: 16,
+    },
+    row: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: '#ccc',
+      marginVertical: 8,
+      marginHorizontal: 2,
+      elevation: 1,
+      borderRadius: 3,
+      backgroundColor: Colors.background.main,
+    },
+    headerTopBar: {
+      backgroundColor: Colors.buttons.main,
+      paddingVertical: 10,
+      borderRadius: 5,
+      elevation: 2,
+      marginBottom: 15,
+      width: '100%',
+    },
+    headerTopBarText: {
+      color: Colors.background.main,
+      fontSize: 16,
+      textAlign: 'center',
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      padding: 10,
+    },
+    heading: {
+      flex: 1,
+      fontSize: 15,
+      textAlign: 'center',
+    },
+    cell: {
+      fontSize: 15,
+      textAlign: 'center',
+      flex: 1,
+    },
     actionContainer: {
       flexDirection: 'row',
       width: '100%',
-      height: '100%', // Asegura que ocupe toda la altura del swipe
+      height: '100%',
     },
     actionButton: {
-      flex: 1, // Ocupa proporcionalmente la mitad del ancho
+      flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
       padding: 10,
@@ -188,35 +190,41 @@ const createStyles = (Colors: IColorTheme) =>
       color: '#fff',
       fontSize: 12,
     },
-  modalContainer: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  modalContent: {
-    width: '80%',
-    backgroundColor: Colors.background.main,
-    borderRadius: 10,
-    padding: 20,
-    alignItems: 'center',
-  },
-  modalTitle: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-  closeButton: {
-    marginTop: 20,
-    padding: 10,
-    backgroundColor: Colors.buttons.main,
-    borderRadius: 5,
-  },
-  closeButtonText: {
-    color: Colors.background.main,
-  },
-  icon: {
-    alignSelf: 'center',
-  }
-});
+    modalContainer: {
+      flex: 1,
+      backgroundColor: 'rgba(0,0,0,0.5)',
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    modalContent: {
+      width: '80%',
+      backgroundColor: Colors.background.main,
+      borderRadius: 10,
+      padding: 20,
+      alignItems: 'center',
+    },
+    modalTitle: {
+      fontSize: 18,
+      marginBottom: 10,
+      color: Colors.text.main,
+    },
+    modalText: {
+      fontSize: 16,
+      marginBottom: 8,
+      color: Colors.text.main,
+    },
+    closeButton: {
+      marginTop: 20,
+      padding: 10,
+      backgroundColor: Colors.buttons.main,
+      borderRadius: 5,
+    },
+    closeButtonText: {
+      color: Colors.background.main,
+    },
+    icon: {
+      alignSelf: 'center',
+    }
+  });
 
 export default MatrixComponent;

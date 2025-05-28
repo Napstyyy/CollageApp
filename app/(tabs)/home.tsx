@@ -56,11 +56,29 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name={t('Ajustes_razonables')}
+        name={t('agregar_area')}
         component={ReasonableAdjustments}
         options={{
           drawerIcon: ({ size, color }) => (
             <AntDesign name="eye" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name={t('agregar_cargo')}
+        component={Learnings}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <FontAwesome5 name="book-reader" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name={t('evaluar_candidato')}
+        component={AcademicAssignment}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <MaterialIcons name="library-books" size={size} color={color} />
           ),
         }}
       />
@@ -74,25 +92,7 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name={t('Aprendizajes')}
-        component={Learnings}
-        options={{
-          drawerIcon: ({ size, color }) => (
-            <FontAwesome5 name="book-reader" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name={t('Asignaturas')}
-        component={AcademicAssignment}
-        options={{
-          drawerIcon: ({ size, color }) => (
-            <MaterialIcons name="library-books" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name={t('Asistencia')}
+        name={t('verSeleccionados')}
         component={Attendance}
         options={{
           drawerIcon: ({ size, color }) => (
