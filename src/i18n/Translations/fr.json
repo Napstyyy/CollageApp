@@ -73,5 +73,11 @@
     "antecedentesVerificados": "Antécédents vérifiés",
     "examenMedicoAprobado": "Examen médical approuvé",
     "contratado": "Embauché",
-    "verSeleccionados": "Voir les sélectionnés"
+    "verSeleccionados": "Voir les sélectionnés",
+    "crearCandidatos": "Créer des candidats",
+    "nombre": "prenom",
+    "apellido": "nom",
+    "DocumentoIdentidad": "Identité",
+    "telefono": "Téléphone",
+    "candidatoId": "Candidat Id"
 }

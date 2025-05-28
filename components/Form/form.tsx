@@ -9,7 +9,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { useEffect } from 'react';
 
 
-type FieldType = 'text' | 'email' | 'phone' | 'file' | 'select' | 'checkbox' | 'number'; // Añade esta línea
+type FieldType = 'text' | 'email' | 'phone' | 'file' | 'select' | 'checkbox' | 'number' | 'date'; // Añade esta línea
 
 type Field = {
   name: string;
