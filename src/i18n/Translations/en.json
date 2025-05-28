@@ -80,5 +80,7 @@
     "apellido": "Last Name",
     "DocumentoIdentidad": "Identity Document",
     "telefono": "Phone",
-    "candidatoId": "Candidate ID"
+    "candidatoId": "Candidate ID",
+    "crearEmpleados": "Create Employees",
+    "seleccionarCandidatos": "Select Candidates"
 }

@@ -79,5 +79,7 @@
     "apellido": "nom",
     "DocumentoIdentidad": "Identité",
     "telefono": "Téléphone",
-    "candidatoId": "Candidat Id"
+    "candidatoId": "Candidat Id",
+    "crearEmpleados": "Créer des employés",
+    "seleccionarCandidatos": "Sélectionner des candidats"
 }

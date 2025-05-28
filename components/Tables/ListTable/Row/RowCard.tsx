@@ -87,17 +87,6 @@ const RowCard: React.FC<RowCardProps> = ({ student, onPress, index }) => {
         )}
       </View>
 
-      {/* Checkbox en la esquina inferior derecha */}
-      <View style={styles.checkboxContainer}>
-        <BouncyCheckbox
-          size={25}
-          fillColor={Colors.buttons.main}
-          unFillColor={Colors.background.main}
-          iconStyle={{ borderColor: Colors.text.main }}
-          onPress={(isChecked: boolean) => handleCheckboxPress(isChecked)}
-        />
-      </View>
-
       {/* Modal */}
       <Modal
         transparent={true}

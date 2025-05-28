@@ -1,7 +1,7 @@
 export const groups = [
   'Recursos Humanos',
   'Marketing',
-  'Desarrollo de Software',
+  'Desarrollo',
   'Diseño Gráfico',
   'Atención al Cliente',
   'Ventas',

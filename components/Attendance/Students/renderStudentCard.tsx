@@ -60,34 +60,31 @@ const renderStudentCard: React.FC<IStudent> = ({ name, lastname, image }) => {
       </View>
       <BlankComponent BCwidth={undefined} BCheight={16} />
 
-      <View style={styles.dropdownContainer}>
+      {/* Serie de checkboxes */}
+      <View style={styles.checkboxContainer}>
+        <Text>Ingeniero en sistemas</Text>
+        <BlankComponent BCwidth={undefined} BCheight={8} />
         <Picker
           selectedValue={selectedReason}
           onValueChange={(itemValue) => setSelectedReason(itemValue)}
-          style={styles.picker}
+          style={styles.dropdownContainer}
           dropdownIconColor={Colors.background.main}
-          mode="dropdown"
         >
-          <Picker.Item label={t('Sin excusa')} value={t('Sin excusa')} color={Colors.text.main} />
-          <Picker.Item label={t('Con excusa')} value={t('Con excusa')} color={Colors.text.main} />
+          <Picker.Item label="Selecciona una razón" value="" />
+          <Picker.Item label="Razón 1" value="reason1" />
+          <Picker.Item label="Razón 2" value="reason2" />
+          <Picker.Item label="Razón 3" value="reason3" />
+          <Picker.Item label="Razón 4" value="reason4" />
+          <Picker.Item label="Razón 5" value="reason5" />
         </Picker>
-      </View>
-
-      {/* Serie de checkboxes */}
-      <View style={styles.checkboxContainer}>
-        {[...Array(7)].map((_, index) => (
-          <CheckBox
-          key={index}
-          size={25}
-          fillColor={Colors.buttons.main}
-          unFillColor={Colors.background.main}
-          text={` ${index + 1}`}
-          iconStyle={{ borderColor: Colors.buttons.main }}
-          textStyle={styles.checkboxText}
+        <BlankComponent BCwidth={undefined} BCheight={8} />
+        <CheckBox
           style={styles.checkbox}
-          onPress={(isChecked) => handleCheckboxPress(isChecked)}
+          isChecked={false}
+          onPress={handleCheckboxPress}
+          textStyle={styles.checkboxText}
+          text="Seleccionado"
         />
-        ))}
       </View>
 
       {/* Modal */}
