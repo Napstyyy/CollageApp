@@ -4,26 +4,51 @@ import { View, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import Form from '@/components/Form/form';
 import { Picker } from '@react-native-picker/picker';
+import { API_BASE_URL } from '@/config';
+import { useState } from 'react';
 
 export default function Learnings() {
   const { t } = useTranslation();
+  const [resetFormKey, setResetFormKey] = useState(Date.now());
     const formFields = [
-      { name: 'namePosition', label: t('nombre_Cargo'), type: 'text' as 'text', options: [] }, 
-      { name: 'Description', label: t('Description'), type: 'text' as 'text', options: [] },
-      { name: 'nivelJerarquico', label: t('nivelJerarquico'), type: 'text' as 'text', options: [] }, 
+      { name: 'NombreCargo', label: t('nombre_Cargo'), type: 'text' as 'text', options: [] }, 
+      { name: 'Descripcion', label: t('Description'), type: 'text' as 'text', options: [] },
+      { name: 'NivelJerarquico', label: t('nivelJerarquico'), type: 'text' as 'text', options: [] }, 
       { name: 'PerfilRequerido', label: t('PerfilRequerido'), type: 'text' as 'text', options: [] },
-      { name: 'area', label: t('area'), type: 'select' as 'select', options: [
-          { label: t('Administracion'), value: 'administracion' },
-          { label: t('Finanzas'), value: 'finanzas' },
-          { label: t('Recursos_Humanos'), value: 'recursos_humanos' },
-          { label: t('Tecnologia'), value: 'tecnologia' },
-          { label: t('Marketing'), value: 'marketing' },
-        ]}
+      { name: 'CargoID', label: "Cargo ID", type: 'number' as 'number', options: [] },
     ];
   
-    const handleSubmit = (data: any) => {
-      console.log('Formulario enviado:', data);
-    };
+    const handleSubmit = async (data: any) => {
+    console.log('Formulario enviado:', data);
+    try {
+      const response = await fetch(`${API_BASE_URL}/cargos/`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          NombreCargo: data.NombreCargo,
+          Descripcion: data.Descripcion,
+          NivelJerarquico: data.NivelJerarquico,
+          PerfilRequerido: data.PerfilRequerido,
+          CargoID: Number(data.CargoID),
+        }),
+      });
+
+      const responseData = await response.json();
+      console.log('Respuesta del servidor:', responseData);
+
+      if (response.ok) {
+        // 🔁 Reiniciar formulario solo si el envío fue exitoso
+        setResetFormKey(Date.now());
+      } else {
+        console.error('Error en el servidor:', responseData);
+      }
+    } catch (error) {
+      console.error('Error al enviar formulario:', error);
+    }
+  };
 
   return (
     <>
@@ -33,6 +58,7 @@ export default function Learnings() {
         title={t('crear_cargo')}
         fields={formFields}
         onSubmit={handleSubmit}
+        resetTrigger={resetFormKey}
       />
     </View>
     </>
