@@ -15,6 +15,7 @@ const RABody: React.FC = () => {
   const handleSubmit = async (data: any) => {
   console.log('Datos del formulario:', data);
   try {
+    console.log(`direccion de la peticion ${API_BASE_URL}`);
     const response = await fetch(`${API_BASE_URL}/areas/`, {
       method: 'POST',
       headers: {
