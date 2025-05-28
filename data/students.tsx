@@ -54,7 +54,7 @@ const EmployeesByDepartment: OrganizationDictionary = {
       position: "Especialista en Redes Sociales"
     }
   },
-  "Desarrollo de Software": {
+  "Desarrollo": {
     301: {
       name: "Alejandro",
       lastname: "Rodríguez Mejía",

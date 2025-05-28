@@ -67,15 +67,6 @@ const SlideTable = <T,>({
       <View style={styles.overlay}>
         <View style={styles.mainContainer}>
           <View style={styles.searchContainer}>
-            <DropDownPicker
-              open={openDropdown}
-              value={selectedStudent}
-              items={studentOptions}
-              setOpen={setOpenDropdown}
-              setValue={setSelectedStudent}
-              placeholder={t('Seleccionar estudiante')}
-              style={styles.dropdown}
-            />
           </View>
           <Carousel
             width={phoneWindow.width}

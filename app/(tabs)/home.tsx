@@ -74,8 +74,17 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
-        name={t('evaluar_candidato')}
-        component={AcademicAssignment}
+        name={t('crearCandidatos')}
+        component={Audit}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <MaterialIcons name="assignment-late" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name={t('seleccionarCandidatos')}
+        component={Subjects}
         options={{
           drawerIcon: ({ size, color }) => (
             <MaterialIcons name="library-books" size={size} color={color} />
@@ -92,29 +101,20 @@ export default function Home() {
         }}
       />
       <Drawer.Screen
+        name={t('crearEmpleados')}
+        component={AcademicAssignment}
+        options={{
+          drawerIcon: ({ size, color }) => (
+            <Ionicons name="school" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
         name={t('verSeleccionados')}
         component={Attendance}
         options={{
           drawerIcon: ({ size, color }) => (
             <AntDesign name="checkcircle" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name={t('crearCandidatos')}
-        component={Audit}
-        options={{
-          drawerIcon: ({ size, color }) => (
-            <MaterialIcons name="assignment-late" size={size} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name={t('Asig_academica')}
-        component={AcademicAssignment}
-        options={{
-          drawerIcon: ({ size, color }) => (
-            <Ionicons name="school" size={size} color={color} />
           ),
         }}
       />
