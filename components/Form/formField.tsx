@@ -11,10 +11,11 @@ type FormFieldProps = {
   title: string;
   value: string | { countryCode: string; phoneNumber: string };
   onChange: (value: any) => void;
-  type?: 'text' | 'email' | 'phone' | 'file';
+  type?: 'text' | 'email' | 'phone' | 'file' | 'select' | 'checkbox' | 'number';
+  options?: { label: string; value: string }[];
 };
 
-const FormField: React.FC<FormFieldProps> = ({ title, value, onChange, type = 'text' }) => {
+const FormField: React.FC<FormFieldProps> = ({ title, value, onChange, type = 'text', options}) => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
   const { t } = useTranslation(); // Traducción
@@ -59,6 +60,54 @@ const FormField: React.FC<FormFieldProps> = ({ title, value, onChange, type = 't
             <Text>{value || t('Subir_archivo')}</Text>
           </TouchableOpacity>
         );
+        case 'select':
+          return (
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={value as string}
+                style={styles.picker}
+                dropdownIconColor={Colors.text.main}
+                onValueChange={(itemValue) => onChange(itemValue)}
+              >
+                {options?.map((option) => (
+                  <Picker.Item 
+                    key={option.value} 
+                    label={option.label} 
+                    value={option.value} 
+                    style={styles.pickerItem}
+                  />
+                ))}
+              </Picker>
+            </View>
+          );
+      case 'checkbox':
+        return (
+          <View style={styles.input}>
+            <TouchableOpacity onPress={() => onChange(!value)}>
+              <Text>{value ? t('seleccionado') : t('no_seleccionado')}</Text>
+            </TouchableOpacity> 
+          </View>
+        );
+      case 'number':
+        return (
+<TextInput
+    style={styles.input}
+    value={value !== undefined && value !== null ? value.toString() : ''}
+    onChangeText={(text) => {
+      // Si está vacío, pasa undefined o null para que el estado acepte ese vacío
+      if (text === '') {
+        onChange(undefined);
+      } else {
+        const num = Number(text);
+        if (!isNaN(num)) {
+          onChange(num);
+        }
+      }
+    }}
+    keyboardType="numeric"
+    placeholder={t('Ingresa_un_numero')}
+  />
+        );
       default:
         return null;
     }
@@ -92,9 +141,13 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     alignItems: 'center',
   },
   picker: {
-    width: 100,
+    width: '100%',
+    height: 50,
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: Colors.inputs.main,
+    borderRadius: 5,
+    backgroundColor: Colors.background.main,
+    color: Colors.text.main,
   },
   fileInput: {
     borderWidth: 1,
@@ -103,6 +156,15 @@ const createStyles = (Colors: IColorTheme) => StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
   },
+  pickerItem: {
+    color: Colors.text.main,
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderColor: Colors.inputs.main,
+    borderRadius: 5,
+    overflow: 'hidden',
+  }
 });
 
 export default FormField;

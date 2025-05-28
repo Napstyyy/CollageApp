@@ -7,8 +7,9 @@ import { useTranslation } from 'react-i18next';
 const ClientList: React.FC = () => {
   const { t } = useTranslation();
   return (
+    <>
+    <Text style={styles.clientTitle}>{t('Nuestros_clientes')}</Text>
     <ScrollView style={styles.clientContainer}>
-      <Text style={styles.clientTitle}>{t('Nuestros_clientes')}</Text>
       <FlatList
         data={clients}
         renderItem={({ item }) => <ClientItem name={item.name} logo={item.logo} />}
@@ -17,22 +18,29 @@ const ClientList: React.FC = () => {
         scrollEnabled={false}
       />
     </ScrollView>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   clientContainer: {
     backgroundColor: '#FFFFFF',
-    borderTopLeftRadius: 50,
-    borderTopRightRadius: 50,
     padding: 20,
+    paddingTop: 20,
     width: '100%',
     flexGrow: 1,
   },
   clientTitle: {
     fontSize: 24,
-    marginBottom: 20,
+    paddingTop: 20,
     alignSelf: 'center',
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
+    backgroundColor: '#FFFFFF',
+    height: 50,
+    width: '100%',
+    textAlign: 'center',
+
   },
   listContent: {
     width: '100%', // Asegurar que el contenido ocupe el 100% del ancho

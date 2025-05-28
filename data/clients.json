@@ -1,92 +1,67 @@
 [
   {
     "id": 1,
-    "name": "Ciudadela Cuba",
-    "url": "http://s1.plataformaacademica.com:7777/inecicu/",
-    "img": "https://lh3.googleusercontent.com/u/0/d/1mlqch5XIrCQLYWqQio4X-O2Uk_FeXGfW",
-    "namespace": "inecicu",
+    "name": "Juan Pérez",
+    "url": "http://empresa.com/candidatos/juanperez",
+    "img": "https://wl-genial.cf.tsp.li/resize/728x/jpg/37f/67f/47ee03526ab50040c7d402b903.jpg",
+    "namespace": "juanperez",
     "confire": {
-      "apiKey": "AIzaSyBm9QHEV4dTI8c1TRX9mE3d3eka3SABoek",
-      "authDomain": "collage-824d0.firebaseapp.com",
-      "databaseURL": "https://collage-824d0.firebaseio.com",
-      "projectId": "collage-824d0",
-      "storageBucket": "",
-      "messagingSenderId": "1091559789270"
+      "perfilCargo": "Analista de Sistemas",
+      "estado": "Preseleccionado",
+      "documentacion": true,
+      "examenMedico": false
     }
   },
   {
     "id": 2,
-    "name": "San Nicolas",
-    "url": "http://s16.plataformaacademica.com:7777/inesan/",
-    "img": "https://lh3.googleusercontent.com/u/0/d/1yViLbt_vHZx3dvbJnFDoU3Wqz3rYgxyF",
-    "namespace": "inesan",
+    "name": "María Gómez",
+    "url": "http://empresa.com/candidatos/mariagomez",
+    "img": "https://strategicplatform.com/hs-fs/hubfs/buyer%20persona%20ejemplos%20%20maria%20marketing.jpg?width=672&name=buyer%20persona%20ejemplos%20%20maria%20marketing.jpg",
+    "namespace": "mariagomez",
     "confire": {
-      "apiKey": "AIzaSyAPPeCJSC1F2yDTYUXJh-Q2dc3na8yugic",
-      "authDomain": "collage-487db.firebaseapp.com",
-      "databaseURL": "https://collage-487db.firebaseio.com",
-      "projectId": "collage-487db",
-      "storageBucket": "",
-      "messagingSenderId": "1061344619867"
+      "perfilCargo": "Desarrollador Frontend",
+      "estado": "Entrevista",
+      "documentacion": true,
+      "examenMedico": true
     }
   },
   {
     "id": 3,
-    "name": "Dolorosa Secundaria",
-    "url": "http://s2.plataformaacademica.com:7777/dolorosasecundaria/",
-    "img": "https://lh3.googleusercontent.com/u/0/d/1uUvF-pnPs8ODfOtOKjYhg1e286dPIITA",
-    "namespace": "dolorosasecundaria",
+    "name": "Carlos Rodríguez",
+    "url": "http://empresa.com/candidatos/carlosrodriguez",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7Xt_6Q0DDxrrPy_eaZiWSlhwOw_7unm8BxQ&s",
+    "namespace": "carlosrodriguez",
     "confire": {
-      "apiKey": "AIzaSyCwnDa9kTFEfEPFS-Kz4fLOhkqOXUoDM2U",
-      "authDomain": "collage-1223d.firebaseapp.com",
-      "databaseURL": "https://collage-1223d.firebaseio.com",
-      "projectId": "collage-1223d",
-      "storageBucket": "",
-      "messagingSenderId": "984464784028"
+      "perfilCargo": "Ingeniero de QA",
+      "estado": "Aprobado",
+      "documentacion": true,
+      "examenMedico": true
     }
   },
   {
     "id": 4,
-    "name": "Dolorosa Secundaria",
-    "url": "http://s2.plataformaacademica.com:7777/dolorosasecundaria/",
-    "img": "https://lh3.googleusercontent.com/u/0/d/1uUvF-pnPs8ODfOtOKjYhg1e286dPIITA",
-    "namespace": "dolorosasecundaria",
+    "name": "Laura Martínez",
+    "url": "http://empresa.com/candidatos/lauramartinez",
+    "img": "https://www.smarttravel.news/wp-content/uploads/2022/02/Foto_Laura_Martinez_Celada_THN_1024-copia.jpg",
+    "namespace": "lauramartinez",
     "confire": {
-      "apiKey": "AIzaSyCwnDa9kTFEfEPFS-Kz4fLOhkqOXUoDM2U",
-      "authDomain": "collage-1223d.firebaseapp.com",
-      "databaseURL": "https://collage-1223d.firebaseio.com",
-      "projectId": "collage-1223d",
-      "storageBucket": "",
-      "messagingSenderId": "984464784028"
+      "perfilCargo": "Diseñadora UX/UI",
+      "estado": "En pruebas psicotécnicas",
+      "documentacion": false,
+      "examenMedico": false
     }
   },
   {
     "id": 5,
-    "name": "Dolorosa Secundaria",
-    "url": "http://s2.plataformaacademica.com:7777/dolorosasecundaria/",
-    "img": "https://lh3.googleusercontent.com/u/0/d/1uUvF-pnPs8ODfOtOKjYhg1e286dPIITA",
-    "namespace": "dolorosasecundaria",
+    "name": "Pedro López",
+    "url": "http://empresa.com/candidatos/pedrolopez",
+    "img": "https://m.media-amazon.com/images/S/pv-target-images/23e849b80aecdd1fc491c9841318de2ebb124851a7632792af4816f9c20c70a2.jpg",
+    "namespace": "pedrolopez",
     "confire": {
-      "apiKey": "AIzaSyCwnDa9kTFEfEPFS-Kz4fLOhkqOXUoDM2U",
-      "authDomain": "collage-1223d.firebaseapp.com",
-      "databaseURL": "https://collage-1223d.firebaseio.com",
-      "projectId": "collage-1223d",
-      "storageBucket": "",
-      "messagingSenderId": "984464784028"
-    }
-  },
-  {
-    "id": 6,
-    "name": "Dolorosa Secundaria",
-    "url": "http://s2.plataformaacademica.com:7777/dolorosasecundaria/",
-    "img": "https://lh3.googleusercontent.com/u/0/d/1uUvF-pnPs8ODfOtOKjYhg1e286dPIITA",
-    "namespace": "dolorosasecundaria",
-    "confire": {
-      "apiKey": "AIzaSyCwnDa9kTFEfEPFS-Kz4fLOhkqOXUoDM2U",
-      "authDomain": "collage-1223d.firebaseapp.com",
-      "databaseURL": "https://collage-1223d.firebaseio.com",
-      "projectId": "collage-1223d",
-      "storageBucket": "",
-      "messagingSenderId": "984464784028"
+      "perfilCargo": "Soporte Técnico",
+      "estado": "Retirado",
+      "documentacion": true,
+      "examenMedico": true
     }
   }
 ]

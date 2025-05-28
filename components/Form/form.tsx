@@ -5,42 +5,56 @@ import SecondaryButton from '@/components/SecondaryButton';
 import { useTheme } from '@/hooks/context/ThemeContext';
 import { themeMap, IColorTheme } from '@/constants/Colors'; 
 import { useTranslation } from 'react-i18next';
+import { ScrollView } from 'react-native-gesture-handler';
+import { useEffect } from 'react';
 
 
-type FieldType = 'text' | 'email' | 'phone' | 'file';
+type FieldType = 'text' | 'email' | 'phone' | 'file' | 'select' | 'checkbox' | 'number'; // Añade esta línea
 
 type Field = {
   name: string;
   label: string;
   type: FieldType;
+  options?: { label: string; value: string }[]; // Añade esta línea
 };
 
 type FormProps = {
   title: string;
   fields: Field[];
   onSubmit: (data: any) => void;
+  resetTrigger?: any; 
 };
 
-const Form: React.FC<FormProps> = ({ title, fields, onSubmit }) => {
+const Form: React.FC<FormProps> = ({ title, fields, onSubmit, resetTrigger }) => {
   const { theme } = useTheme(); // Obtener el tema actual
   const Colors: IColorTheme = themeMap[theme]; // Obtener los colores del tema actual
   const { t } = useTranslation(); // Traducción
 
   const styles = createStyles(Colors); 
 
-  const [formData, setFormData] = useState<{ [key: string]: any }>(
+  const [formData, setFormData] = useState<{ [key: string]: any }>(() =>
     fields.reduce((acc, field) => ({
       ...acc,
-      [field.name]: field.type === 'phone' ? { countryCode: '+1', phoneNumber: '' } : ''
+      [field.name]: field.type === 'phone' ? { countryCode: '+1', phoneNumber: '' } : '',
     }), {})
   );
+
+  useEffect(() => {
+    // se ejecuta cada vez que cambia `resetTrigger`
+    setFormData(
+      fields.reduce((acc, field) => ({
+        ...acc,
+        [field.name]: field.type === 'phone' ? { countryCode: '+1', phoneNumber: '' } : '',
+      }), {})
+    );
+  }, [resetTrigger, fields]);
 
   const handleFieldChange = (name: string, value: any) => {
     setFormData({ ...formData, [name]: value });
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>{title}</Text>
       {fields.map((field) => (
         <FormField
@@ -49,12 +63,13 @@ const Form: React.FC<FormProps> = ({ title, fields, onSubmit }) => {
           value={formData[field.name]}
           onChange={(value) => handleFieldChange(field.name, value)}
           type={field.type}
+          options={field.options}
         />
       ))}
     <View style={styles.buttonContainer}>
-      <SecondaryButton text={t('Guardar_Datos')} controller={undefined} />
+      <SecondaryButton text={t('Guardar_Datos')} controller={() => onSubmit(formData)} />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 
